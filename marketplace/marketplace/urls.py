@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+import auth0login
+
 urlpatterns = [
+    path('users/', include('auth0login.urls')),
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),
+    path('', auth0login.views.index),
 ]

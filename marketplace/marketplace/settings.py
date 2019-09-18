@@ -31,6 +31,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+<<<<<<< HEAD
+=======
+    'social_django',
+    'auth0login',
+>>>>>>> master
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -118,3 +123,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Custom variables
+
+SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-n1v551c1.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = 'I7zjMQXuJPlgTu9eFjygxEyEvz6paYfB'
+SOCIAL_AUTH_AUTH0_SECRET = 'pp7UK-_bHU9KOUHe-kW1ms98R36uGBz5cY7QI6NKkPeyxbip2ZMKISsMaiznu33Z'
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile',
+    'email'
+]
+
+AUTHENTICATION_BACKENDS = {
+    'auth0login.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend'
+}
+LOGIN_URL = '/users/login/auth0'
+LOGIN_REDIRECT_URL = '/users/dashboard'
