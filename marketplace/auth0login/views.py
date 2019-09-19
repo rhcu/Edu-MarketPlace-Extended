@@ -27,8 +27,7 @@ def dashboard(request):
     }
 
     return render(request, 'dashboard.html', {
-        'auth0User': auth0user,
-        'userdata': json.dumps(userdata, indent=4)
+        'userdata': userdata
     })
 
 def logout(request):

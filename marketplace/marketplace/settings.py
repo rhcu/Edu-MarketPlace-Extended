@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'courses',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'marketplace.urls'
@@ -132,6 +135,11 @@ SOCIAL_AUTH_AUTH0_SCOPE = [
     'profile',
     'email'
 ]
+static_dir = os.path.join(BASE_DIR, "static")
+
+STATICFILES_DIRS = [
+    static_dir,
+]
 
 AUTHENTICATION_BACKENDS = {
     'auth0login.auth0backend.Auth0',
@@ -139,3 +147,10 @@ AUTHENTICATION_BACKENDS = {
 }
 LOGIN_URL = '/users/login/auth0'
 LOGIN_REDIRECT_URL = '/users/dashboard'
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
+       'localhost:3000',
+)
+

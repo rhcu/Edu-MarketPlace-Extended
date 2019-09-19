@@ -1,12 +1,19 @@
 <html>
 
+{% include "header.html" %}
+
 <body>
 
-<div class="login-box auth0-box before">
-    <img src="https://i.cloudup.com/StzWWrY34s.png" />
-    <h3>Auth0 Example</h3>
-    <p>Zero friction identity infrastructure, built for developers</p>
-    <a class="btn btn-primary btn-lg btn-login btn-block" href="/users/login/auth0">Log In</a>
+{% include "navbar.html" %}
+<div class="container">
+
+	<div class="jumbotron">
+	  <h1 class="display-4">Start learning today</h1>
+	  <p class="lead">Discover the endless world of education with us</p>
+	  <hr class="my-4">
+	  <a class="btn btn-primary" href="/users/login/auth0">Log In</a>
+	  or <a class="btn btn-success" href="/users/login/auth0">Sign Up</a> to learn more
+	</div>
 </div>
 
 </body>
