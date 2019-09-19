@@ -3,3 +3,7 @@ flake8==3.5.0
 isort==4.3.21
 pyflakes==1.6.0
 pytest==5.1.2
+social-auth-app-django~=3.1
+python-jose~=3.0
+django-cors-headers
+djangorestframework

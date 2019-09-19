@@ -4,6 +4,8 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
+  - python marketplace/manage.py makemigrations
+  - python marketplace/manage.py migrate
 # command to run tests
 script:
-  - python marketplace/manage.py test courses
+  - python marketplace/manage.py test courses auth0login
