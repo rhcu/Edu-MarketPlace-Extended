@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
+from .forms import CourseForm
+from django.shortcuts import redirect
+from django.utils import timezone
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
-
+from .models import Course
 
 def index(request):
     userdata = {}
@@ -23,4 +25,18 @@ def index(request):
 
 @login_required
 def add_courses(request):
-    return render(request, 'add_courses.html', {})
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.owner = request.user
+            course.date_created = timezone.now()
+            course.save()
+            return redirect('course_detail', pk=course.pk)
+    else:
+       form = CourseForm() 
+    return render(request, 'add_courses.html', {'form':form})
+
+def course_detail(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    return render(request, 'course_detail.html', {'course': course})

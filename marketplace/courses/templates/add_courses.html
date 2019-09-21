@@ -1,14 +1,16 @@
 <html>
-
-{% include "header.html" %}
-
-<body>
-
-{% include "navbar.html" %}
-	<div class="jumbotron">
-	  <h1 class="display-4 text-center">Add courses page!</h1>
-	</div>
-
-</body>
-
+    {% include "header.html" %}
+    <body>
+        {% include "navbar.html" %}
+        <div class="jumbotron">
+            <h1 class="display-4 text-center">Add courses page!</h1>
+        </div>
+        {% block content %}
+        <h2>New course</h2>
+        <form method="POST" class="course-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+        {% endblock %}
+    </body>
 </html>
