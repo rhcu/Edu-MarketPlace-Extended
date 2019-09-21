@@ -19,3 +19,7 @@ def index(request):
     return render(request, 'courses.html', {
         'userdata': userdata
     })
+
+
+def add_courses(request):
+    return render(request, 'add_courses.html', {})
