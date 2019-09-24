@@ -1,0 +1,13 @@
+{% block content %}
+    <div class="post">
+        {% if course.created_date %}
+            <div class="date">
+                {{ course.created_date }}
+            </div>
+        {% endif %}
+        <h2>{{ course.title }}</h2>
+        <p>{{ course.topic }} </p>
+        <p>{{ course.owner }} </p>
+        <p>{{ course.description|linebreaksbr }}</p>
+    </div>
+{% endblock %}
