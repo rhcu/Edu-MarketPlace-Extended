@@ -1,3 +1,9 @@
+<html>
+
+{% include "header.html" %}
+
+<body>
+{% include "navbar.html" %}
 {% block content %}
     <div class="post">
         {% if course.created_date %}
@@ -11,3 +17,6 @@
         <p>{{ course.description|linebreaksbr }}</p>
     </div>
 {% endblock %}
+</body>
+
+</html>

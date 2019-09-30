@@ -8,4 +8,6 @@ class Course(models.Model):
     topic = models.CharField(max_length=200)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     date_created = models.DateTimeField('date published')
-    
+
+    def __str__(self):
+        return self.title
