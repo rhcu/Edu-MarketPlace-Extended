@@ -1,4 +1,4 @@
-Django==2.2.5
+  Django==2.2.5
 flake8==3.5.0
 isort==4.3.21
 pyflakes==1.6.0
@@ -8,3 +8,5 @@ python-jose~=3.0
 django-cors-headers
 djangorestframework
 mysqlclient==1.4.4
+Pillow==5.2.0
+django-crispy-forms==1.7.2
