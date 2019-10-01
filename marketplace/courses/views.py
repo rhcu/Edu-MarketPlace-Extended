@@ -4,12 +4,13 @@ from .forms import CourseForm
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
 from .models import Course
+
 
 def index(request):
     userdata = {}
     user = request.user
+    courses = Course.objects.all()
     if user.is_authenticated:
         user = request.user
         auth0user = user.social_auth.get(provider='auth0')
@@ -20,8 +21,10 @@ def index(request):
             'email': auth0user.extra_data['email'],
         }
     return render(request, 'courses.html', {
-        'userdata': userdata
+        'userdata': userdata,
+        'courses': courses
     })
+
 
 @login_required
 def add_courses(request):
@@ -35,7 +38,8 @@ def add_courses(request):
             return redirect('course_detail', pk=course.pk)
     else:
        form = CourseForm() 
-    return render(request, 'add_courses.html', {'form':form})
+    return render(request, 'add_courses.html', {'form': form})
+
 
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
