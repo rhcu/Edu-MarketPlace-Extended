@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'courses',
     'core',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # Custom variables
 
 SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
@@ -161,3 +165,4 @@ CORS_ORIGIN_WHITELIST = (
        'localhost:3000',
 )
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
