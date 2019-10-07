@@ -1,1 +1,1 @@
-python marketplace/manage.py runserver &
+python3 marketplace/manage.py runserver &
