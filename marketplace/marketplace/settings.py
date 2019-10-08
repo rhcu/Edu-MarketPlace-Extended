@@ -162,9 +162,9 @@ LOGIN_REDIRECT_URL = '/users/dashboard'
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ORIGIN_WHITELIST = (
-       'localhost:3000',
-)
+CORS_ORIGIN_REGEX_WHITELIST='^.*$'
+
+ALLOWED_HOSTS = '*'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
