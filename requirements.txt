@@ -1,4 +1,4 @@
-  Django==2.2.5
+Django==2.2.5
 flake8==3.5.0
 isort==4.3.21
 pyflakes==1.6.0
@@ -10,3 +10,8 @@ djangorestframework
 mysqlclient==1.4.4
 Pillow==5.2.0
 django-crispy-forms==1.7.2
+boto3==1.9.243
+botocore==1.12.243
+jmespath==0.9.4
+s3transfer==0.2.1
+django-storages==1.7.2
