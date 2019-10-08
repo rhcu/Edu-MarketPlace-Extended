@@ -25,8 +25,6 @@ SECRET_KEY = '+fz5u%v*@@g!k@60_^m_$)ydrp7cfcj+z7j#ehg9d=711e81*u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -162,9 +160,9 @@ LOGIN_REDIRECT_URL = '/users/dashboard'
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ORIGIN_WHITELIST = (
-       'localhost:3000',
-)
+CORS_ORIGIN_REGEX_WHITELIST='^.*$'
+
+ALLOWED_HOSTS = '*'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
