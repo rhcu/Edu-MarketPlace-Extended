@@ -16,6 +16,8 @@
                     <h2 class="article-title">{{ course.title }}</h2>
                     <h6 class="article-content">{{ course.topic }} </h6>
                     <p class="article-content">{{ course.description|linebreaksbr }}</p>
+	 	    <p class="article-content">{{ course.price }} KZT </p>
+		<a class="btn btn-success" href="/courses/">Enroll</a>
                 </div>
             </article>
         {% endfor %}
