@@ -1,0 +1,18 @@
+<html>
+    {% include "header.html" %}
+    <body>
+        {% include "navbar.html" %}
+        <div class="jumbotron">
+            <h1 class="display-4 text-center">Add course entry</h1>
+        </div>
+        {% block content %}
+            <h2>Course entry</h2>
+            <div class="container">
+                <form method="POST" class="course-form">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="save btn btn-default">Save</button>
+                </form>
+            </div>
+        {% endblock %}
+    </body>
+</html>

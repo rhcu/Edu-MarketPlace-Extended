@@ -12,3 +12,13 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+class CourseEntry(models.Model):
+	name = models.CharField(max_length=500)
+	entry_type = models.CharField(max_length=100)
+	course = models.ForeignKey(Course,  on_delete=models.DO_NOTHING,)
+	date_created = models.DateTimeField('date published')
+
+class Lesson(models.Model):
+	course_entry = models.ForeignKey(CourseEntry, on_delete=models.CASCADE,)
+	content = models.TextField()

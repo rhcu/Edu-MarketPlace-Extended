@@ -1,0 +1,23 @@
+<html>
+    {% include "header.html" %}
+    <head>
+        <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            {% include "navbar.html" %}
+            <div class="jumbotron">
+                <h1 class="display-4 text-center">{{ lesson.course_entry.name }}</h1>
+            </div>
+            {% block content %}
+                <form method="POST">{% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+                <script>
+                    CKEDITOR.replace( 'content' );
+                </script>
+            {% endblock %}
+        </div>
+    </body>
+</html>
