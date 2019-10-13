@@ -13,9 +13,13 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+ENTRIES_CHOICES = (
+    ('lesson','Lesson'),
+)
+
 class CourseEntry(models.Model):
 	name = models.CharField(max_length=500)
-	entry_type = models.CharField(max_length=100)
+	entry_type = models.CharField(max_length=100, choices=ENTRIES_CHOICES, default='lesson')
 	course = models.ForeignKey(Course,  on_delete=models.DO_NOTHING,)
 	date_created = models.DateTimeField('date published')
 
