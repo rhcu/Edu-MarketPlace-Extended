@@ -16,3 +16,4 @@ jmespath==0.9.4
 s3transfer==0.2.1
 django-storages==1.7.2
 gunicorn
+whitenoise==4.1.4
