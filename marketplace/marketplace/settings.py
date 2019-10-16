@@ -128,7 +128,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -144,11 +144,6 @@ SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
     'profile',
     'email'
-]
-static_dir = os.path.join(BASE_DIR, "static")
-
-STATICFILES_DIRS = [
-    static_dir,
 ]
 
 AUTHENTICATION_BACKENDS = {
