@@ -5,15 +5,16 @@
 <body>
 
 {% include "navbar.html" %}
+<div class="container">
     {% if courses %}
         {% for course in courses %}
             <article class="media content-section">
                 <div class="media-body">
                      <div class="article-metadata">
-                         <a class="mr-2" href="#">{{ course.owner }}</a>
+                         <a class="mr-2" href="#">{{ course.owner.first_name }}</a>
                          <small class="text-muted">{{ course.date_created|date:"F d, Y" }}</small>
                      </div>
-                    <h2 class="article-title">{{ course.title }}</h2>
+                    <h2 class="article-title"><a href="/courses/course/{{course.pk}}">{{ course.title }}</a></h2>
                     <h6 class="article-content">{{ course.topic }} </h6>
                     <p class="article-content">{{ course.description|linebreaksbr }}</p>
 	 	    <p class="article-content">{{ course.price }} KZT </p>
@@ -27,6 +28,7 @@
         </div>
     {% endif %}
 	<a class="btn btn-primary" href="/courses/add_courses">Add course</a>
+</div>
 </body>
 
 </html>

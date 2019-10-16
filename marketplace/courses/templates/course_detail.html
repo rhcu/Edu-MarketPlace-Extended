@@ -5,17 +5,30 @@
 <body>
 {% include "navbar.html" %}
 {% block content %}
-    <div class="post">
+    <div class="container">
         {% if course.created_date %}
             <div class="date">
                 {{ course.created_date }}
             </div>
         {% endif %}
         <h2>{{ course.title }}</h2>
-        <p>{{ course.topic }} </p>
-        <p>{{ course.owner }} </p>
+        <p><b> Topic: </b>{{ course.topic }} </p>
+        <p><b>Author: </b>{{ course.owner.first_name }} </p>
+        <p>Price: {{ course.price }} KZT</p>
         <p>{{ course.description|linebreaksbr }}</p>
-	<p>{{ course.price }} KZT</p>
+        <ul>
+            {% for entry in course_entries %}
+                {% if entry.entry_type == 'lesson' %}
+                    <li><a href="/courses/lesson/{{ entry.pk }}">{{entry.name}}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        
+        <hr>
+
+        {% if user == course.owner %}
+            <p><a href='/courses/add_entry/{{ course.pk }}'>Add course entry</a></p>
+        {% endif %}
     </div>
 {% endblock %}
 </body>

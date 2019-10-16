@@ -1,0 +1,22 @@
+<html>
+    {% include "header.html" %}
+    <body>
+        <div class="container">
+            {% include "navbar.html" %}
+                <a href="/courses/course/{{lesson.course_entry.course.pk}}">
+                    <i class="fas fa-arrow-left"></i> Course: {{ lesson.course_entry.course.title }}
+                </a>
+            </h4>
+            <h1 class="display-4">
+                {{ lesson.course_entry.name }}
+            </h1>
+            {% if user == lesson.course_entry.course.owner %}
+                <a href='/courses/save_lesson/{{lesson.pk}}'><i class="fas fa-edit"></i> Edit</a>
+            {% endif %}
+            <hr>
+            {% block content %}
+                {{ lesson.content |safe }}
+            {% endblock %}
+        </div>
+    </body>
+</html>

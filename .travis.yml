@@ -4,7 +4,7 @@ python:
 # command to install dependencies
 install:
   - pip install -r requirements.txt
-  - python marketplace/manage.py makemigrations
+  - yes | python marketplace/manage.py makemigrations  --merge
   - python marketplace/manage.py migrate
 # command to run tests
 script:
