@@ -15,6 +15,9 @@ def index(request):
     else:
         return render(request, 'index.html')
 
+def contact_us(request):
+    return render(request, 'contact_form.html')
+
 
 @login_required
 def dashboard(request):
