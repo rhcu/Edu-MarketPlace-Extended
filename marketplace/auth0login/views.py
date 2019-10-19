@@ -18,6 +18,8 @@ def index(request):
 def contact_us(request):
     return render(request, 'contact_form.html')
 
+def faq(request):
+    return render(request, 'faq.html')
 
 @login_required
 def dashboard(request):
