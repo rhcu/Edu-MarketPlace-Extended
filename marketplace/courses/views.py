@@ -14,6 +14,14 @@ def is_user_enrolled(course, user):
     enroll_count = CourseEnroll.objects.filter(course=course, user=user).count()
     return enroll_count > 0
 
+def get_lesson(course_entry_pk):
+    course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
+    return Lesson.objects.filter(course_entry=course_entry)[0]
+
+def get_video(course_entry_pk):
+    course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
+    return Video.objects.filter(course_entry=course_entry)[0]
+
 
 def index(request):
     userdata = {}
@@ -71,10 +79,11 @@ def save_lesson(request, pk):
 
 @login_required
 def lesson_detail(request, pk):
+    # pk - primary key for course entry and NOT LESSON
     user = None
     if request.user.is_authenticated:
         user = request.user
-        lesson = get_object_or_404(Lesson, pk=pk)
+        lesson = get_lesson(pk)
         if is_user_enrolled(lesson.course_entry.course, user):
             return render(request, 'lesson_detail.html', {'lesson': lesson, 'user': user})
     return redirect('course_detail', pk=lesson.course_entry.course.pk)
@@ -103,10 +112,11 @@ def save_video(request, pk):
 
 @login_required
 def video_detail(request, pk):
+    # pk - primary key for course entry and NOT VIDEO
     user = None
     if request.user.is_authenticated:
         user = request.user
-        video = get_object_or_404(Video, pk=pk)
+        video = get_video(pk)
         if user_enrolled(video.course_entry.course, user):
             return render(request, 'video_detail.html', {'video': video, 'user': user})
     return redirect('course_detail', pk=video.course_entry.course.pk)
@@ -164,3 +174,13 @@ def course_enroll(request, pk):
         enroll.save()
     # In any case, just redirect to course detail
     return redirect('course_detail', pk=course.pk)
+
+@login_required
+def enrolled_list(request, pk):
+    user = request.user
+    course = get_object_or_404(Course, pk=pk)
+    if user == course.owner:
+        users = CourseEnroll.objects.filter(course=course)
+        return render(request, 'enrolled_list.html', {'enrolled_users': users, 'user': user, 'course': course})
+    else:
+        return redirect('course_detail', pk=course.pk)

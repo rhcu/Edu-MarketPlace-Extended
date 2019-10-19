@@ -1,0 +1,22 @@
+<html>
+
+{% include "header.html" %}
+
+<body>
+{% include "navbar.html" %}
+{% block content %}
+    <div class="container">
+        <h2>Enrolled students for course: {{ course.title }}</h2>
+        <ul>
+            {% for enrolled_user in enrolled_users %}
+                <!-- TODO: add link to user profile page once it implemented-->
+                <li> {{ user.first_name }}{{ user.last_name }}</li>
+            {% endfor %}
+        </ul>
+        
+        <hr>
+    </div>
+{% endblock %}
+</body>
+
+</html>
