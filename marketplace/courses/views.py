@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .forms import CourseForm, CourseEntryForm, LessonSaveForm
+from .forms import CourseForm, CourseEntryForm, LessonSaveForm, VideoSaveForm
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson
+from .models import Course, CourseEntry, Lesson, Video
 
 def user_enrolled(course, user):
     if user == False:
@@ -78,6 +78,38 @@ def lesson_detail(request, pk):
             return render(request, 'lesson_detail.html', {'lesson': lesson, 'user': user})
     return redirect('course_detail', pk=lesson.course_entry.course.pk)
 
+@login_required
+def save_video(request, pk):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+    video = get_object_or_404(Video, pk=pk)
+    course_entry = video.course_entry
+    course = course_entry.course
+    if user == course.owner:
+        form = VideoSaveForm()
+        form.fields['video_url'].initial = video.video_url
+        if request.method == "POST":
+            form = VideoSaveForm(request.POST)
+            if form.is_valid():
+                cd = form.cleaned_data
+                video.video_url = cd.get("video_url", "")
+                video.save()
+                return redirect('video_detail', pk=video.pk)
+        return render(request, 'save_video.html', {'video': video, 'user': user, 'form': form})
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def video_detail(request, pk):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+        video = get_object_or_404(Video, pk=pk)
+        if user_enrolled(video.course_entry.course, user):
+            return render(request, 'video_detail.html', {'video': video, 'user': user})
+    return redirect('course_detail', pk=video.course_entry.course.pk)
+
 
 @login_required
 def add_entry(request, pk):
@@ -97,6 +129,11 @@ def add_entry(request, pk):
                     lesson.content = "Here will be the content of your course!"
                     lesson.save()
                     return redirect('save_lesson', pk=lesson.pk)
+                elif course_entry.entry_type == 'video':
+                    video = Video()
+                    video.course_entry = course_entry
+                    video.save()
+                    return redirect('save_video', pk = video.pk)
                 else:
                     raise Exception("Course entry is not found")
         else:
@@ -109,7 +146,6 @@ def add_entry(request, pk):
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
     course_entries = CourseEntry.objects.filter(course=course)
-    print(course_entries)
     user = None
     if request.user.is_authenticated:
         user = request.user
