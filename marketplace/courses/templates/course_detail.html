@@ -13,7 +13,7 @@
         {% endif %}
         <h2>{{ course.title }}</h2>
         <p><b> Topic: </b>{{ course.topic }} </p>
-        <p><b>Author: </b>{{ course.owner.first_name }} </p>
+        <p><b> Author: </b>{{ course.owner.first_name }} </p>
         <p>Price: {{ course.price }} KZT</p>
         <p>{{ course.description|linebreaksbr }}</p>
         <ul>
@@ -21,6 +21,9 @@
                 {% if entry.entry_type == 'lesson' %}
                     <li><a href="/courses/lesson/{{ entry.pk }}">{{entry.name}}</li>
                 {% endif %}
+		{% if entry.entry_type == 'video' %}
+		    <li><a href="/courses/video/{{ entry.pk }}">{{entry.name}}</li>
+		{% endif %}
             {% endfor %}
         </ul>
         

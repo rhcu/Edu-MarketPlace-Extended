@@ -15,6 +15,7 @@ class Course(models.Model):
 
 ENTRIES_CHOICES = (
     ('lesson','Lesson'),
+    ('video','Video'),
 )
 
 class CourseEntry(models.Model):
@@ -26,3 +27,7 @@ class CourseEntry(models.Model):
 class Lesson(models.Model):
 	course_entry = models.ForeignKey(CourseEntry, on_delete=models.CASCADE,)
 	content = models.TextField()
+
+class Video(models.Model):
+	course_entry = models.ForeignKey(CourseEntry, on_delete=models.CASCADE,)
+	video_url = models.URLField(max_length=1000)

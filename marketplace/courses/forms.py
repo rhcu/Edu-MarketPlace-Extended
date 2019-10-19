@@ -16,3 +16,6 @@ class CourseEntryForm(forms.ModelForm):
 
 class LessonSaveForm(forms.Form):
 	content = forms.CharField(widget=forms.Textarea)
+
+class VideoSaveForm(forms.Form):
+	video_url = forms.URLField(label='Link to YouTube video', required=True)
