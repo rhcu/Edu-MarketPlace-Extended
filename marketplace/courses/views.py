@@ -4,15 +4,16 @@ from .forms import CourseForm, CourseEntryForm, LessonSaveForm, VideoSaveForm
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson, Video
+from .models import Course, CourseEntry, Lesson, Video, CourseEnroll
 
-def user_enrolled(course, user):
+def is_user_enrolled(course, user):
     if user == False:
         return False
     if course.owner == user:
         return True
-    # TODO: https://github.com/rhcu/Edu-MarketPlace-Extended/issues/32
-    return True
+    enroll_count = CourseEnroll.objects.filter(course=course, user=user).count()
+    return enroll_count > 0
+
 
 def index(request):
     userdata = {}
@@ -35,7 +36,7 @@ def index(request):
 
 @login_required
 def add_courses(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = CourseForm(request.POST)
         if form.is_valid():
             course = form.save(commit=False)
@@ -58,11 +59,11 @@ def save_lesson(request, pk):
     if user == course.owner:
         form = LessonSaveForm()
         form.fields['content'].initial = lesson.content
-        if request.method == "POST":
+        if request.method == 'POST':
             form = LessonSaveForm(request.POST)
             if form.is_valid():
                 cd = form.cleaned_data
-                lesson.content = cd.get("content", "")
+                lesson.content = cd.get('content', '')
                 lesson.save()
                 return redirect('lesson_detail', pk=lesson.pk)
         return render(request, 'save_lesson.html', {'lesson': lesson, 'user': user, 'form': form})
@@ -74,7 +75,7 @@ def lesson_detail(request, pk):
     if request.user.is_authenticated:
         user = request.user
         lesson = get_object_or_404(Lesson, pk=pk)
-        if user_enrolled(lesson.course_entry.course, user):
+        if is_user_enrolled(lesson.course_entry.course, user):
             return render(request, 'lesson_detail.html', {'lesson': lesson, 'user': user})
     return redirect('course_detail', pk=lesson.course_entry.course.pk)
 
@@ -116,7 +117,7 @@ def add_entry(request, pk):
     user = request.user
     course = get_object_or_404(Course, pk=pk)
     if user == course.owner:
-        if request.method == "POST":
+        if request.method == 'POST':
             form = CourseEntryForm(request.POST)
             if form.is_valid():
                 course_entry = form.save(commit=False)
@@ -126,7 +127,7 @@ def add_entry(request, pk):
                 if course_entry.entry_type == 'lesson':
                     lesson = Lesson()
                     lesson.course_entry = course_entry
-                    lesson.content = "Here will be the content of your course!"
+                    lesson.content = 'Here will be the content of your course!'
                     lesson.save()
                     return redirect('save_lesson', pk=lesson.pk)
                 elif course_entry.entry_type == 'video':
@@ -135,7 +136,7 @@ def add_entry(request, pk):
                     video.save()
                     return redirect('save_video', pk = video.pk)
                 else:
-                    raise Exception("Course entry is not found")
+                    raise Exception('Course entry is not found')
         else:
            form = CourseEntryForm()
         return render(request, 'add_entry.html', {'course': course, 'user': user, 'form': form})
@@ -149,4 +150,17 @@ def course_detail(request, pk):
     user = None
     if request.user.is_authenticated:
         user = request.user
-    return render(request, 'course_detail.html', {'course': course, 'user': user, 'course_entries': course_entries})
+    user_enrolled = is_user_enrolled(course, user)
+    return render(request, 'course_detail.html', {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled})
+
+@login_required
+def course_enroll(request, pk):
+    user = request.user
+    course = get_object_or_404(Course, pk=pk)
+    if request.method == 'POST':
+        enroll = CourseEnroll()
+        enroll.user = user
+        enroll.course = course
+        enroll.save()
+    # In any case, just redirect to course detail
+    return redirect('course_detail', pk=course.pk)

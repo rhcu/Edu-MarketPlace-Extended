@@ -11,4 +11,5 @@ urlpatterns = [
     path('lesson/<int:pk>/', views.lesson_detail, name='lesson_detail'),
     path('save_video/<int:pk>/', views.save_video, name='save_video'),
     path('video/<int:pk>/', views.video_detail, name='video_detail'),
+    path('enroll/<int:pk>/', views.course_enroll, name='course_enroll'),
 ]

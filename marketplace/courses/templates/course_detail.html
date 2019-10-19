@@ -15,6 +15,16 @@
         <p><b> Topic: </b>{{ course.topic }} </p>
         <p><b> Author: </b>{{ course.owner.first_name }} </p>
         <p>Price: {{ course.price }} KZT</p>
+        <p>
+            {% if user_enrolled %}
+                <b>You are already enrolled</b>
+            {% else %}
+                <form method="POST" class="course-form" action="/courses/enroll/{{ course.pk }}/">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">Enroll</button>
+                </form>
+            {% endif %}
+        </p>
         <p>{{ course.description|linebreaksbr }}</p>
         <ul>
             {% for entry in course_entries %}
