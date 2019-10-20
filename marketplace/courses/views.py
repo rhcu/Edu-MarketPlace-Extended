@@ -174,7 +174,8 @@ def enrolled_list(request, pk):
     user = request.user
     course = get_object_or_404(Course, pk=pk)
     if user == course.owner:
-        users = CourseEnroll.objects.filter(course=course)
+        enrolled_objects = CourseEnroll.objects.filter(course=course)
+        users = [obj.user for obj in enrolled_objects]
         return render(request, 'enrolled_list.html', {'enrolled_users': users, 'user': user, 'course': course})
     else:
         return redirect('course_detail', pk=course.pk)
