@@ -6,16 +6,16 @@
 {% include "navbar.html" %}
 <section id="one" class="wrapper style3">
     <div class="inner">
-        <header class="align-center">
-            <h2>Courses</h2>
-        </header>
-    </div>
-</section>
-<section id="one" class="wrapper style3">
-    <div class="inner">
-        <header class="align-center">
-            <a class="button special" href="/courses/add_courses">Add course</a>
-        </header>
+        <div class="content">
+            <div class="media">
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ user.first_name }}{{ user.last_name }}</h2>
+                    <p class="text-secondary">{{ user.username }}</p>
+                    <p class="text-secondary">{{ user.email }}</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% if courses %}
@@ -26,15 +26,7 @@
                     <div>
                         <div class="box">
                             <div class="content">
-                                <div class="article-metadata">
-                                    <a class="mr-2" href="{% url 'user_detail' username=course.owner.username %}">
-                                        {{ course.owner.first_name }}
-                                    </a>
-                                    <small class="text-muted">{{ course.date_created|date:"F d, Y" }}</small>
-                                </div>
-                                <header class=".align-left">
-                                    <h2>{{ course.title }}</h2>
-                                </header>
+                                <header class=".align-left"><h2>{{ course.title }}</h2></header>
                                 <h3>{{ course.topic }} </h3>
                                 <p class="article-content">{{ course.description|linebreaksbr }}</p>
                                 <h4>{{ course.price }} KZT</h4>
@@ -52,7 +44,7 @@
     <section id="two" class="wrapper style3">
         <div class="inner">
             <header class="align-center">
-                <h2>There are no courses right now!</h2>
+                <h2>This user has no courses published</h2>
             </header>
         </div>
     </section>

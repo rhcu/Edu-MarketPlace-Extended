@@ -13,4 +13,5 @@ urlpatterns = [
     path('video/<int:pk>/', views.video_detail, name='video_detail'),
     path('enroll/<int:pk>/', views.course_enroll, name='course_enroll'),
     path('enrolled_list/<int:pk>/', views.enrolled_list, name='enrolled_list'),
+    path('user_courses/<str:username>', views.get_user_detail, name='user_detail'),
 ]
