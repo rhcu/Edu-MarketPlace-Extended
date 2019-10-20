@@ -78,7 +78,7 @@ def save_lesson(request, pk):
                 cd = form.cleaned_data
                 lesson.content = cd.get('content', '')
                 lesson.save()
-                return redirect('lesson_detail', pk=lesson.pk)
+                return redirect('lesson_detail', pk=course_entry.pk)
         return render(request, 'save_lesson.html', {'lesson': lesson, 'user': user, 'form': form})
     return redirect('course_detail', pk=course.pk)
 
