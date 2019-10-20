@@ -1,18 +1,34 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
-    {% include "header.html" %}
-    <body>
-        {% include "navbar.html" %}
-        <div class="jumbotron">
-            <h1 class="display-4 text-center">Add courses page!</h1>
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Add Courses</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            {% block content %}
+                <div class="content">
+                    <header class="align-left">
+                        <h2>New course</h2>
+                    </header>
+                    <form method="POST" class="course-form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Add course</button>
+                    </form>
+                </div>
+            {% endblock %}
         </div>
-        {% block content %}
-        <div class="container">
-            <h2>New course</h2>
-            <form method="POST" class="course-form">{% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary">Add course</button>
-            </form>
-        </div>
-        {% endblock %}
-    </body>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
 </html>

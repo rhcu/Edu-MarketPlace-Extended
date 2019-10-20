@@ -1,17 +1,23 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
+    {% include "header.html" %}
+    <body>
+        {% include "navbar.html" %}
+        <!-- Banner -->
+			<section class="banner full">
+				<article>
+					<img src="{% static 'images/slide01.jpg'%}" alt=""/>
+					<div class="inner">
+						<header>
+							<p>Welcome, {{ userdata.name }}</p>
+                            <br/>
+                            <h3>Start your next education today by exploring our <b><a href="/courses">list of courses</a></b>.</h3>
+						</header>
+					</div>
+				</article>
+			</section>
 
-{% include "header.html" %}
-
-<body>
-
-{% include "navbar.html" %}
-<div class="container">
-	<div class="jumbotron">
-	  <h1 class="display-4">Welcome, {{ userdata.name }}</h1>
-	  <hr class="my-4">
-	  <p class="lead">Start your next education today by exploring our list of courses. <a href="/courses">View courses here!</a></p>
-	</div>
-</div>
-</body>
-
+        {% include "footer.html" %}
+    </body>
 </html>

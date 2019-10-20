@@ -1,33 +1,60 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
-
 {% include "header.html" %}
-
 <body>
-
 {% include "navbar.html" %}
-<div class="container">
-    {% if courses %}
-        {% for course in courses %}
-            <article class="media content-section">
-                <div class="media-body">
-                     <div class="article-metadata">
-                         <a class="mr-2" href="#">{{ course.owner.first_name }}</a>
-                         <small class="text-muted">{{ course.date_created|date:"F d, Y" }}</small>
-                     </div>
-                    <h2 class="article-title"><a href="/courses/course/{{course.pk}}">{{ course.title }}</a></h2>
-                    <h6 class="article-content">{{ course.topic }} </h6>
-                    <p class="article-content">{{ course.description|linebreaksbr }}</p>
-	 	            <p class="article-content">{{ course.price }} KZT </p>
-		        </div>
-            </article>
-        {% endfor %}
-    {% else %}
-        <div class="jumbotron">
-            <h1 class="display-4 text-center">There are no courses right now!</h1>
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Courses</h2>
+        </header>
+    </div>
+</section>
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <a class="button special" href="/courses/add_courses">Add course</a>
+        </header>
+    </div>
+</section>
+{% if courses %}
+    <section id="two" class="wrapper style2">
+        <div class="inner">
+            <div class="grid-style">
+                {% for course in courses %}
+                    <div>
+                        <div class="box">
+                            <div class="content">
+                                <div class="article-metadata">
+                                    <a class="mr-2" href="#">{{ course.owner.first_name }}</a>
+                                    <small class="text-muted">{{ course.date_created|date:"F d, Y" }}</small>
+                                </div>
+                                <header class=".align-left">
+                                    <h2>{{ course.title }}</h2>
+                                </header>
+                                <h3>{{ course.topic }} </h3>
+                                <p class="article-content">{{ course.description|linebreaksbr }}</p>
+                                <h4>{{ course.price }} KZT</h4>
+                                <footer class="align-center">
+                                    <a href="/courses/course/{{course.pk}}" class="button alt">Learn More</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    {% endif %}
-	<a class="btn btn-primary" href="/courses/add_courses">Add course</a>
-</div>
+    </section>
+{% else %}
+    <section id="two" class="wrapper style3">
+        <div class="inner">
+            <header class="align-center">
+                <h2>There are no courses right now!</h2>
+            </header>
+        </div>
+    </section>
+{% endif %}
+{% include "footer.html" %}
 </body>
-
 </html>

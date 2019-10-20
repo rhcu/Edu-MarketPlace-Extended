@@ -1,21 +1,79 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
+    {% include "header.html" %}
+    <body>
+        {% include "navbar.html" %}
+        <!-- Banner -->
+			<section class="banner full">
+				<article>
+					<img src="{% static 'images/slide01.jpg'%}" alt=""/>
+					<div class="inner">
+						<header>
+							<p>Welcome to the first educational platform tailored to the needs of Kazakhstan</p>
+							<h2>Edu Marketplace</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/slide02.jpg'%}" alt=""/>
+					<div class="inner">
+						<header>
+							<p>Look through our rich courses catalog and gain the knowledge you need to maximize
+                            your success</p>
+							<h2>Discover courses</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/slide03.jpg'%}" alt=""/>
+					<div class="inner">
+						<header>
+							<p>If you have knowledge to share, utilize our platform to deliver it to the maximum
+                            amount of people</p>
+							<h2>Create courses</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/slide04.jpg'%}" alt=""/>
+					<div class="inner">
+						<header>
+							<p>Talk to other students and to course creators to enhance your knowledge</p>
+							<h2>Collaborate</h2>
+						</header>
+					</div>
+				</article>
+				<article>
+					<img src="{% static 'images/slide05.jpg'%}" alt=""/>
+					<div class="inner">
+						<header>
+							<p>Knowledge is power. Information is liberating. Education is the premise of progress,
+                                in every society, in every family</p>
+							<h2>Make a difference</h2>
+						</header>
+					</div>
+				</article>
+			</section>
 
-{% include "header.html" %}
+            <section id="two" class="wrapper style2">
+				<div class="inner">
+					<div class="box">
+						<div class="content">
+							<header class="align-center">
+								<h2>Start learning today</h2>
+                                <h4>Discover the endless world of education with us!</h4>
+                                <br/>
+                                <ul class="actions">
+									<li><a href="/users/login/auth0" class="button special">Log In</a></li>
+									<li><a href="/users/login/auth0" class="button alt">Sign Up</a></li>
+								</ul>
+							</header>
+                        </div>
+					</div>
+				</div>
+			</section>
 
-<body>
-
-{% include "navbar.html" %}
-<div class="container">
-
-	<div class="jumbotron">
-	  <h1 class="display-4">Start learning today</h1>
-	  <p class="lead">Discover the endless world of education with us</p>
-	  <hr class="my-4">
-	  <a class="btn btn-primary" href="/users/login/auth0">Log In</a>
-	  or <a class="btn btn-success" href="/users/login/auth0">Sign Up</a> to learn more
-	</div>
-</div>
-
-</body>
-
+            {% include "footer.html" %}
+    </body>
 </html>

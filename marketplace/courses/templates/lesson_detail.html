@@ -1,22 +1,38 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
-    {% include "header.html" %}
-    <body>
-        <div class="container">
-            {% include "navbar.html" %}
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-left">
+            <h2>
                 <a href="/courses/course/{{lesson.course_entry.course.pk}}">
                     <i class="fas fa-arrow-left"></i> Course: {{ lesson.course_entry.course.title }}
                 </a>
-            </h4>
-            <h1 class="display-4">
-                {{ lesson.course_entry.name }}
-            </h1>
-            {% if user == lesson.course_entry.course.owner %}
-                <a href='/courses/save_lesson/{{lesson.pk}}'><i class="fas fa-edit"></i> Edit</a>
-            {% endif %}
-            <hr>
-            {% block content %}
-                {{ lesson.content |safe }}
-            {% endblock %}
+            </h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <h3 class="display-4">
+                    {{ lesson.course_entry.name }}
+                </h3>
+                {% if user == lesson.course_entry.course.owner %}
+                    <a href='/courses/save_lesson/{{lesson.pk}}'><i class="fas fa-edit"></i> Edit</a>
+                {% endif %}
+                <hr>
+                {% block content %}
+                    {{ lesson.content |safe }}
+                {% endblock %}
+            </div>
         </div>
-    </body>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
 </html>
