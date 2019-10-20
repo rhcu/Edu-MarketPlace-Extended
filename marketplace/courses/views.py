@@ -154,7 +154,7 @@ def course_detail(request, pk):
     user = None
     if request.user.is_authenticated:
         user = request.user
-    user_enrolled = user_enrolled(course, user)
+    user_enrolled = is_user_enrolled(course, user)
     return render(request, 'course_detail.html', {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled})
 
 @login_required
