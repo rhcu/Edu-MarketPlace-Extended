@@ -11,6 +11,13 @@
         </header>
     </div>
 </section>
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <a class="button special" href="/courses/add_courses">Add course</a>
+        </header>
+    </div>
+</section>
 {% if courses %}
     <section id="two" class="wrapper style2">
         <div class="inner">
@@ -18,9 +25,6 @@
                 {% for course in courses %}
                     <div>
                         <div class="box">
-                            <div class="image fit">
-                                <img src="{% static 'images/pic02.jpg'%}" alt="" />
-                            </div>
                             <div class="content">
                                 <div class="article-metadata">
                                     <a class="mr-2" href="#">{{ course.owner.first_name }}</a>
@@ -51,13 +55,6 @@
         </div>
     </section>
 {% endif %}
-<section id="one" class="wrapper style3">
-    <div class="inner">
-        <header class="align-center">
-            <a class="button special" href="/courses/add_courses">Add course</a>
-        </header>
-    </div>
-</section>
 {% include "footer.html" %}
 </body>
 </html>
