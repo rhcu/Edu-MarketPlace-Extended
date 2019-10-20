@@ -6,7 +6,6 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from .models import Course, CourseEntry, Lesson, Video, CourseEnroll
-from django.views.generic import ListView
 
 
 def is_user_enrolled(course, user):
@@ -196,14 +195,10 @@ def enrolled_list(request, pk):
         return redirect('course_detail', pk=course.pk)
 
 
-class UserView(ListView):
-    context_object_name = 'user_courses'
-    template_name = 'user_courses.html'
-    queryset = User.objects.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(UserView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        context['user'] = user
-        context['courses'] = Course.objects.filter(owner=user)
-        return context
+def get_user_detail(request, username):
+    user = get_object_or_404(User, username=username)
+    context = {
+        'user': user,
+        'courses': Course.objects.filter(owner=user)
+    }
+    return render(request, 'user_courses.html', context)

@@ -27,7 +27,7 @@
                         <div class="box">
                             <div class="content">
                                 <div class="article-metadata">
-                                    <a class="mr-2" href="{% url 'user_courses' course.owner.username %}">
+                                    <a class="mr-2" href="{% url 'user_detail' username=course.owner.username %}">
                                         {{ course.owner.first_name }}
                                     </a>
                                     <small class="text-muted">{{ course.date_created|date:"F d, Y" }}</small>
