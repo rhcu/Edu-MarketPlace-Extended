@@ -199,16 +199,6 @@ def enrolled_list(request, pk):
 
 
 class UserView(ListView):
-    model = Course
-    template_name = 'user_courses.html'
-    context_object_name = 'courses'
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Course.objects.filter(owner=user)
-
-
-class UserView(ListView):
     context_object_name = 'user_courses'
     template_name = 'user_courses.html'
     queryset = User.objects.all()
