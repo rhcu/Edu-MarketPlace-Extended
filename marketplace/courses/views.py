@@ -6,9 +6,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from .models import Course, CourseEntry, Lesson, Video, CourseEnroll
-from django.views.generic import (
-    ListView,
-)
+from django.views.generic import ListView
 
 
 def is_user_enrolled(course, user):
