@@ -1,26 +1,34 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import CourseForm, CourseEntryForm, LessonSaveForm, VideoSaveForm
+from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from .models import Course, CourseEntry, Lesson, Video, CourseEnroll
+from django.views.generic import (
+    ListView,
+)
+
 
 def is_user_enrolled(course, user):
-    if user == False:
+    if not user:
         return False
     if course.owner == user:
         return True
     enroll_count = CourseEnroll.objects.filter(course=course, user=user).count()
     return enroll_count > 0
 
+
 def get_lesson(course_entry_pk):
     course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
     return Lesson.objects.filter(course_entry=course_entry)[0]
 
+
 def get_video(course_entry_pk):
     course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
     return Video.objects.filter(course_entry=course_entry)[0]
+
 
 def index(request):
     userdata = {}
@@ -40,6 +48,7 @@ def index(request):
         'courses': courses
     })
 
+
 @login_required
 def add_courses(request):
     if request.method == 'POST':
@@ -51,8 +60,9 @@ def add_courses(request):
             course.save()
             return redirect('course_detail', pk=course.pk)
     else:
-       form = CourseForm() 
+        form = CourseForm()
     return render(request, 'add_courses.html', {'form': form})
+
 
 @login_required
 def save_lesson(request, pk):
@@ -75,16 +85,17 @@ def save_lesson(request, pk):
         return render(request, 'save_lesson.html', {'lesson': lesson, 'user': user, 'form': form})
     return redirect('course_detail', pk=course.pk)
 
+
 @login_required
 def lesson_detail(request, pk):
     # pk - primary key for course entry and NOT LESSON
-    user = None
     if request.user.is_authenticated:
         user = request.user
         lesson = get_lesson(pk)
         if is_user_enrolled(lesson.course_entry.course, user):
             return render(request, 'lesson_detail.html', {'lesson': lesson, 'user': user})
     return redirect('course_detail', pk=lesson.course_entry.course.pk)
+
 
 @login_required
 def save_video(request, pk):
@@ -107,6 +118,7 @@ def save_video(request, pk):
         return render(request, 'save_video.html', {'video': video, 'user': user, 'form': form})
     return redirect('course_detail', pk=course.pk)
 
+
 @login_required
 def video_detail(request, pk):
     # pk - primary key for course entry and NOT VIDEO
@@ -116,6 +128,7 @@ def video_detail(request, pk):
         if is_user_enrolled(video.course_entry.course, user):
             return render(request, 'video_detail.html', {'video': video, 'user': user})
     return redirect('course_detail', pk=video.course_entry.course.pk)
+
 
 @login_required
 def add_entry(request, pk):
@@ -139,14 +152,15 @@ def add_entry(request, pk):
                     video = Video()
                     video.course_entry = course_entry
                     video.save()
-                    return redirect('save_video', pk = video.pk)
+                    return redirect('save_video', pk=video.pk)
                 else:
                     raise Exception('Course entry is not found')
         else:
-           form = CourseEntryForm()
+            form = CourseEntryForm()
         return render(request, 'add_entry.html', {'course': course, 'user': user, 'form': form})
     else:
         return redirect('course_detail', pk=course.pk)
+
 
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
@@ -155,7 +169,9 @@ def course_detail(request, pk):
     if request.user.is_authenticated:
         user = request.user
     user_enrolled = is_user_enrolled(course, user)
-    return render(request, 'course_detail.html', {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled})
+    return render(request, 'course_detail.html',
+                  {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled})
+
 
 @login_required
 def course_enroll(request, pk):
@@ -169,6 +185,7 @@ def course_enroll(request, pk):
     # In any case, just redirect to course detail
     return redirect('course_detail', pk=course.pk)
 
+
 @login_required
 def enrolled_list(request, pk):
     user = request.user
@@ -179,3 +196,26 @@ def enrolled_list(request, pk):
         return render(request, 'enrolled_list.html', {'enrolled_users': users, 'user': user, 'course': course})
     else:
         return redirect('course_detail', pk=course.pk)
+
+
+class UserView(ListView):
+    model = Course
+    template_name = 'user_courses.html'
+    context_object_name = 'courses'
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Course.objects.filter(owner=user)
+
+
+class UserView(ListView):
+    context_object_name = 'user_courses'
+    template_name = 'user_courses.html'
+    queryset = User.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super(UserView, self).get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        context['user'] = user
+        context['courses'] = Course.objects.filter(owner=user)
+        return context
