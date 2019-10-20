@@ -22,7 +22,6 @@ def get_video(course_entry_pk):
     course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
     return Video.objects.filter(course_entry=course_entry)[0]
 
-
 def index(request):
     userdata = {}
     user = request.user
@@ -40,7 +39,6 @@ def index(request):
         'userdata': userdata,
         'courses': courses
     })
-
 
 @login_required
 def add_courses(request):
@@ -109,18 +107,15 @@ def save_video(request, pk):
         return render(request, 'save_video.html', {'video': video, 'user': user, 'form': form})
     return redirect('course_detail', pk=course.pk)
 
-
 @login_required
 def video_detail(request, pk):
     # pk - primary key for course entry and NOT VIDEO
-    user = None
     if request.user.is_authenticated:
         user = request.user
         video = get_video(pk)
-        if user_enrolled(video.course_entry.course, user):
+        if is_user_enrolled(video.course_entry.course, user):
             return render(request, 'video_detail.html', {'video': video, 'user': user})
     return redirect('course_detail', pk=video.course_entry.course.pk)
-
 
 @login_required
 def add_entry(request, pk):
@@ -153,14 +148,13 @@ def add_entry(request, pk):
     else:
         return redirect('course_detail', pk=course.pk)
 
-
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
     course_entries = CourseEntry.objects.filter(course=course)
     user = None
     if request.user.is_authenticated:
         user = request.user
-    user_enrolled = is_user_enrolled(course, user)
+    user_enrolled = user_enrolled(course, user)
     return render(request, 'course_detail.html', {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled})
 
 @login_required

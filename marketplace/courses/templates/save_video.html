@@ -1,23 +1,40 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
-    {% include "header.html" %}
-    <head>
-        <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            {% include "navbar.html" %}
-            <div class="jumbotron">
-                <h1 class="display-4 text-center">{{ video.course_entry.name }}</h1>
+{% include "header.html" %}
+<head>
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+</head>
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Save Video</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                {% include "navbar.html" %}
+                <div class="jumbotron">
+                    <h1 class="display-4 text-center">{{ video.course_entry.name }}</h1>
+                </div>
+                {% block content %}
+                    <form method="POST">{% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                    <script>
+                        CKEDITOR.replace( 'content' );
+                    </script>
+                {% endblock %}
             </div>
-            {% block content %}
-                <form method="POST">{% csrf_token %}
-                    {{form.as_p}}
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </form>
-                <script>
-                    CKEDITOR.replace( 'content' );
-                </script>
-            {% endblock %}
         </div>
-    </body>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
 </html>

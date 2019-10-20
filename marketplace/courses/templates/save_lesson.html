@@ -1,14 +1,26 @@
+{% load static %}
+{% load crispy_forms_tags %}
 <html>
-    {% include "header.html" %}
-    <head>
-        <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
-    </head>
-    <body>
-        <div class="container">
-            {% include "navbar.html" %}
-            <div class="jumbotron">
-                <h1 class="display-4 text-center">{{ lesson.course_entry.name }}</h1>
-            </div>
+{% include "header.html" %}
+<head>
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+</head>
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Save Lesson</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <div class="jumbotron">
+                    <h2 class="display-4 text-center">{{ lesson.course_entry.name }}</h2>
+                </div>
             {% block content %}
                 <form method="POST">{% csrf_token %}
                     {{form.as_p}}
@@ -18,6 +30,10 @@
                     CKEDITOR.replace( 'content' );
                 </script>
             {% endblock %}
+            </div>
         </div>
-    </body>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
 </html>

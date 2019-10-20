@@ -1,104 +1,122 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>EduMarketplace FAQ Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <head>
+        <meta charset="utf-8" />
+        <title>EduMarketplace FAQ Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="https://kit.fontawesome.com/84022fcfa9.js" crossorigin="anonymous"></script>
-</head>
-{% include "header.html" %}
+         <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Optional JavaScript -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+        <script src="{% static 'assets/js/skel.min.js' %}"></script>
+        <script src="{% static 'assets/js/util.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/84022fcfa9.js" crossorigin="anonymous"></script>
+    </head>
 
 <body>
-
 {% include "navbar.html" %}
-<div>
-<div class="container">
-    <br />
-    <br />
-    <br />
-
-    <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        If you cannot find an answer to your question, make sure to contact us. 
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>FAQ</h2>
+        </header>
     </div>
-
-    <br />
-
-    <div class="panel-group" id="accordion">
-        <div class="faqHeader">General questions</div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
-                </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse in">
-                <div class="panel-body">
-                    Yes, you need to create an account to be able to see the list of courses. However, FAQ and contact form are available without registration. Registration can be done either using existing Google account or by filling the required information in Sign-up window. 
+</section>
+ <section id="two" class="wrapper style2">
+     <div class="inner">
+         <div class="box">
+             <div class="content">
+                 <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    If you cannot find an answer to your question, make sure to contact us.
                 </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I create my own course?</a>
-                </h4>
-            </div>
-            <div id="collapseTen" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Yes! Use "Add new course" button to open a form for the course creation. Fill out all the required details, including the price, and add some lessons or videos. We will review your course to see if it satisfies our rules and conditions, and will notify you once your course is approved and added to the list of courses for students.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
-                </h4>
-            </div>
-            <div id="collapseEleven" class="panel-collapse collapse">
-                <div class="panel-body">
-                    All prices for courses are in <strong>KZT</strong>. We plan to add other currencies later.
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to enroll to the course. How can I do this?</a>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse">
-                <div class="panel-body">
-                    Enrolling to a course is really simple. Each course has a description and price.  
-                    Once you have selected a course, you can enroll to it and you will gain a full access to the purchased course materials including lessons and other course entries.
-                </div>
-            </div>
-        </div>
-<div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">How can I add videos to the course?</a>
-                </h4>
-            </div>
-            <div id="collapseFour" class="panel-collapse collapse">
-                <div class="panel-body">
-                    We have 2 options for this: <br/>
-		<ul>
-		<li>You can chose Video course entry type from dropdown, and then paste the embed link from YouTube. This will create an entry with your video in the course.</li>
-		<li>You can insert embeddable iframe with a link from YouTube to the text editor in Lesson course entry in "Source" tab. This will add the video to the content of your lesson.</li>
-</ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-</div>
+                 <div class="panel-group" id="accordion">
+                     <br/>
+                     <h2>General questions</h2>
+                     <br/>
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <h4 class="panel-title">
+                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Is account registration required?</a>
+                             </h4>
+                         </div>
+                         <div id="collapseOne" class="panel-collapse collapse in">
+                             <div class="panel-body">
+                                 Yes, you need to create an account to be able to see the list of courses. However, FAQ and contact form are available without registration. Registration can be done either using existing Google account or by filling the required information in Sign-up window.
+                             </div>
+                         </div>
+                     </div>
+                     <br/>
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <h4 class="panel-title">
+                                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Can I create my own course?</a>
+                             </h4>
+                         </div>
+                         <div id="collapseTen" class="panel-collapse collapse">
+                             <div class="panel-body">
+                                 Yes! Use "Add new course" button to open a form for the course creation. Fill out all the required details, including the price, and add some lessons or videos. We will review your course to see if it satisfies our rules and conditions, and will notify you once your course is approved and added to the list of courses for students.
+                             </div>
+                         </div>
+                     </div>
+                     <br/>
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <h4 class="panel-title">
+                                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">What is the currency used for all transactions?</a>
+                             </h4>
+                         </div>
+                         <div id="collapseEleven" class="panel-collapse collapse">
+                             <div class="panel-body">
+                                 All prices for courses are in <strong>KZT</strong>. We plan to add other currencies later.
+                             </div>
+                         </div>
+                     </div>
+                     <br/>
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <h4 class="panel-title">
+                                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">I want to enroll to the course. How can I do this?</a>
+                             </h4>
+                         </div>
+                         <div id="collapseFour" class="panel-collapse collapse">
+                             <div class="panel-body">
+                                 Enrolling to a course is really simple. Each course has a description and price.
+                                 Once you have selected a course, you can enroll to it and you will gain a full access to the purchased course materials including lessons and other course entries.
+                             </div>
+                         </div>
+                     </div>
+                     <br/>
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             <h4 class="panel-title">
+                                 <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">How can I add videos to the course?</a>
+                             </h4>
+                         </div>
+                         <div id="collapseFive" class="panel-collapse collapse">
+                             <div class="panel-body">
+                                 We have 2 options for this: <br/>
+                                 <ul>
+                                     <li>You can chose Video course entry type from dropdown, and then paste the embed link from YouTube. This will create an entry with your video in the course.</li>
+                                     <li>You can insert embeddable iframe with a link from YouTube to the text editor in Lesson course entry in "Source" tab. This will add the video to the content of your lesson.</li>
+                                 </ul>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
 </body>
 
 </html>
