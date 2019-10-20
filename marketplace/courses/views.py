@@ -103,7 +103,7 @@ def save_video(request, pk):
                 cd = form.cleaned_data
                 video.video_url = cd.get("video_url", "")
                 video.save()
-                return redirect('video_detail', pk=video.pk)
+                return redirect('video_detail', pk=course_entry.pk)
         return render(request, 'save_video.html', {'video': video, 'user': user, 'form': form})
     return redirect('course_detail', pk=course.pk)
 
