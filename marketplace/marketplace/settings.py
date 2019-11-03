@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+fz5u%v*@@g!k@60_^m_$)ydrp7cfcj+z7j#ehg9d=711e81*u'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'marketplace.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'edu_marketplace',
-        'USER': 'admin',
-        'PASSWORD': 'seniorProject!2019',
-        'HOST': 'db-marketplace-dev.ckk35bjjvtat.us-east-2.rds.amazonaws.com',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
         'PORT': 3306,
         'OPTIONS': {
             'sql_mode': 'STRICT_TRANS_TABLES',
@@ -138,9 +138,9 @@ MEDIA_URL = '/media/'
 # Custom variables
 
 SOCIAL_AUTH_TRAILING_SLASH = False  # Remove trailing slash from routes
-SOCIAL_AUTH_AUTH0_DOMAIN = 'dev-n1v551c1.auth0.com'
-SOCIAL_AUTH_AUTH0_KEY = 'I7zjMQXuJPlgTu9eFjygxEyEvz6paYfB'
-SOCIAL_AUTH_AUTH0_SECRET = 'pp7UK-_bHU9KOUHe-kW1ms98R36uGBz5cY7QI6NKkPeyxbip2ZMKISsMaiznu33Z'
+SOCIAL_AUTH_AUTH0_DOMAIN = os.environ.get('SOCIAL_AUTH_AUTH0_DOMAIN')
+SOCIAL_AUTH_AUTH0_KEY = os.environ.get('SOCIAL_AUTH_AUTH0_KEY')
+SOCIAL_AUTH_AUTH0_SECRET = os.environ.get('SOCIAL_AUTH_AUTH0_SECRET')
 SOCIAL_AUTH_AUTH0_SCOPE = [
     'openid',
     'profile',
