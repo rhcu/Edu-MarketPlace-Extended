@@ -21,7 +21,7 @@ ENTRIES_CHOICES = (
 class CourseEntry(models.Model):
 	name = models.CharField(max_length=500)
 	entry_type = models.CharField(max_length=100, choices=ENTRIES_CHOICES, default='lesson')
-	course = models.ForeignKey(Course, on_delete=models.DO_NOTHING,)
+	course = models.ForeignKey(Course, on_delete=models.CASCADE,)
 	date_created = models.DateTimeField('date published')
 
 class Lesson(models.Model):
@@ -33,5 +33,5 @@ class Video(models.Model):
 	video_url = models.URLField(max_length=1000)
 
 class CourseEnroll(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING,)
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
