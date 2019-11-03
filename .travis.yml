@@ -8,4 +8,4 @@ install:
   - python marketplace/manage.py migrate
 # command to run tests
 script:
-  - python marketplace/manage.py test courses auth0login
+  - yes | python marketplace/manage.py test courses auth0login
