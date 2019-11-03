@@ -30,7 +30,7 @@ def get_video(course_entry_pk):
 def index(request):
     userdata = {}
     user = request.user
-    courses = Course.objects.all()
+    courses = Course.objects.filter(visible=True)
     if user.is_authenticated:
         user = request.user
         auth0user = user.social_auth.get(provider='auth0')

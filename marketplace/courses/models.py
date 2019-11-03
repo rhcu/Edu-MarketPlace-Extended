@@ -9,7 +9,7 @@ class Course(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     date_created = models.DateTimeField('date published')
     price = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
-
+    visible = models.BooleanField(default=False)
     def __str__(self):
         return self.title
 
