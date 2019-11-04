@@ -8,8 +8,12 @@ from django.shortcuts import get_object_or_404
 from .models import Course, CourseEntry, Lesson, Video, CourseEnroll
 
 
+def is_course_owner(course, user):
+    return course.owner == user
+
+
 def is_user_enrolled(course, user):
-    if not user:
+    if not user or not user.is_authenticated:
         return False
     if course.owner == user:
         return True
@@ -30,7 +34,8 @@ def get_video(course_entry_pk):
 def index(request):
     userdata = {}
     user = request.user
-    courses = Course.objects.filter(visible=True)
+    course_objects = Course.objects.filter(visible=True)
+    courses = []
     if user.is_authenticated:
         user = request.user
         auth0user = user.social_auth.get(provider='auth0')
@@ -40,9 +45,12 @@ def index(request):
             'picture': auth0user.extra_data['picture'],
             'email': auth0user.extra_data['email'],
         }
+    for course in course_objects:
+        courses.append(
+            (course, (is_user_enrolled(course, user), is_course_owner(course, user))))
     return render(request, 'courses.html', {
         'userdata': userdata,
-        'courses': courses
+        'courses': courses,
     })
 
 
@@ -180,6 +188,14 @@ def course_enroll(request, pk):
         enroll.course = course
         enroll.save()
     # In any case, just redirect to course detail
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def course_unenroll(request, pk):
+    user = request.user
+    course = get_object_or_404(Course, pk=pk)
+    CourseEnroll.objects.filter(user=user, course=course).delete()
     return redirect('course_detail', pk=course.pk)
 
 

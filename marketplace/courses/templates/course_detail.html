@@ -13,6 +13,11 @@
 </section>
 <section id="two" class="wrapper style2">
     <div class="inner">
+        <h3>
+            <a href="/courses">
+                <i class="fas fa-arrow-left"></i>&nbsp;All courses
+            </a>
+        </h3>
         <div class="box">
             {% block content %}
                 <div class="content">
@@ -20,35 +25,51 @@
                     <div class="date">{{ course.created_date }}</div>
                 {% endif %}
                 <h2>{{ course.title }}</h2>
-                <p><b> Topic: </b> {{ course.topic }} </p>
-                <p><b> Author: </b> {{ course.owner.first_name }} </p>
-                <p><b>Price: </b> {{ course.price }} KZT</p>
+                <div class="table-wrapper">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><b>Topic</b></td>
+                                <td>{{ course.topic }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Author</b></td>
+                                <td>{{ course.owner.first_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Price</b></td>
+                                <td>{{ course.price }}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Description</b></td>
+                                <td>{{ course.description }}</td>
+                            </tr>
+                    </table>
+                </div>
                 <p>
                     {% if user != course.owner  %}
                         {% if user_enrolled %}
-                            <b>You are enrolled</b>
+                            <b>You are enrolled. <a href="/courses/unenroll/{{ course.pk }}">Unenroll</a>?</b>
                         {% else %}
                             <form method="POST" class="course-form" action="/courses/enroll/{{ course.pk }}/">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-success">Enroll</button>
+                                <button type="submit" class="button special fit">Enroll</button>
                             </form>
                         {% endif %}
                     {% else %}
                         <a href='/courses/enrolled_list/{{ course.pk }}/'>Enrolled students</a>
                     {% endif %}
                 </p>
-                <p>{{ course.description|linebreaksbr }}</p>
                 <ul>
+                    {% if not user_enrolled %}
+                        <h4><b>NOTE</b>: Before accessing course contents you should be enrolled in the course.</h4>
+                    {% endif %}
                     {% for entry in course_entries %}
                         {% if entry.entry_type == 'lesson' %}
                             {% if user_enrolled %}
                                 <li><a href="/courses/lesson/{{ entry.pk }}">{{entry.name}}</li>
                             {% else %}
-                                <li>
-                                    <button type = "button" class="btn btn-link" data-toggle="tooltip" data-placement="top" title="You should be enrolled to course first, before accessing course content">
-                                        {{entry.name}}
-                                    </button>
-                                </li>
+                                <li>{{entry.name}}</li>
                             {% endif %}
                         {% endif %}
                         {% if entry.entry_type == 'video' %}

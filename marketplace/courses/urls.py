@@ -12,6 +12,7 @@ urlpatterns = [
     path('save_video/<int:pk>/', views.save_video, name='save_video'),
     path('video/<int:pk>/', views.video_detail, name='video_detail'),
     path('enroll/<int:pk>/', views.course_enroll, name='course_enroll'),
+    path('unenroll/<int:pk>/', views.course_unenroll, name='course_unenroll'),
     path('enrolled_list/<int:pk>/', views.enrolled_list, name='enrolled_list'),
     path('user_courses/<str:username>', views.get_user_detail, name='user_detail'),
 ]
