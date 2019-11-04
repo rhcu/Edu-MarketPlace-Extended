@@ -22,7 +22,7 @@
     <section id="two" class="wrapper style2">
         <div class="inner">
             <div class="grid-style">
-                {% for course in courses %}
+                {% for course, user_info in courses %}
                     <div>
                         <div class="box">
                             <div class="content">
@@ -39,7 +39,15 @@
                                 <p class="article-content">{{ course.description|linebreaksbr }}</p>
                                 <h4>{{ course.price }} KZT</h4>
                                 <footer class="align-center">
-                                    <a href="/courses/course/{{course.pk}}" class="button alt">Learn More</a>
+                                    {# check for the course_owner #}
+                                    {% if user_info.1 %}
+                                        <a href="/courses/course/{{course.pk}}" class="button alt">Manage Your Course</a>
+                                    {# check for the enrolled user #}
+                                    {% elif user_info.0 %}
+                                        <a href="/courses/course/{{course.pk}}" class="button alt">Continue Learning</a>
+                                    {% else %}
+                                        <a href="/courses/course/{{course.pk}}" class="button alt">Learn More</a>
+                                    {% endif %}
                                 </footer>
                             </div>
                         </div>
