@@ -42,7 +42,10 @@ def get_quiz(course_entry_pk):
 def index(request):
     userdata = {}
     user = request.user
-    course_objects = Course.objects.filter(Q(visible=True) | Q(owner=user))
+    if user.is_authenticated:
+        course_objects = Course.objects.filter(Q(visible=True) | Q(owner=user))
+    else:
+        course_objects = Course.objects.filter(Q(visible=True))
     courses = []
     if user.is_authenticated:
         user = request.user
