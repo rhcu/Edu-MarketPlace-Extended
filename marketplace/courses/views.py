@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson, Video, CourseEnroll
+from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer
+from django.http import JsonResponse, HttpResponse
+from django.core import serializers
+from django.db.models import Q
 
 
 def is_course_owner(course, user):
@@ -31,10 +34,15 @@ def get_video(course_entry_pk):
     return Video.objects.filter(course_entry=course_entry)[0]
 
 
+def get_quiz(course_entry_pk):
+    course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
+    return Quiz.objects.filter(course_entry=course_entry)[0]
+
+
 def index(request):
     userdata = {}
     user = request.user
-    course_objects = Course.objects.filter(visible=True)
+    course_objects = Course.objects.filter(Q(visible=True) | Q(owner=user))
     courses = []
     if user.is_authenticated:
         user = request.user
@@ -136,6 +144,108 @@ def video_detail(request, pk):
 
 
 @login_required
+def save_question(request, quiz_pk):
+    if request.user.is_authenticated:
+        user = request.user
+    quiz = get_object_or_404(Quiz, pk=quiz_pk)
+    course_entry = quiz.course_entry
+    course = course_entry.course
+    if user == course.owner:
+        if request.method == 'POST':
+            name = request.POST.get('name', '')
+            pk = request.POST.get('pk', None)
+            if pk:
+                # Change question name, if it already exists
+                question = get_object_or_404(Question, pk=pk)
+            else:
+                question = Question()
+            question.name = name
+            question.quiz = quiz
+            question.save()
+            obj = serializers.serialize('json', [question])
+            return HttpResponse(obj, content_type="text/json-comment-filtered")
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def save_answer(request, question_pk):
+    if request.user.is_authenticated:
+        user = request.user
+    question = get_object_or_404(Question, pk=question_pk)
+    quiz = get_object_or_404(Quiz, pk=question.quiz.pk)
+    course_entry = quiz.course_entry
+    course = course_entry.course
+    if user == course.owner:
+        if request.method == 'POST':
+            name = request.POST.get('name', '')
+            correct = 'true' in request.POST.get('correct')
+            pk = request.POST.get('pk', None)
+            if pk:
+                # Change answer name, if it already exists
+                answer = get_object_or_404(Answer, pk=pk)
+            else:
+                answer = Answer()
+            answer.name = name
+            answer.correct = correct
+            answer.question = question
+            answer.save()
+            obj = serializers.serialize('json', [answer])
+            return HttpResponse(obj, content_type="text/json-comment-filtered")
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def quiz_detail(request, pk):
+    # pk - primary key for course entry and NOT LESSON
+    if request.user.is_authenticated:
+        user = request.user
+        quiz = get_quiz(pk)
+        if is_user_enrolled(quiz.course_entry.course, user):
+            return render(request, 'quiz_detail.html', {'quiz': quiz, 'user': user})
+    return redirect('course_detail', pk=quiz.course_entry.course.pk)
+
+
+@login_required
+def get_quiz_content(request, quiz_pk):
+    if request.user.is_authenticated:
+        user = request.user
+    quiz = get_object_or_404(Quiz, pk=quiz_pk)
+    course_entry = quiz.course_entry
+    course = course_entry.course
+    if user == course.owner or is_user_enrolled(course, user):
+        if request.method == 'GET':
+            questions = Question.objects.filter(quiz=quiz)
+            arr_questions = []
+            for question in questions:
+                answers = Answer.objects.filter(question=question)
+                arr_answers = []
+                for answer in answers:
+                    if user == course.owner:
+                        dict_answer = {'name': answer.name, 'correct': answer.correct}
+                    else:
+                        dict_answer = {'name': answer.name}
+                    arr_answers.append(dict_answer)
+                dict_question = {'answers': arr_answers, 'name': question.name, 'pk': question.pk}
+                arr_questions.append(dict_question)
+            return JsonResponse({'questions': arr_questions})
+    return redirect('course_detail', pk=course.pk)
+
+
+
+@login_required
+def save_quiz(request, pk):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+    quiz = get_object_or_404(Quiz, pk=pk)
+    course_entry = quiz.course_entry
+    course = course_entry.course
+    if user == course.owner:
+        return render(request, 'save_quiz.html', {'quiz': quiz, 'user': user})
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
 def add_entry(request, pk):
     user = request.user
     course = get_object_or_404(Course, pk=pk)
@@ -158,6 +268,11 @@ def add_entry(request, pk):
                     video.course_entry = course_entry
                     video.save()
                     return redirect('save_video', pk=video.pk)
+                elif course_entry.entry_type == 'quiz':
+                    quiz = Quiz()
+                    quiz.course_entry = course_entry
+                    quiz.save()
+                    return redirect('save_quiz', pk=quiz.pk)
                 else:
                     raise Exception('Course entry is not found')
         else:
