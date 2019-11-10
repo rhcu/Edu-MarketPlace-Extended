@@ -21,6 +21,9 @@ def contact_us(request):
 def faq(request):
     return render(request, 'faq.html')
 
+def refund_policies(request):
+    return render(request, 'refund.html')
+
 @login_required
 def dashboard(request):
     user = request.user
