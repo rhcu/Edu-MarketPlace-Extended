@@ -75,6 +75,9 @@
                         {% if entry.entry_type == 'video' %}
                             <li><a href="/courses/video/{{ entry.pk }}">{{entry.name}}</a></li>
                         {% endif %}
+                        {% if entry.entry_type == 'quiz' %}
+                            <li><a href="/courses/quiz/{{ entry.pk }}">{{entry.name}}</a></li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
                 <hr>
