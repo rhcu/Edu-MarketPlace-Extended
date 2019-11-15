@@ -24,11 +24,28 @@
                 </h3>
                 {% if user == lesson.course_entry.course.owner %}
                     <a href='/courses/save_lesson/{{lesson.pk}}'><i class="fas fa-edit"></i> Edit</a>
+                    <a href='/courses/delete_lesson/{{lesson.pk}}'><i class="fas fa-trash-alt"></i> Delete</a>
+                {% else %}
+                    {% if is_completed %}
+                         <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>Completed</span>
+                    {% else %}
+                        <span style="color: red; ">In progress</span>
+                    {% endif %}
                 {% endif %}
                 <hr>
                 {% block content %}
                     {{ lesson.content |safe }}
                 {% endblock %}
+                <hr>
+                {% if user != lesson.course_entry.course.owner %}
+                    <a href="/courses/mark_lesson/{{lesson.pk}}" class="button special fit small">
+                        {% if is_completed %}
+                            Mark as NOT completed
+                        {% else %}
+                            Mark as completed
+                        {% endif %}
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>

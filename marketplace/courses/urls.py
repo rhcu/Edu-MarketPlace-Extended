@@ -20,4 +20,9 @@ urlpatterns = [
     path('save_answer/<int:question_pk>/', views.save_answer, name='save_answer'),
     path('get_quiz_content/<int:quiz_pk>/', views.get_quiz_content, name='get_quiz_content'),
     path('quiz/<int:pk>/', views.quiz_detail, name='quiz_detail'),
+    path('get_progress/<int:course_pk>', views.get_progress, name='progress'),
+    path('delete_lesson/<int:pk>', views.delete_lesson, name='delete_lesson'),
+    path('delete_video/<int:pk>', views.delete_video, name='delete_video'),
+    path('mark_lesson/<int:pk>', views.mark_lesson, name='mark_lesson'),
+    path('mark_video/<int:pk>', views.mark_video, name='mark_video'),
 ]

@@ -1,14 +1,17 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+
 from .forms import CourseForm, CourseEntryForm, LessonSaveForm, VideoSaveForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer
+from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer, CourseProgression
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from django.db.models import Q
+
+import json
 
 
 def is_course_owner(course, user):
@@ -22,6 +25,11 @@ def is_user_enrolled(course, user):
         return True
     enroll_count = CourseEnroll.objects.filter(course=course, user=user).count()
     return enroll_count > 0
+
+
+def get_course(course_pk):
+    course = get_object_or_404(Course, pk=course_pk)
+    return course
 
 
 def get_lesson(course_entry_pk):
@@ -65,6 +73,21 @@ def index(request):
     })
 
 
+def is_course_entry_completed(user, course, course_entry):
+    course_progression = CourseProgression.objects.filter(user=user, course=course, course_entry=course_entry)
+    if course_progression.count() == 0:
+        progress = CourseProgression()
+        progress.user = user
+        progress.course = course
+        progress.course_entry = course_entry
+        progress.completed = False
+        return False
+    else:
+        course_progression = course_progression[0]
+        is_completed = getattr(course_progression, 'completed')
+        return is_completed
+
+
 @login_required
 def add_courses(request):
     if request.method == 'POST':
@@ -105,11 +128,15 @@ def save_lesson(request, pk):
 @login_required
 def lesson_detail(request, pk):
     # pk - primary key for course entry and NOT LESSON
+    global lesson
     if request.user.is_authenticated:
         user = request.user
         lesson = get_lesson(pk)
+        course_entry = lesson.course_entry
+        course = course_entry.course
         if is_user_enrolled(lesson.course_entry.course, user):
-            return render(request, 'lesson_detail.html', {'lesson': lesson, 'user': user})
+            is_completed = is_course_entry_completed(user, course, course_entry)
+            return render(request, 'lesson_detail.html', {'lesson': lesson, 'user': user, 'is_completed': is_completed})
     return redirect('course_detail', pk=lesson.course_entry.course.pk)
 
 
@@ -138,11 +165,15 @@ def save_video(request, pk):
 @login_required
 def video_detail(request, pk):
     # pk - primary key for course entry and NOT VIDEO
+    global video
     if request.user.is_authenticated:
         user = request.user
         video = get_video(pk)
+        course_entry = video.course_entry
+        course = course_entry.course
         if is_user_enrolled(video.course_entry.course, user):
-            return render(request, 'video_detail.html', {'video': video, 'user': user})
+            is_completed = is_course_entry_completed(user, course, course_entry)
+            return render(request, 'video_detail.html', {'video': video, 'user': user, 'is_completed': is_completed})
     return redirect('course_detail', pk=video.course_entry.course.pk)
 
 
@@ -248,6 +279,17 @@ def save_quiz(request, pk):
     return redirect('course_detail', pk=course.pk)
 
 
+def update_progression(course, course_entry):
+    enrolled_users = CourseEnroll.objects.filter(course=course)
+    for enrolled_user in enrolled_users:
+        progress = CourseProgression()
+        progress.user = enrolled_user
+        progress.course = course
+        progress.course_entry = course_entry
+        progress.completed = False
+        progress.save()
+
+
 @login_required
 def add_entry(request, pk):
     user = request.user
@@ -260,6 +302,8 @@ def add_entry(request, pk):
                 course_entry.date_created = timezone.now()
                 course_entry.course = course
                 course_entry.save()
+                # Update CourseProgression data
+                update_progression(course, course_entry)
                 if course_entry.entry_type == 'lesson':
                     lesson = Lesson()
                     lesson.course_entry = course_entry
@@ -289,11 +333,15 @@ def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
     course_entries = CourseEntry.objects.filter(course=course)
     user = None
+    course_progression = {}
     if request.user.is_authenticated:
         user = request.user
     user_enrolled = is_user_enrolled(course, user)
+    if user_enrolled:
+        course_progression = CourseProgression.objects.filter(user=user, course=course)
     return render(request, 'course_detail.html',
-                  {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled})
+                  {'course': course, 'user': user, 'course_entries': course_entries, 'user_enrolled': user_enrolled,
+                   'course_progression': course_progression})
 
 
 @login_required
@@ -301,10 +349,20 @@ def course_enroll(request, pk):
     user = request.user
     course = get_object_or_404(Course, pk=pk)
     if request.method == 'POST':
+        # Save data to the CourseEnroll table
         enroll = CourseEnroll()
         enroll.user = user
         enroll.course = course
         enroll.save()
+        # Save data to the CourseProgression table
+        course_entries = CourseEntry.objects.filter(course=course)
+        for course_entry in course_entries:
+            progress = CourseProgression()
+            progress.user = user
+            progress.course = course
+            progress.course_entry = course_entry
+            progress.completed = False
+            progress.save()
     # In any case, just redirect to course detail
     return redirect('course_detail', pk=course.pk)
 
@@ -314,6 +372,7 @@ def course_unenroll(request, pk):
     user = request.user
     course = get_object_or_404(Course, pk=pk)
     CourseEnroll.objects.filter(user=user, course=course).delete()
+    CourseProgression.objects.filter(user=user, course=course).delete()
     return redirect('course_detail', pk=course.pk)
 
 
@@ -324,7 +383,17 @@ def enrolled_list(request, pk):
     if user == course.owner:
         enrolled_objects = CourseEnroll.objects.filter(course=course)
         users = [obj.user for obj in enrolled_objects]
-        return render(request, 'enrolled_list.html', {'enrolled_users': users, 'user': user, 'course': course})
+        user_to_progress = {}
+        for enrolled_user in users:
+            course_progression = CourseProgression.objects.filter(user=enrolled_user, course=course)
+            completed = 0
+            total = course_progression.count()
+            for entry in course_progression:
+                if getattr(entry, 'completed'):
+                    completed += 1
+            user_to_progress[enrolled_user] = completed/total * 100
+        return render(request, 'enrolled_list.html',
+                      {'user': user, 'course': course, 'user_to_progress': user_to_progress})
     else:
         return redirect('course_detail', pk=course.pk)
 
@@ -336,3 +405,85 @@ def get_user_detail(request, username):
         'courses': Course.objects.filter(owner=user)
     }
     return render(request, 'user_courses.html', context)
+
+
+def get_progress(request, course_pk):
+    global user
+    if request.user.is_authenticated:
+        user = request.user
+    course = get_course(course_pk)
+    if is_user_enrolled(course, user):
+        course_progression = CourseProgression.objects.filter(user=user, course=course)
+        completed = 0
+        total = course_progression.count()
+        for entry in course_progression:
+            if getattr(entry, 'completed'):
+                completed += 1
+        response_data = {
+            'completed': completed,
+            'total': total
+        }
+        return HttpResponse(json.dumps(response_data), content_type='application/json')
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def delete_lesson(request, pk):
+    global user
+    if request.user.is_authenticated:
+        user = request.user
+    lesson = get_object_or_404(Lesson, pk=pk)
+    course_entry = lesson.course_entry
+    print('here for pk=' + str(pk))
+    if user == course_entry.course.owner:
+        print('here as course owner')
+        CourseProgression.objects.filter(course_entry=course_entry).all().delete()
+        CourseEntry.objects.filter(pk=pk).all().delete()
+        # lesson.delete()
+    return redirect('course_detail', pk=course_entry.course.pk)
+
+
+@login_required
+def delete_video(request, pk):
+    global user
+    if request.user.is_authenticated:
+        user = request.user
+    video = get_object_or_404(Video, pk=pk)
+    course_entry = video.course_entry
+    if user == course_entry.course.owner:
+        CourseProgression.objects.filter(course_entry=course_entry).all().delete()
+        CourseEntry.objects.filter(pk=pk).all().delete()
+        video.delete()
+    return redirect('course_detail', pk=course_entry.course.pk)
+
+
+@login_required
+def mark_lesson(request, pk):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+    lesson = get_object_or_404(Lesson, pk=pk)
+    course_entry = lesson.course_entry
+    course = course_entry.course
+    if is_user_enrolled(course, user):
+        lesson_progress = CourseProgression.objects.filter(user=user, course=course, course_entry=course_entry).all()[0]
+        is_completed = getattr(lesson_progress, 'completed')
+        lesson_progress.completed = not is_completed
+        lesson_progress.save()
+    return redirect('lesson_detail', pk=course_entry.pk)
+
+
+@login_required
+def mark_video(request, pk):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+    video = get_object_or_404(Video, pk=pk)
+    course_entry = video.course_entry
+    course = course_entry.course
+    if is_user_enrolled(course, user):
+        video_progress = CourseProgression.objects.filter(user=user, course=course, course_entry=course_entry).all()[0]
+        is_completed = getattr(video_progress, 'completed')
+        video_progress.completed = not is_completed
+        video_progress.save()
+    return redirect('video_detail', pk=course_entry.pk)
