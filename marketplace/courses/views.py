@@ -280,11 +280,11 @@ def save_quiz(request, pk):
 
 
 def update_progression(course, course_entry):
-    enrolled_users = CourseEnroll.objects.filter(course=course)
-    for enrolled_user in enrolled_users:
+    entries = CourseEnroll.objects.filter(course=course)
+    for entry in entries:
         progress = CourseProgression()
-        progress.user = enrolled_user
-        progress.course = course
+        progress.user = entry.user
+        progress.course = entry.course
         progress.course_entry = course_entry
         progress.completed = False
         progress.save()
@@ -429,22 +429,22 @@ def get_progress(request, course_pk):
 
 @login_required
 def delete_lesson(request, pk):
+    # pk - primary key for lesson
     global user
     if request.user.is_authenticated:
         user = request.user
     lesson = get_object_or_404(Lesson, pk=pk)
     course_entry = lesson.course_entry
-    print('here for pk=' + str(pk))
     if user == course_entry.course.owner:
-        print('here as course owner')
         CourseProgression.objects.filter(course_entry=course_entry).all().delete()
-        CourseEntry.objects.filter(pk=pk).all().delete()
-        # lesson.delete()
+        CourseEntry.objects.filter(pk=course_entry.pk).all().delete()
+        lesson.delete()
     return redirect('course_detail', pk=course_entry.course.pk)
 
 
 @login_required
 def delete_video(request, pk):
+    # pk - primary key for video
     global user
     if request.user.is_authenticated:
         user = request.user
@@ -452,7 +452,7 @@ def delete_video(request, pk):
     course_entry = video.course_entry
     if user == course_entry.course.owner:
         CourseProgression.objects.filter(course_entry=course_entry).all().delete()
-        CourseEntry.objects.filter(pk=pk).all().delete()
+        CourseEntry.objects.filter(pk=course_entry.pk).all().delete()
         video.delete()
     return redirect('course_detail', pk=course_entry.course.pk)
 
