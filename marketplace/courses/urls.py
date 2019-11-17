@@ -18,6 +18,10 @@ urlpatterns = [
     path('save_quiz/<int:pk>/', views.save_quiz, name='save_quiz'),
     path('save_question/<int:quiz_pk>/', views.save_question, name='save_question'),
     path('save_answer/<int:question_pk>/', views.save_answer, name='save_answer'),
+    path('add_user_answer/<int:answer_pk>/', views.add_user_answer, name='add_user_answer'),
+    path('get_user_answer/<int:answer_pk>/', views.get_user_answer, name='get_user_answer'),
+    # If submitted with POST method, will add current user to those who passed quiz
+    path('user_passed_quiz/<int:quiz_pk>/', views.user_passed_quiz, name='user_passed_quiz'),
     path('get_quiz_content/<int:quiz_pk>/', views.get_quiz_content, name='get_quiz_content'),
     path('quiz/<int:pk>/', views.quiz_detail, name='quiz_detail'),
     path('get_progress/<int:course_pk>', views.get_progress, name='progress'),

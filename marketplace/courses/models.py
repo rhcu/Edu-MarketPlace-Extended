@@ -73,6 +73,23 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE,)
     name = models.CharField(max_length=200)
     correct = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name
+
+
+class UserAnswer(models.Model):
+    # What user have chosen as an answer
+    answer = models.ForeignKey(Answer, on_delete=models.CASCADE,)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    correct = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.answer) + " correct=" + str(self.correct)
+
+
+class UserQuizPassed(models.Model):
+    # Check if user passed the quiz
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE,)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
 
 
 class CourseProgression(models.Model):
