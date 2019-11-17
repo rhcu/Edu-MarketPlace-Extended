@@ -17,9 +17,22 @@
             {% block content %}
                 <div class="content">
                     <ul>
-                        {% for enrolled_user in enrolled_users %}
-                            <!-- TODO(Aisha): add link to user profile page once it implemented-->
-                            <li> {{ enrolled_user.first_name }}{{ enrolled_user.last_name }}</li>
+                        {% for enrolled_user, progress in user_to_progress.items %}
+                            <li>
+                                <div>
+                                    <div class="left">
+                                        <a class="mr-2" href="{% url 'user_detail' username=enrolled_user.username %}">
+                                            {{ enrolled_user.first_name }}{{ enrolled_user.last_name }}
+                                        </a>
+                                    </div>
+                                    <div class="right">
+                                        <div id="progress-wrapper">
+                                            <label for="progress-bar">Progress: {{ progress}}%</label>
+                                            <progress id="progress-bar" max="100" value="{{ progress }}"></progress>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

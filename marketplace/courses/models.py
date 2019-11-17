@@ -32,6 +32,9 @@ class CourseEntry(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE,)
     date_created = models.DateTimeField('date published')
 
+    def __str__(self):
+        return self.name + " in " + self.course.title
+
 
 class Lesson(models.Model):
     # Lesson (rich text) type of course entry
@@ -51,7 +54,7 @@ class CourseEnroll(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.course.title + " id=" + str(self.course_id) + ", enrolled: " + self.user.username
+        return self.user.username + " enrolled in " + self.course.title + ", course_id=" + str(self.course_id)
 
 
 class Quiz(models.Model):
@@ -70,3 +73,15 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE,)
     name = models.CharField(max_length=200)
     correct = models.BooleanField(default=False)
+
+
+class CourseProgression(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, )
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    course_entry = models.ForeignKey(
+        CourseEntry, on_delete=models.CASCADE, limit_choices_to={'course': course})
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "CourseProgression: user=" + self.user.username + " course='" + self.course.title + \
+               "', course_entity='" + self.course_entry.name + ", completed=%r" % self.completed
