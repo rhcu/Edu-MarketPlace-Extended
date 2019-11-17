@@ -391,7 +391,10 @@ def enrolled_list(request, pk):
             for entry in course_progression:
                 if getattr(entry, 'completed'):
                     completed += 1
-            user_to_progress[enrolled_user] = completed/total * 100
+            if total > 0:
+                user_to_progress[enrolled_user] = completed/total * 100
+            else:
+                user_to_progress[enrolled_user] = 0
         return render(request, 'enrolled_list.html',
                       {'user': user, 'course': course, 'user_to_progress': user_to_progress})
     else:
