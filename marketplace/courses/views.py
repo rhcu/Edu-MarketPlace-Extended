@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer, CourseProgression
+from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer, CourseProgression, UserAnswer, UserQuizPassed
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from django.db.models import Q
@@ -229,13 +229,72 @@ def save_answer(request, question_pk):
 
 
 @login_required
+def user_passed_quiz(request, quiz_pk):
+    if request.user.is_authenticated:
+        user = request.user
+    quiz = get_object_or_404(Quiz, pk=quiz_pk)
+    course = quiz.course_entry.course
+    if is_user_enrolled(course, user):
+        if request.method == 'POST':
+            quiz_passed = UserQuizPassed()
+            quiz_passed.user = user
+            quiz_passed.quiz = quiz
+            quiz_passed.save()
+            course_progress = CourseProgression()
+            course_progress.course_entry = quiz.course_entry
+            course_progress.user = user
+            course_progress.course = course
+            course_progress.completed = True
+            course_progress.save()
+            obj = serializers.serialize('json', [quiz_passed])
+            return HttpResponse(obj, content_type="text/json-comment-filtered")
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def add_user_answer(request, answer_pk):
+    if request.user.is_authenticated:
+        user = request.user
+    answer = get_object_or_404(Answer, pk=answer_pk)
+    course = answer.question.quiz.course_entry.course
+    if is_user_enrolled(course, user):
+        if request.method == 'POST':
+            correct = 'true' in request.POST.get('correct')
+            user_answer = UserAnswer()
+            user_answer.user = user
+            user_answer.answer = answer
+            user_answer.correct = correct
+            user_answer.save()
+            obj = serializers.serialize('json', [user_answer])
+            return HttpResponse(obj, content_type="text/json-comment-filtered")
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def get_user_answer(request, answer_pk):
+    if request.user.is_authenticated:
+        user = request.user
+    answer = get_object_or_404(Answer, pk=answer_pk)
+    course = answer.question.quiz.course_entry.course
+    if is_user_enrolled(course, user):
+        user_answer = get_object_or_404(UserAnswer, answer=answer)
+        if user_answer.user == user or course.owner == user:
+            # Only users themselves or course admin
+            # can see their answers for privacy reasons
+            obj = serializers.serialize('json', [user_answer])
+            return HttpResponse(obj, content_type="text/json-comment-filtered")
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
 def quiz_detail(request, pk):
     # pk - primary key for course entry and NOT LESSON
     if request.user.is_authenticated:
         user = request.user
         quiz = get_quiz(pk)
         if is_user_enrolled(quiz.course_entry.course, user):
-            return render(request, 'quiz_detail.html', {'quiz': quiz, 'user': user})
+            user_passed_quiz = UserQuizPassed.objects.filter(quiz=quiz, user=user).count() > 0
+            return render(request, 'quiz_detail.html', {'quiz': quiz, 'user': user, 'user_passed_quiz': user_passed_quiz})
     return redirect('course_detail', pk=quiz.course_entry.course.pk)
 
 
@@ -246,7 +305,7 @@ def get_quiz_content(request, quiz_pk):
     quiz = get_object_or_404(Quiz, pk=quiz_pk)
     course_entry = quiz.course_entry
     course = course_entry.course
-    if user == course.owner or is_user_enrolled(course, user):
+    if is_user_enrolled(course, user):
         if request.method == 'GET':
             questions = Question.objects.filter(quiz=quiz)
             arr_questions = []
@@ -254,10 +313,12 @@ def get_quiz_content(request, quiz_pk):
                 answers = Answer.objects.filter(question=question)
                 arr_answers = []
                 for answer in answers:
+                    dict_answer = {'name': answer.name, 'pk': answer.pk}
                     if user == course.owner:
-                        dict_answer = {'name': answer.name, 'correct': answer.correct}
-                    else:
-                        dict_answer = {'name': answer.name}
+                        dict_answer['correct'] = answer.correct
+                    if UserQuizPassed.objects.filter(quiz=quiz, user=user).count() > 0:
+                        dict_answer['user_answer'] = UserAnswer.objects.filter(user=user, answer=answer)[0].correct
+                        dict_answer['user_answered_correct'] = dict_answer['user_answer'] == answer.correct
                     arr_answers.append(dict_answer)
                 dict_question = {'answers': arr_answers, 'name': question.name, 'pk': question.pk}
                 arr_questions.append(dict_question)
