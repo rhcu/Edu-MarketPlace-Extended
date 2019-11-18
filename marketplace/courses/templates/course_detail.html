@@ -63,19 +63,79 @@
                 <ul>
                     {% if not user_enrolled %}
                         <h4><b>NOTE</b>: Before accessing course contents you should be enrolled in the course.</h4>
-                    {% endif %}
-                    {% for entry in course_entries %}
-                        {% if entry.entry_type == 'lesson' %}
-                            {% if user_enrolled %}
-                                <li><a href="/courses/lesson/{{ entry.pk }}">{{entry.name}}</li>
-                            {% else %}
-                                <li>{{entry.name}}</li>
+                        {% for entry in course_entries %}
+                            <li>{{entry.name}}</li>
+                        {% endfor %}
+                    {% elif user == course.owner %}
+                        {% for entry in course_entries %}
+                            {% if entry.entry_type == 'lesson' %}
+                                <li><a href="/courses/lesson/{{ entry.pk }}">{{entry.name}}</a></li>
                             {% endif %}
-                        {% endif %}
-                        {% if entry.entry_type == 'video' %}
-                            <li><a href="/courses/video/{{ entry.pk }}">{{entry.name}}</a></li>
-                        {% endif %}
-                    {% endfor %}
+                            {% if entry.entry_type == 'video' %}
+                                <li><a href="/courses/video/{{ entry.pk }}">{{entry.name}}</a></li>
+                            {% endif %}
+                            {% if entry.entry_type == 'quiz' %}
+                                <li><a href="/courses/quiz/{{ entry.pk }}">{{entry.name}}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div id="progress-wrapper">
+                            <label for="progress-bar">Progress:</label>
+                            <progress id="progress-bar" max="100" value="0"></progress>
+                            <div id="progress-bar-message"></div>
+                        </div>
+                        <hr>
+                        {% for entry in course_progression %}
+                            {% if entry.course_entry.entry_type == 'lesson' %}
+                                <li>
+                                    <div>
+                                        <div class="left">
+                                            <a href="/courses/lesson/{{ entry.course_entry.pk }}">{{ entry.course_entry.name }}</a>
+                                        </div>
+                                        <div class="right">
+                                            {% if entry.completed %}
+                                                <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>Completed</span>
+                                            {% else %}
+                                                <span style="color: red; ">In progress</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% if entry.course_entry.entry_type == 'video' %}
+                                <li>
+                                    <div>
+                                        <div class="left">
+                                            <a href="/courses/video/{{ entry.course_entry.pk }}">{{entry.course_entry.name}}</a>
+                                        </div>
+                                        <div class="right">
+                                            {% if entry.completed %}
+                                                <span style="color: darkgreen; "<i class="fas fa-check-circle"></i>Completed</span>
+                                            {% else %}
+                                                <span style="color: red; ">In progress</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% if entry.entry_type == 'quiz' %}
+                                <li>
+                                    <div>
+                                        <div class="left">
+                                            <a href="/courses/quiz/{{ entry.course_entry.pk }}">{{ entry.course_entry.name }}</a>
+                                        </div>
+                                        <div class="right">
+                                            {% if entry.completed %}
+                                                <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>Completed</span>
+                                            {% else %}
+                                                <span style="color: red; ">In progress</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 </ul>
                 <hr>
                 {% if user == course.owner %}
@@ -86,5 +146,26 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function(){
+        function updateProgress() {
+            let url = "/courses/get_progress/{{ course.pk }}";
+            fetch(url).then(function(response) {
+              response.json().then(function(progress) {
+		if (progress.total != 0) {
+			document.getElementById("progress-bar").value = progress.completed / progress.total * 100;
+			document.getElementById("progress-bar-message").innerHTML =
+				progress.completed + ' of ' + progress.total + ' courses completed.';
+		} else {
+			document.getElementById("progress-bar").value = 0;
+			document.getElementById("progress-bar-message").innerHTML =
+                                progress.completed + ' of ' + progress.total + ' courses completed.';
+		}
+              });
+          });
+        }
+        updateProgress();
+    });
+</script>
 </body>
 </html>

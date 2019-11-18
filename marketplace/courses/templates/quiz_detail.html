@@ -1,0 +1,158 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+{% include "header.html" %}
+
+<head>
+    <style>
+        .badAnswer{
+            color: red;
+        }
+        .goodAnswer{
+            color: green;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+            function getAnswerHTML(i, answer){
+
+                {% if user_passed_quiz %}
+                    var checkedString = '';
+                    if(answer.user_answer){
+                        checkedString = 'checked'
+                    }
+                    var userAnsweredCorrectClass = "width: 50%;border:5px solid red;padding:1px";
+                    if(answer.user_answered_correct){
+                        userAnsweredCorrectClass = "width: 50%;border:5px solid green;padding:1px";
+                    }
+                    return "<p style='"+userAnsweredCorrectClass+"'><input type='checkbox' id='correct-checkbox' name="+i+" answer-pk='"+answer.pk+"' "+checkedString+"><label>" + answer.name + "</label></p><br>";
+                {% else %}
+                    return "<span id='correct-checkbox'><input type='checkbox' id='correct-checkbox' name="+i+" answer-pk='"+answer.pk+"'><label>" + answer.name + "</label></span><br>";
+                {% endif %}
+            }
+
+            function updateContent(){
+                var url = "/courses/get_quiz_content/{{ quiz.pk }}/";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data){
+                        var questions = data['questions'];
+                        var questionsHTML = "";
+                        for (var i = 0; i < questions.length; i++) {
+                            var question = questions[i];
+                            var name = question.name;
+                            questionsHTML += "<h4>Question " + (i + 1) + ": " + name + "</h4><br>";
+                            questionsHTML += "<ol type='a'>";
+                            for(var j = 0; j < question.answers.length; j++){
+                                var answer = question.answers[j];
+                                questionsHTML += getAnswerHTML(i, answer);
+                            }
+                            questionsHTML += "</ol>"
+                        }
+                        $("#quiz").html(questionsHTML);
+                    }
+                });
+            }
+
+            $(document).on('click', '#correct-checkbox', function() {
+                var checkbox = $(this).find('input');
+                checkbox.prop("checked", !checkbox.prop("checked"));
+            });
+
+            $(document).on('click', '#submit', function() {
+                $('input[answer-pk]').each(function() {
+                    var isCorrectMarked = $(this).prop("checked");
+                    var answer = $(this).attr('answer-pk');
+                    var url = "/courses/add_user_answer/" + answer + "/";
+                    var data = {'correct': isCorrectMarked}
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: data,
+                        async: false,
+                        success: function(data){
+                            console.log(data);
+                        },
+                        error: function(data){
+                            console.log(data);
+                        }
+                    });
+                });
+                var url = "/courses/user_passed_quiz/{{ quiz.pk }}/";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        console.log(data);
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+                });
+                location.reload();
+
+            });
+            updateContent();
+        });
+    </script>
+</head>
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-left">
+            <h2>
+                <a href="/courses/course/{{quiz.course_entry.course.pk}}">
+                    <i class="fas fa-arrow-left"></i> Course: {{ quiz.course_entry.course.title }}
+                </a>
+            </h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <h3 class="display-4">
+                    {{ quiz.course_entry.name }}
+                    {% if user_passed_quiz %}
+                        [Already submitted]
+                    {% endif %}
+                </h3>
+                {% csrf_token %}
+                {% if user == quiz.course_entry.course.owner %}
+                    <a href='/courses/save_quiz/{{quiz.pk}}'><i class="fas fa-edit"></i> Edit</a>
+                {% endif %}
+                <hr>
+                {% block content %}
+                    <div id="quiz">
+                    </div>
+                {% endblock %}
+                {% if not user_passed_quiz %}
+                    <button id="submit">Submit</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
+</html>
+

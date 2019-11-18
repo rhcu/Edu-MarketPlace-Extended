@@ -9,6 +9,7 @@ urlpatterns = [
     path('profile', views.profile),
     path('contact_us', views.contact_us),
     path('faq', views.faq),
+    path('refund_policies', views.refund_policies),
     path('', include('django.contrib.auth.urls')),
     path('', include('social_django.urls')),
 ]

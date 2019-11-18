@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>EduMarketplace Refund Policies</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+         <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Optional JavaScript -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+        <script src="{% static 'assets/js/skel.min.js' %}"></script>
+        <script src="{% static 'assets/js/util.js' %}"></script>
+        <script src="{% static 'assets/js/main.js' %}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/84022fcfa9.js" crossorigin="anonymous"></script>
+    </head>
+
+<body>
+{% include "navbar.html" %}
+<!-- One -->
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Refund Policies</h2>
+        </header>
+    </div>
+</section>
+ <section id="two" class="wrapper style2">
+     <div class="inner">
+         <div class="box">
+             <div class="content">
+                 <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    If you cannot find an answer to your question, make sure to contact us.
+                </div>
+                 <div class="panel-group" id="accordion">
+                     <br/>
+                     <h2>Refund Policies</h2>
+                     <br/>
+		    <p>
+You can unenroll from the course within <b>7 days</b> from enrollment, and you will be refunded in the full amount in case you have not received a completion certificate in this timeline.  You may cancel your enrollment at any time after 7 days but won't get any refund in that case.</br>
+You can unenroll from free courses at any time with no charge.
+You are only allowed to unenroll from one specific course once. That means, if you will cancel your enrollment to the course claiming a refund, and will subsequently enroll in the same course, you won't be allowed to claim a refund for subsequent unenrollment. 
+</b>
+Please, allow <b>30 days from the cancellation point for the refund to be processed</b>. If you were eligible for a refund and didn't receive a money transfer after this period, please contact us.
+		    </p>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+{% include "footer.html" %}
+</body>
+
+</html>

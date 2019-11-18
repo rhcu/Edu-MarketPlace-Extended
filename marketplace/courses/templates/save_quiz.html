@@ -1,0 +1,121 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+{% include "header.html" %}
+<head>
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script>
+        $(document).ready(function(){
+            var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            function updateContent(){
+                var url = "/courses/get_quiz_content/{{ quiz.pk }}/";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function(data){
+                        var questions = data['questions'];
+                        var questionsHTML = "";
+                        for (var i = 0; i < questions.length; i++) {
+                            var question = questions[i];
+                            var name = question.name;
+                            questionsHTML += "<h2>Question " + (i + 1) + ": " + name + "</h2><br>";
+                            questionsHTML += "<ol type='a'>";
+                            for(var j = 0; j < question.answers.length; j++){
+                                var answer = question.answers[j];
+                                questionsHTML += "<li><b>Answer: </b>" + answer.name + ( answer.correct ? '(correct answer)' : "")  + " </li>";
+                            }
+                            questionsHTML += "</ol>"
+                            questionsHTML += "<input style='width: 50%' placeholder='Add answer' type='text' id='answer-name' question-name-id='"+question.pk+"'> <span id='correct-checkbox'><input type='checkbox' question-correct-id='"+question.pk+"'><label>Is correct answer?</label></span> <button id='submit-answer' question-id='"+question.pk+"'> Add answer</button><hr>"
+                        }
+                        $("#quiz").html(questionsHTML);
+                    }
+                });
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+            $(document).on('click', '#submit-answer', function() {
+                var questionPk = $(this).attr("question-id");
+                var answerText = jQuery("[question-name-id='"+questionPk+"']").val();
+                var correct = jQuery("[question-correct-id='"+questionPk+"']").prop('checked');
+                var url = "/courses/save_answer/"+questionPk+"/";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {'name': answerText, 'correct': correct},
+                    success: function(data){
+                        updateContent();
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+                });
+            });
+
+            $(document).on('click', '#submit-question', function() {
+                var name = $("#question-name").val();
+                var url = "/courses/save_question/{{ quiz.pk }}/";
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {'name': name},
+                    success: function(data){
+                        updateContent();
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+                });
+            });
+            $(document).on('click', '#correct-checkbox', function() {
+                var checkbox = $(this).find('input');
+                checkbox.prop("checked", !checkbox.prop("checked"));
+            });
+            updateContent();
+        });
+    </script>
+</head>
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>Save Quiz</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+        <h3>
+            <a href="/courses">
+                <i class="fas fa-arrow-left"></i>&nbsp;All courses
+            </a>
+        </h3>
+    {% csrf_token %}
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <div class="jumbotron">
+                    <h1 class="display-4 text-center">{{ quiz.course_entry.name }}</h1>
+                </div>
+                <p id="quiz"></p>
+                <p>
+                    <input type="text" id="question-name" placeholder="Add question">
+                    <button id="submit-question">Add</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
+</html>
