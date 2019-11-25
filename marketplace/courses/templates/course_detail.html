@@ -118,7 +118,7 @@
                                     </div>
                                 </li>
                             {% endif %}
-                            {% if entry.entry_type == 'quiz' %}
+                            {% if entry.course_entry.entry_type == 'quiz' %}
                                 <li>
                                     <div>
                                         <div class="left">
@@ -152,15 +152,15 @@
             let url = "/courses/get_progress/{{ course.pk }}";
             fetch(url).then(function(response) {
               response.json().then(function(progress) {
-		if (progress.total != 0) {
-			document.getElementById("progress-bar").value = progress.completed / progress.total * 100;
-			document.getElementById("progress-bar-message").innerHTML =
-				progress.completed + ' of ' + progress.total + ' courses completed.';
-		} else {
-			document.getElementById("progress-bar").value = 0;
-			document.getElementById("progress-bar-message").innerHTML =
-                                progress.completed + ' of ' + progress.total + ' courses completed.';
-		}
+                  if (progress.total !== 0) {
+                      document.getElementById("progress-bar").value = progress.completed / progress.total * 100;
+                      document.getElementById("progress-bar-message").innerHTML =
+                          progress.completed + ' of ' + progress.total + ' course entries completed.';
+                  } else {
+                      document.getElementById("progress-bar").value = 0;
+                      document.getElementById("progress-bar-message").innerHTML =
+                          progress.completed + ' of ' + progress.total + ' course entries completed.';
+                  }
               });
           });
         }
