@@ -51,10 +51,7 @@
                         {% if user_enrolled %}
                             <b>You are enrolled. <a href="/courses/unenroll/{{ course.pk }}">Unenroll</a>?</b>
                         {% else %}
-                            <form method="POST" class="course-form" action="/courses/enroll/{{ course.pk }}/">
-                                {% csrf_token %}
-                                <button type="submit" class="button special fit">Enroll</button>
-                            </form>
+                            <a href='/courses/pay/{{ course.pk }}' class="button special fit">Purchase</a>
                         {% endif %}
                     {% else %}
                         <a href='/courses/enrolled_list/{{ course.pk }}/'>Enrolled students</a>
@@ -62,7 +59,7 @@
                 </p>
                 <ul>
                     {% if not user_enrolled %}
-                        <h4><b>NOTE</b>: Before accessing course contents you should be enrolled in the course.</h4>
+                        <h4><b>NOTE</b>: Before accessing course contents you should purchase the course.</h4>
                         {% for entry in course_entries %}
                             <li>{{entry.name}}</li>
                         {% endfor %}

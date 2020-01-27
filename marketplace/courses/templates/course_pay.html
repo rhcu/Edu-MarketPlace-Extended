@@ -1,0 +1,120 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <h2>{{ course.title }}</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <h3>
+            <a href="/courses/course/{{ course.pk }}/">
+                <i class="fas fa-arrow-left"></i>&nbsp;Back to course
+            </a>
+        </h3>
+        <div class="container" >
+
+            <div class="row">
+
+
+<div class="col-xs-12 col-md-12">
+<div class="panel panel-default credit-card-box">
+<div class="panel-heading display-table" >
+<div class="row display-tr" >
+<h3 class="panel-title display-td" >Payment Details</h3>
+<div class="display-td" >                            
+<img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+</div>
+</div>                    
+</div>
+<div class="panel-body">
+<div class="row">
+<div class="col-xs-12   ">
+<div class="form-group">
+<label for="cardNumber">CARD NUMBER</label>
+<div class="input-group">
+<input 
+type="tel"
+class="form-control"
+name="cardNumber"
+id="cardNumber"
+placeholder="Valid Card Number"
+autocomplete="cc-number"
+required autofocus 
+/>
+<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+</div>
+</div>                            
+</div>
+</div>
+<div class="row">
+<div class="col-xs-7 col-md-7">
+<div class="form-group">
+<label for="cardExpiry">EXPIRATION DATE</label>
+<input 
+type="tel" 
+class="form-control" 
+name="cardExpiry"
+id="cardExpiry"
+placeholder="MM / YY"
+autocomplete="cc-exp"
+required 
+/>
+</div>
+</div>
+<div class="col-xs-6 col-md-6 pull-right">
+<div class="form-group">
+<label for="cardCVC">CV CODE</label>
+<input 
+type="tel" 
+class="form-control"
+name="cardCVC"
+id="cardCVC"
+placeholder="CVC"
+autocomplete="cc-csc"
+required
+/>
+</div>
+</div>
+</div>
+<div class="row">
+</div>
+
+</div>
+</div>
+    <hr>
+
+    {% block content %}
+            <form method="POST" class="course-form" id="pay-form" action="/courses/enroll/{{ course.pk }}/">
+                {% csrf_token %}
+                <button type="submit" class="button special fit">Buy</button>
+            </form>
+    {% endblock %}
+</div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $('#pay-form').submit(function() {
+            var cardNumber = $("#cardNumber").val();
+            var cardCVC = $("#cardCVC").val();
+            var cardExpiry = $("#cardExpiry").val();
+            if(cardNumber && cardCVC && cardExpiry)
+                return true;
+            alert("Fill all fields!");
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

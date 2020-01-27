@@ -406,6 +406,13 @@ def course_detail(request, pk):
 
 
 @login_required
+def course_pay(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    user = request.user
+    return render(request, 'course_pay.html', {'course': course, 'user': user})    
+
+
+@login_required
 def course_enroll(request, pk):
     user = request.user
     course = get_object_or_404(Course, pk=pk)
