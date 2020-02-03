@@ -605,10 +605,12 @@ def set_course_rating(request, course_pk, rating):
 
         # User can rate a course once only, so we are safe to update the course rating like on the lines below
         enrolled_objects = CourseEnroll.objects.filter(course=course)
-        count = enrolled_objects.count()
+        count = 0
         total = 0
         for enrolled_object in enrolled_objects:
-            total += enrolled_object.user_rating
+            if enrolled_object.user_rating != 0.0:
+                total += enrolled_object.user_rating
+                count += 1
         floor = total//count
         float_div = total/count - floor
 
