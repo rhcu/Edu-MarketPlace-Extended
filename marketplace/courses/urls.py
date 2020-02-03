@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -30,4 +30,9 @@ urlpatterns = [
     path('delete_video/<int:pk>', views.delete_video, name='delete_video'),
     path('mark_lesson/<int:pk>', views.mark_lesson, name='mark_lesson'),
     path('mark_video/<int:pk>', views.mark_video, name='mark_video'),
+    path('get_course_rating/<int:course_pk>', views.get_course_rating, name='get_course_rating'),
+    path('get_user_rating/<int:course_pk>', views.get_user_rating, name='get_user_rating'),
+    re_path(r'^set_rating/(?P<course_pk>[0-9]+)/(?P<rating>[0-9]+)/$', views.set_course_rating,
+            name='set_course_rating')
 ]
+

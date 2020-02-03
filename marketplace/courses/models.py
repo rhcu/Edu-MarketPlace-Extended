@@ -12,9 +12,10 @@ class Course(models.Model):
     date_created = models.DateTimeField('date published')
     price = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
     visible = models.BooleanField(default=False)
+    rating = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
 
     def __str__(self):
-        return self.title
+        return self.title + ", pk=" + str(self.pk) + ", rating=" + str(self.rating)
 
 
 ENTRIES_CHOICES = (
@@ -52,9 +53,11 @@ class CourseEnroll(models.Model):
     # User enrollment storage
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    user_rating = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
 
     def __str__(self):
-        return self.user.username + " enrolled in " + self.course.title + ", course_id=" + str(self.course_id)
+        return self.user.username + " enrolled in " + self.course.title + ", course_id=" + str(self.course_id) + \
+               ", user_rating=" + str(self.user_rating)
 
 
 class Quiz(models.Model):
@@ -73,6 +76,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE,)
     name = models.CharField(max_length=200)
     correct = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 
@@ -82,6 +86,7 @@ class UserAnswer(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE,)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     correct = models.BooleanField(default=False)
+
     def __str__(self):
         return str(self.answer) + " correct=" + str(self.correct)
 
