@@ -24,7 +24,32 @@
                 {% if course.created_date %}
                     <div class="date">{{ course.created_date }}</div>
                 {% endif %}
-                <h2>{{ course.title }}</h2>
+                    <h2>{{ course.title }}</h2>
+                    {% if user != course.owner and user_enrolled %}
+                        <span class="rating_stars rating_0">
+                            <span class='s' data-low='0.5' data-high='1'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            <span class='s' data-low='1.5' data-high='2'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            <span class='s' data-low='2.5' data-high='3'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            <span class='s' data-low='3.5' data-high='4'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            <span class='s' data-low='4.5' data-high='5'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                            <span class='r r0_5' data-rating='1' data-value='0.5'></span>
+                            <span class='r r1' data-rating='1' data-value='1'></span>
+                            <span class='r r1_5' data-rating='15' data-value='1.5'></span>
+                            <span class='r r2' data-rating='2' data-value='2'></span>
+                            <span class='r r2_5' data-rating='25' data-value='2.5'></span>
+                            <span class='r r3' data-rating='3' data-value='3'></span>
+                            <span class='r r3_5' data-rating='35' data-value='3.5'></span>
+                            <span class='r r4' data-rating='4' data-value='4'></span>
+                            <span class='r r4_5' data-rating='45' data-value='4.5'></span>
+                            <span class='r r5' data-rating='5' data-value='5'></span>
+                            <span class='r current' id="total-rating"></span>
+                        </span>
+                        <input type="hidden" id="rating" value="0" />
+                        <input type="hidden" name="rating" id="rating_val" value="0" />
+                        <br/><br/>
+                    {% else %}
+                        <div id="rating-not-enrolled"></div>
+                    {% endif %}
                 <div class="table-wrapper">
                     <table>
                         <tbody>
@@ -46,7 +71,7 @@
                             </tr>
                     </table>
                 </div>
-                <p>
+                <div>
                     {% if user != course.owner  %}
                         {% if user_enrolled %}
                             <b>You are enrolled. <a href="/courses/unenroll/{{ course.pk }}">Unenroll</a>?</b>
@@ -54,9 +79,10 @@
                             <a href='/courses/pay/{{ course.pk }}' class="button special fit">Purchase</a>
                         {% endif %}
                     {% else %}
-                        <a href='/courses/enrolled_list/{{ course.pk }}/'>Enrolled students</a>
+                        <b><a href='/courses/enrolled_list/{{ course.pk }}/'>Enrolled students</a></b>
+                        <br/><br/>
                     {% endif %}
-                </p>
+                </div>
                 <ul>
                     {% if not user_enrolled %}
                         <h4><b>NOTE</b>: Before accessing course contents you should purchase the course.</h4>
@@ -145,23 +171,123 @@
 </section>
 <script>
     $(document).ready(function(){
+        let is_enrolled = "{{ user_enrolled }}";
+        let course_owner = "{{ course.owner}}";
+        let user = "{{ user }}";
+        let is_owner = false;
+        if (course_owner.localeCompare(user) === 0) {
+            is_owner = true;
+        }
+        console.log('is_enrolled=' + is_enrolled);
+        console.log('is_owner=' + is_owner);
+
+        // Helper functions
         function updateProgress() {
             let url = "/courses/get_progress/{{ course.pk }}";
             fetch(url).then(function(response) {
-              response.json().then(function(progress) {
-                  if (progress.total !== 0) {
-                      document.getElementById("progress-bar").value = progress.completed / progress.total * 100;
-                      document.getElementById("progress-bar-message").innerHTML =
-                          progress.completed + ' of ' + progress.total + ' course entries completed.';
-                  } else {
-                      document.getElementById("progress-bar").value = 0;
-                      document.getElementById("progress-bar-message").innerHTML =
-                          progress.completed + ' of ' + progress.total + ' course entries completed.';
-                  }
-              });
-          });
+                response.json().then(function(progress) {
+                    if (progress.total !== 0) {
+                        document.getElementById("progress-bar").value = progress.completed / progress.total * 100;
+                        document.getElementById("progress-bar-message").innerHTML =
+                            progress.completed + ' of ' + progress.total + ' course entries completed.';
+                    } else {
+                        document.getElementById("progress-bar").value = 0;
+                        document.getElementById("progress-bar-message").innerHTML =
+                            progress.completed + ' of ' + progress.total + ' course entries completed.';
+                    }
+                });
+            });
         }
-        updateProgress();
+
+        function isRatingSet() {
+            let user_rating = "/courses/get_user_rating/{{ course.pk }}";
+            fetch(user_rating).then(function(response) {
+                response.json().then(function(user_rating) {
+                    let curr_user_rating = parseFloat(user_rating.value);
+                    console.log('in isRatingSet() and curr_user_rating = ' + curr_user_rating);
+                    if (curr_user_rating !== 0.0) {
+                        // Disable 'rating' if the user has rated a course already
+                        $('.rating_stars span.r').unbind("click").unbind('mouseenter mouseleave');
+                    }
+                });
+            });
+
+        }
+
+        function updateRating() {
+            if (is_enrolled && !is_owner) {
+                let user_rating = "/courses/get_user_rating/{{ course.pk }}";
+                fetch(user_rating).then(function (response) {
+                    response.json().then(function (user_rating) {
+                        console.log('user rating set, user_rating = ' + user_rating.value);
+                        highlight_star(parseFloat(user_rating.value));
+                    });
+                });
+            }
+
+            let course_rating = "/courses/get_course_rating/{{ course.pk }}";
+            fetch(course_rating).then(function(response) {
+                response.json().then(function(course_rating) {
+                    console.log('course rating set');
+                    if (is_enrolled && !is_owner) {
+                        document.getElementById("total-rating").innerHTML = 'Total rating: ' + course_rating.value;
+                    } else {
+                        document.getElementById("rating-not-enrolled").innerHTML =
+                            "<h4>Total rating: " + course_rating.value + "</h4>";
+                    }
+                });
+            });
+        }
+
+        // Perform all the information retrieval
+        if (is_enrolled && !is_owner) {
+            console.log('enrolled and not an owner');
+            isRatingSet();
+            updateProgress();
+        }
+        updateRating();
+
+        // Rating logic
+        $('.rating_stars span.r').hover(
+            function() {
+                // Get a hovered value
+                let rating = $(this).data('rating');
+                let value = $(this).data('value');
+                $(this).parent().attr('class', '').addClass('rating_stars').addClass('rating_'+rating);
+                highlight_star(value);
+            }, function() {
+                // Get a hidden-field value
+                let rating = $("#rating").val();
+                let value = $("#rating_val").val();
+                $(this).parent().attr('class', '').addClass('rating_stars').addClass('rating_'+rating);
+                highlight_star(value);
+            }
+        ).click(function() {
+            // Set a hidden-field value on click
+            var value = $(this).data('value');
+            var rating = $(this).data('rating');
+            $("#rating_val").val(value);
+            $("#rating").val(rating);
+
+            highlight_star(value);
+            // Disable 'rating'
+            $('.rating_stars span.r').unbind("click").unbind('mouseenter mouseleave');
+
+            let url = "/courses/set_rating/{{ course.pk }}/" + rating + "/";
+            fetch(url);
+        });
+        const highlight_star = function(rating) {
+            $('.rating_stars span.s').each(function() {
+                let low = $(this).data('low');
+                let high = $(this).data('high');
+                $(this).removeClass('active-high').removeClass('active-low');
+                if (rating >= high) {
+                    $(this).addClass('active-high');
+                } else if (rating === low) {
+                    $(this).addClass('active-low');
+                }
+            });
+        }
     });
 </script>
 </body>

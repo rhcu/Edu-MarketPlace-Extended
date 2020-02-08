@@ -10,8 +10,10 @@ from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Ques
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from django.db.models import Q
+from decimal import Decimal
 
 import json
+import simplejson
 
 
 def is_course_owner(course, user):
@@ -558,3 +560,65 @@ def mark_video(request, pk):
         video_progress.completed = not is_completed
         video_progress.save()
     return redirect('video_detail', pk=course_entry.pk)
+
+
+@login_required
+def get_course_rating(request, course_pk):
+    course = get_object_or_404(Course, pk=course_pk)
+    course_rating = course.rating
+    response_data = {
+        'value': simplejson.dumps(course_rating, use_decimal=True)
+    }
+    return HttpResponse(json.dumps(response_data), content_type='application/json')
+
+
+@login_required
+def get_user_rating(request, course_pk):
+    curr_user = None
+    if request.user.is_authenticated:
+        curr_user = request.user
+    course = get_object_or_404(Course, pk=course_pk)
+    if is_user_enrolled(course, curr_user):
+        enrolled_course = CourseEnroll.objects.filter(user=curr_user, course=course).all()[0]
+        user_rating = enrolled_course.user_rating
+        response_data = {
+            'value': simplejson.dumps(user_rating, use_decimal=True)
+        }
+        return HttpResponse(json.dumps(response_data), content_type='application/json')
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def set_course_rating(request, course_pk, rating):
+    rating = int(rating)
+    if rating // 10 > 0:
+        rating /= 10
+        rating = Decimal(rating)
+    curr_user = None
+    if request.user.is_authenticated:
+        curr_user = request.user
+    course = get_object_or_404(Course, pk=course_pk)
+    if is_user_enrolled(course, curr_user):
+        enrolled_course = CourseEnroll.objects.filter(user=curr_user, course=course).all()[0]
+        enrolled_course.user_rating = rating
+        enrolled_course.save()
+
+        # User can rate a course once only, so we are safe to update the course rating like on the lines below
+        enrolled_objects = CourseEnroll.objects.filter(course=course)
+        count = 0
+        total = 0
+        for enrolled_object in enrolled_objects:
+            if enrolled_object.user_rating != 0.0:
+                total += enrolled_object.user_rating
+                count += 1
+        floor = total//count
+        float_div = total/count - floor
+
+        course_rating = floor
+        if float_div > 0.5:
+            course_rating = floor + 1
+        elif float_div == 0.5:
+            course_rating = floor + 0.5
+        course.rating = course_rating
+        course.save()
+    return redirect('course_detail', pk=course.pk)

@@ -38,6 +38,30 @@
                                 <h3>{{ course.topic }} </h3>
                                 <p class="article-content">{{ course.description|linebreaksbr }}</p>
                                 <h4>{{ course.price }} KZT</h4>
+                                {# START - Course Rating #}
+                                <div id="{{ course.pk }}">
+                                    <span class="rating_stars rating_0">
+                                        <span class='s' data-low='0.5' data-high='1'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                        <span class='s' data-low='1.5' data-high='2'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                        <span class='s' data-low='2.5' data-high='3'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                        <span class='s' data-low='3.5' data-high='4'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                        <span class='s' data-low='4.5' data-high='5'><i class="fa fa-star-o"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star"></i></span>
+                                        <span class='r r0_5' data-rating='1' data-value='0.5'></span>
+                                        <span class='r r1' data-rating='1' data-value='1'></span>
+                                        <span class='r r1_5' data-rating='15' data-value='1.5'></span>
+                                        <span class='r r2' data-rating='2' data-value='2'></span>
+                                        <span class='r r2_5' data-rating='25' data-value='2.5'></span>
+                                        <span class='r r3' data-rating='3' data-value='3'></span>
+                                        <span class='r r3_5' data-rating='35' data-value='3.5'></span>
+                                        <span class='r r4' data-rating='4' data-value='4'></span>
+                                        <span class='r r4_5' data-rating='45' data-value='4.5'></span>
+                                        <span class='r r5' data-rating='5' data-value='5'></span>
+                                        <span class='r current' id="total-rating"></span>
+                                    </span>
+                                    <input type="hidden" id="rating" value="0" />
+                                    <input type="hidden" name="rating" id="rating_val" value="0" />
+                                </div>
+                                {# END - Course Rating #}
                                 <footer class="align-center">
                                     {# check for the course_owner #}
                                     {% if user_info.1 %}
@@ -66,5 +90,48 @@
     </section>
 {% endif %}
 {% include "footer.html" %}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        const highlight_star = function(rating, course_pk) {
+            let parent = document.getElementById(course_pk);
+
+            $('.rating_stars span.s', parent).each(function() {
+                let low = $(this).data('low');
+                let high = $(this).data('high');
+                $(this).removeClass('active-high').removeClass('active-low');
+                if (rating >= high) {
+                    $(this).addClass('active-high');
+                } else if (rating === low) {
+                    $(this).addClass('active-low');
+                }
+            });
+        };
+
+        function getCourseRatings() {
+            let courses = "{{courses}}";
+            courses = courses.substring(1,);
+
+            let split = courses.split("(&lt;");
+            for (let i = 0; i < split.length; i++) {
+                let s = split[i];
+                if (s.length > 0) {
+                    let pk_idx = s.indexOf("pk");
+                    let pk_s = s.substring(pk_idx + 3,);
+                    let pk_end = pk_s.indexOf(",");
+                    let pk = pk_s.substring(0, pk_end);
+
+                    let rating_idx = s.indexOf("rating");
+                    let rating_s = s.substring(rating_idx + 7,);
+                    let rating_end = rating_s.indexOf("&");
+                    let rating = rating_s.substring(0, rating_end);
+
+                    highlight_star(parseFloat(rating), pk);
+                }
+            }
+        }
+        getCourseRatings();
+    });
+</script>
 </body>
 </html>
