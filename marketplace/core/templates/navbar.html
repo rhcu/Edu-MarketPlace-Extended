@@ -1,21 +1,50 @@
 {% load i18n %}
+
+<script>
+    function changeLang(langId){
+        console.log(langId);
+        document.getElementById(langId).submit();
+    }
+</script>
 <header id="header" class="alt">
+    
     <div class="logo"><a href="/">Edu Marketplace</a></div>
+    
+    
+    {% get_available_languages as LANGUAGES %}
+    {% get_current_language as LANGUAGE_CODE %}
+    
+    <a class="nav-item nav-link" href="#">Your lang is: {{ LANGUAGE_CODE }} </a>
+    {% get_language_info_list for LANGUAGES as languages%}
+    {% for language in languages %}
+        <a class="nav-item nav-link" href="#" onclick="changeLang('{{ language.code }}')">{{ language.name_local }} </a>
+        <!-- код языка: ({{ language.code }}) -->
+    {% endfor %}
+    
     {% if user.is_authenticated %}
         <a class="nav-item nav-link" href="/profile">My Profile</a>
         <a class="nav-item nav-link" href="/users/logout">Log out</a>
     {% else %}
+    
         <a class="nav-item nav-link" href="/users/login/auth0">Login</a>
         <a class="nav-item nav-link" href="/users/login/auth0">Register</a>
     {% endif %}
     <a href="#menu">Menu</a>
+    
+    {% for language in languages %}
+    <!-- код языка: ({{ language.code }}) -->
+    <form action="{% url 'set_language' %}" method="post" id="{{ language.code }}">{% csrf_token %}
+        <input type="hidden" name="next" value="{{ redirect_to }}">
+            <input type="hidden" name="language" value="{{ language.code }}">
+                </form>
+    {% endfor %}
 </header>
 <nav id="menu">
     <ul class="links">
         <li><a href="/">{% trans "Home" %}</a></li>
         <li><a href="/courses"> {% trans "Courses" %}</a></li>
         <li><a href="/users/contact_us">{% trans "Contact us" %}</a></li>
-	<li><a href="/users/refund_policies">{% trans "Refund policies" %}</a></li>
+        <li><a href="/users/refund_policies">{% trans "Refund policies" %}</a></li>
         <li><a href="/users/faq">FAQ</a></li>
     </ul>
 </nav>

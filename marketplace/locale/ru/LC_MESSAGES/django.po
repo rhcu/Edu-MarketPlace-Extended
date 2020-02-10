@@ -22,11 +22,11 @@ msgstr ""
 msgid "Add Courses"
 msgstr "Создать курсы"
 
-#: core/templates/navbar.html:15
+#: core/templates/navbar.html:44
 msgid "Home"
 msgstr "Дом"
 
-#: core/templates/navbar.html:16
+#: core/templates/navbar.html:45
 msgid "Courses"
 msgstr "Курсы"
 
