@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 00:28+0600\n"
+"POT-Creation-Date: 2020-02-11 01:08+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: auth0login/templates/contact_form.html:18
+#: auth0login/templates/contact_form.html:10
+msgid ""
+"Hi! Thanks for using Edu Marketplace! If you want to contact us with any "
+"feedback or concern, fill out the form below"
+msgstr ""
+"Здравствуйте! Спасибо за использование Edu Marketplace! Если вы хотите "
+"связаться с нами, чтобы оставить отзыв, заполните следующую форму"
+
+#: auth0login/templates/contact_form.html:17
 msgid "Loading…"
 msgstr "Загрузка..."
 
@@ -28,13 +36,11 @@ msgstr "Добро пожаловать"
 
 #: auth0login/templates/dashboard.html:16
 msgid "Start your next education today by exploring our"
-msgstr "Начни свое образование сегодня с открытия наших"
+msgstr "Начни свое образование сегодня."
 
-#: auth0login/templates/dashboard.html:16
-#, fuzzy
-#| msgid "Add course"
+#: auth0login/templates/dashboard.html:17
 msgid "list of courses"
-msgstr "Все курсы"
+msgstr "Список курсов."
 
 #: auth0login/templates/faq.html:40 auth0login/templates/refund.html:40
 msgid "Close"
@@ -42,7 +48,9 @@ msgstr "Закрыть"
 
 #: auth0login/templates/faq.html:41 auth0login/templates/refund.html:41
 msgid "If you cannot find an answer to your question, make sure to contact us."
-msgstr "Если у вас не получилось найти ответ на ваш вопрос, пожалуйста, свяжитесь с нами."
+msgstr ""
+"Если у вас не получилось найти ответ на ваш вопрос, пожалуйста, свяжитесь с "
+"нами."
 
 #: auth0login/templates/faq.html:45
 msgid "General questions"
@@ -58,7 +66,11 @@ msgid ""
 "However, FAQ and contact form are available without registration. "
 "Registration can be done either using existing Google account or by filling "
 "the required information in Sign-up window."
-msgstr "Да, вам нужно создать учетную запись, чтобы увидеть список курсов. Тем не менее, FAQ и контактная форма доступны без регистрации. Регистрация может быть осуществлена ​​либо с использованием существующей учетной записи Google, либо путем заполнения необходимой информации в окне регистрации."
+msgstr ""
+"Да, вам нужно создать учетную запись, чтобы увидеть список курсов. Тем не "
+"менее, FAQ и контактная форма доступны без регистрации. Регистрация может "
+"быть осуществлена ​​либо с использованием существующей учетной записи Google, "
+"либо путем заполнения необходимой информации в окне регистрации."
 
 #: auth0login/templates/faq.html:63
 msgid "Can I create my own course?"
@@ -69,7 +81,10 @@ msgid ""
 "Yes! We will review your course to see if it satisfies our rules and "
 "conditions, and will notify you once your course is approved and added to "
 "the list of courses for students."
-msgstr "Да! Мы проверим ваш курс, чтобы выяснить, соответствует ли он нашим правилам и условиям, и уведомим вас, как только ваш курс будет одобрен и добавлен в список курсов для студентов."
+msgstr ""
+"Да! Мы проверим ваш курс, чтобы выяснить, соответствует ли он нашим правилам "
+"и условиям, и уведомим вас, как только ваш курс будет одобрен и добавлен в "
+"список курсов для студентов."
 
 #: auth0login/templates/faq.html:76
 msgid "What is the currency used for all transactions?"
@@ -91,26 +106,43 @@ msgstr "Мы планируем добавление других денежны
 msgid "I want to enroll to the course. How can I do this?"
 msgstr "Я хочу записаться на курс. Как мне это сделать?"
 
-#: auth0login/templates/faq.html:103
+#: auth0login/templates/faq.html:94
+msgid ""
+"Enrolling to a course is really simple. Each course has a description and "
+"price. Once you have selected a course, you can enroll to it and you will "
+"gain a full access to the purchased course materials including lessons and "
+"other course entries."
+msgstr ""
+"Записаться на курс действительно просто. У каждого курса есть описание и "
+"цена. Как только вы выбрали курс, вы можете записаться на него и получить "
+"полный доступ к приобретенным материалам курса, включая уроки и другие "
+"записи курса."
+
+#: auth0login/templates/faq.html:102
 msgid "How can I add videos to the course?"
 msgstr "Как добавлять видео в курсы?"
 
-#: auth0login/templates/faq.html:108
+#: auth0login/templates/faq.html:107
 msgid "We have 2 options for this"
 msgstr "Есть 2 варианта того, как можно это сделать"
 
-#: auth0login/templates/faq.html:110
+#: auth0login/templates/faq.html:109
 msgid ""
 "You can chose Video course entry type from dropdown, and then paste the "
 "embed link from YouTube. This will create an entry with your video in the "
 "course."
-msgstr "Вы можете выбрать элемент курса Видео из выпадающего списка, а затем вставить ссылку для iframe с YouTube. Это создаст запись с вашим видео в курсе."
+msgstr ""
+"Вы можете выбрать элемент курса Видео из выпадающего списка, а затем "
+"вставить ссылку для iframe с YouTube. Это создаст запись с вашим видео в "
+"курсе."
 
-#: auth0login/templates/faq.html:111
+#: auth0login/templates/faq.html:110
 msgid ""
 "You can insert embeddable iframe with a link from YouTube to the text editor "
 "in Lesson course entry."
 msgstr ""
+"Вы можете вставить встраиваемый iframe со ссылкой на YouTube в текстовый "
+"редактор в записи курса."
 
 #: auth0login/templates/index.html:14
 msgid ""
@@ -167,11 +199,9 @@ msgstr "Профиль"
 msgid "Update"
 msgstr "Обновить"
 
-#: auth0login/templates/refund.html:7 auth0login/templates/refund.html:31
-#: auth0login/templates/refund.html:45
-#, fuzzy
-#| msgid "Refund policies"
-msgid "Refund Policies"
+#: auth0login/templates/refund.html:31 auth0login/templates/refund.html:45
+#: core/templates/navbar.html:47
+msgid "Refund policies"
 msgstr "Правила возмещения"
 
 #: auth0login/templates/refund.html:48
@@ -180,11 +210,18 @@ msgid ""
 "be refunded in the full amount in case you have not received a completion "
 "certificate in this timeline.  You may cancel your enrollment at any time "
 "after 7 days but won't get any refund in that case."
-msgstr "Вы можете отказаться от участия в курсе в течение 7 дней с момента регистрации, и вам будет возвращена полная сумма в случае, если вы не получили сертификат об окончании в этот срок. Вы можете отменить свою регистрацию в любое время по истечении 7 дней, но в этом случае возмещение не будет."
+msgstr ""
+"Вы можете отказаться от участия в курсе в течение 7 дней с момента "
+"регистрации, и вам будет возвращена полная сумма в случае, если вы не "
+"получили сертификат об окончании в этот срок. Вы можете отменить свою "
+"регистрацию в любое время по истечении 7 дней, но в этом случае возмещение "
+"не будет."
 
 #: auth0login/templates/refund.html:49
 msgid "You can unenroll from free courses at any time with no charge."
-msgstr "Вы можете отписаться от бесплатных курсов в любой момент времени без какого-либо штрафа."
+msgstr ""
+"Вы можете отписаться от бесплатных курсов в любой момент времени без какого-"
+"либо штрафа."
 
 #: auth0login/templates/refund.html:51
 msgid ""
@@ -192,14 +229,21 @@ msgid ""
 "if you will cancel your enrollment to the course claiming a refund, and will "
 "subsequently enroll in the same course, you won't be allowed to claim a "
 "refund for subsequent unenrollment."
-msgstr "Вы можете отписаться от одного конкретного курса только единожды. Это означает, что если вы отмените свою регистрацию на курс, требующий возврата средств, и впоследствии зарегистрируетесь на том же курсе, вам не будет разрешено требовать возврата средств после последующей отмены регистрации."
+msgstr ""
+"Вы можете отписаться от одного конкретного курса только единожды. Это "
+"означает, что если вы отмените свою регистрацию на курс, требующий возврата "
+"средств, и впоследствии зарегистрируетесь на том же курсе, вам не будет "
+"разрешено требовать возврата средств после последующей отмены регистрации."
 
 #: auth0login/templates/refund.html:54
 msgid ""
 "Please, allow 30 days from the cancellation point for the refund to be "
 "processed. If you were eligible for a refund and didn't receive a money "
 "transfer after this period, please contact us."
-msgstr "Пожалуйста, подождите 30 дней с момента отмены для обработки возмещения. Если вы имели право на возмещение и не получили денежный перевод после этого периода, пожалуйста, свяжитесь с нами»."
+msgstr ""
+"Пожалуйста, подождите 30 дней с момента отмены для обработки возмещения. "
+"Если вы имели право на возмещение и не получили денежный перевод после этого "
+"периода, пожалуйста, свяжитесь с нами»."
 
 #: core/templates/footer.html:9
 msgid "Email"
@@ -227,7 +271,7 @@ msgstr "Меню"
 
 #: core/templates/navbar.html:44
 msgid "Home"
-msgstr "Дом"
+msgstr "Главная страница"
 
 #: core/templates/navbar.html:45 courses/templates/courses.html:11
 msgid "Courses"
@@ -236,10 +280,6 @@ msgstr "Курсы"
 #: core/templates/navbar.html:46
 msgid "Contact us"
 msgstr "Свяжитесь с нами"
-
-#: core/templates/navbar.html:47
-msgid "Refund policies"
-msgstr "Правила возмещения"
 
 #: courses/templates/add_courses.html:11
 msgid "Add Courses"
@@ -451,3 +491,8 @@ msgstr "На данный момент курсов нет"
 #| msgid "Payment Details"
 msgid "Video Details"
 msgstr "Платежные детали"
+
+#, fuzzy
+#~| msgid "Refund policies"
+#~ msgid "Refund Policies"
+#~ msgstr "Правила возмещения"
