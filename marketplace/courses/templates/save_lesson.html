@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -10,7 +11,7 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>Save Lesson</h2>
+            <h2>{% trans "Save Lesson" %}</h2>
         </header>
     </div>
 </section>
@@ -24,7 +25,7 @@
             {% block content %}
                 <form method="POST">{% csrf_token %}
                     {{form.as_p}}
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="submit" class="btn btn-success">{% trans "Submit" %}</button>
                 </form>
                 <script>
                     CKEDITOR.replace( 'content' );

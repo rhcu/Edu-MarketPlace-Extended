@@ -1,4 +1,5 @@
 {% load crispy_forms_tags %}
+{% load i18n %}
 <html>
 {% include "header.html" %}
     <body>
@@ -6,15 +7,14 @@
     <section id="One" class="wrapper style3">
         <div class="inner">
             <header class="align-center">
-                <h2>Hi! Thanks for using Edu Marketplace! If you want to contact us with any feedback or concern, fill
-                    out the form below</h2>
+                <h2>{% trans "Hi! Thanks for using Edu Marketplace! If you want to contact us with any feedback or concern, fill out the form below" %}</h2>
             </header>
         </div>
     </section>
     <section id="two" class="wrapper style2">
         <div class="inner">
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeOJbgXsa7PcG6re5KNIn0jc2igKUrTOBji0z-59zLmhxne4w/viewform?embedded=true"
-                    width="640" height="864" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                width="640" height="864" frameborder="0" marginheight="0" marginwidth="0">{% trans "Loading…" %}</iframe>
         </div>
     </section>
     {% include "footer.html" %}

@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -7,7 +8,7 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>{{ course.title }} - Add Course Entry</h2>
+            <h2>{{ course.title }} - {% trans "Add Course Entry" %}</h2>
         </header>
     </div>
 </section>
@@ -16,11 +17,11 @@
         <div class="box">
             {% block content %}
                 <div class="content">
-                    <h2>Course entry</h2>
+                    <h2>{% trans "Course entry" %}</h2>
                     <form method="POST" class="course-form">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Save"%}</button>
                     </form>
                 </div>
             {% endblock %}

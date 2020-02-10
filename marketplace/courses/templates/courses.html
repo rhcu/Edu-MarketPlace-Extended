@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -7,14 +8,14 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>Courses</h2>
+            <h2>{% trans "Courses" %}</h2>
         </header>
     </div>
 </section>
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <a class="button special" href="/courses/add_courses">Add course</a>
+            <a class="button special" href="/courses/add_courses">{% trans "Add course" %}</a>
         </header>
     </div>
 </section>
@@ -65,12 +66,12 @@
                                 <footer class="align-center">
                                     {# check for the course_owner #}
                                     {% if user_info.1 %}
-                                        <a href="/courses/course/{{course.pk}}" class="button alt">Manage Your Course</a>
+                                    <a href="/courses/course/{{course.pk}}" class="button alt">{% trans "Manage Your Course" %}</a>
                                     {# check for the enrolled user #}
                                     {% elif user_info.0 %}
-                                        <a href="/courses/course/{{course.pk}}" class="button alt">Continue Learning</a>
+                                    <a href="/courses/course/{{course.pk}}" class="button alt">{% trans "Continue Learning" %}</a>
                                     {% else %}
-                                        <a href="/courses/course/{{course.pk}}" class="button alt">Learn More</a>
+                                    <a href="/courses/course/{{course.pk}}" class="button alt">{% trans "Learn More" %}</a>
                                     {% endif %}
                                 </footer>
                             </div>
@@ -84,7 +85,7 @@
     <section id="two" class="wrapper style3">
         <div class="inner">
             <header class="align-center">
-                <h2>There are no courses right now!</h2>
+                <h2>{% trans "There are no courses right now!" %}</h2>
             </header>
         </div>
     </section>
