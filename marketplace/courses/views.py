@@ -15,7 +15,8 @@ from decimal import Decimal
 import json
 import simplejson
 from django.utils import translation
-from django.utils.translation import gettext
+
+
 def is_course_owner(course, user):
     return course.owner == user
 

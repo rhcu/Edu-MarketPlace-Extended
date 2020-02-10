@@ -28,15 +28,6 @@ urlpatterns = [
     path('profile/', auth0login.views.profile),
     path('', auth0login.views.index),
 ]
-"""
-urlpatterns += i18n_patterns(
-    path('users/', include('auth0login.urls')),
-    path('courses/', include('courses.urls')),
-    path('profile/', auth0login.views.profile),
-    path('', auth0login.views.index),
-    prefix_default_language=False,
-)
-"""
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
