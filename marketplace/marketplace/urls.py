@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from search import views as search_views
 
 import auth0login
 
 urlpatterns = [
+    path('search/', search_views.search, name='search'),
     path('users/', include('auth0login.urls')),
     path('courses/', include('courses.urls')),
     path('admin/', admin.site.urls),

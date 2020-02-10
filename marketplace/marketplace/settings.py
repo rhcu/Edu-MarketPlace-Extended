@@ -41,7 +41,15 @@ INSTALLED_APPS = [
     'core',
     'crispy_forms',
     'storages',
+    'search',
+    'django_elasticsearch_dsl'
 ]
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': os.environ.get('ES_HOST'),
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

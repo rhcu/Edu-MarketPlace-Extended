@@ -1,6 +1,7 @@
 <header id="header" class="alt">
     <div class="logo"><a href="/">Edu Marketplace</a></div>
     {% if user.is_authenticated %}
+        <a class="nav-item nav-link" href="/search">Search</a>
         <a class="nav-item nav-link" href="/profile">My Profile</a>
         <a class="nav-item nav-link" href="/users/logout">Log out</a>
     {% else %}
