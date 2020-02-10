@@ -14,8 +14,8 @@ from decimal import Decimal
 
 import json
 import simplejson
-
-
+from django.utils import translation
+from django.utils.translation import gettext
 def is_course_owner(course, user):
     return course.owner == user
 
@@ -50,6 +50,9 @@ def get_quiz(course_entry_pk):
 
 
 def index(request):
+    if translation.LANGUAGE_SESSION_KEY in request.session:
+        del request.session[translation.LANGUAGE_SESSION_KEY]
+
     userdata = {}
     user = request.user
     if user.is_authenticated:

@@ -17,16 +17,26 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 import auth0login
-
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('admin/', admin.site.urls),
     path('users/', include('auth0login.urls')),
     path('courses/', include('courses.urls')),
-    path('admin/', admin.site.urls),
     path('profile/', auth0login.views.profile),
     path('', auth0login.views.index),
 ]
+"""
+urlpatterns += i18n_patterns(
+    path('users/', include('auth0login.urls')),
+    path('courses/', include('courses.urls')),
+    path('profile/', auth0login.views.profile),
+    path('', auth0login.views.index),
+    prefix_default_language=False,
+)
+"""
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
