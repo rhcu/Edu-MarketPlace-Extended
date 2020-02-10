@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -120,7 +121,7 @@
         <header class="align-left">
             <h2>
                 <a href="/courses/course/{{quiz.course_entry.course.pk}}">
-                    <i class="fas fa-arrow-left"></i> Course: {{ quiz.course_entry.course.title }}
+                    <i class="fas fa-arrow-left"></i> {% trans "Course" %}: {{ quiz.course_entry.course.title }}
                 </a>
             </h2>
         </header>
@@ -133,12 +134,12 @@
                 <h3 class="display-4">
                     {{ quiz.course_entry.name }}
                     {% if user_passed_quiz %}
-                        [Already submitted]
+                        [{% trans "Already submitted" %}]
                     {% endif %}
                 </h3>
                 {% csrf_token %}
                 {% if user == quiz.course_entry.course.owner %}
-                    <a href='/courses/save_quiz/{{quiz.pk}}'><i class="fas fa-edit"></i> Edit</a>
+                <a href='/courses/save_quiz/{{quiz.pk}}'><i class="fas fa-edit"></i> {% trans "Edit" %}</a>
                 {% endif %}
                 <hr>
                 {% block content %}
@@ -146,7 +147,7 @@
                     </div>
                 {% endblock %}
                 {% if not user_passed_quiz %}
-                    <button id="submit">Submit</button>
+                    <button id="submit">{% trans "Submit" %}</button>
                 {% endif %}
             </div>
         </div>

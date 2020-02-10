@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -15,7 +16,7 @@
     <div class="inner">
         <h3>
             <a href="/courses">
-                <i class="fas fa-arrow-left"></i>&nbsp;All courses
+                <i class="fas fa-arrow-left"></i>&nbsp; {% trans "All courses" %}
             </a>
         </h3>
         <div class="box">
@@ -54,19 +55,19 @@
                     <table>
                         <tbody>
                             <tr>
-                                <td><b>Topic</b></td>
+                                <td><b>{% trans "Topic" %}</b></td>
                                 <td>{{ course.topic }}</td>
                             </tr>
                             <tr>
-                                <td><b>Author</b></td>
+                                <td><b>{% trans "Author" %}</b></td>
                                 <td>{{ course.owner.first_name }}</td>
                             </tr>
                             <tr>
-                                <td><b>Price</b></td>
+                                <td><b>{% trans "Price" %}</b></td>
                                 <td>{{ course.price }}</td>
                             </tr>
                             <tr>
-                                <td><b>Description</b></td>
+                                <td><b>{% trans "Description" %}</b></td>
                                 <td>{{ course.description }}</td>
                             </tr>
                     </table>
@@ -74,18 +75,18 @@
                 <div>
                     {% if user != course.owner  %}
                         {% if user_enrolled %}
-                            <b>You are enrolled. <a href="/courses/unenroll/{{ course.pk }}">Unenroll</a>?</b>
+                        <b>{% trans "You are enrolled" %} <a href="/courses/unenroll/{{ course.pk }}">{% trans "Unenroll" %}</a>?</b>
                         {% else %}
-                            <a href='/courses/pay/{{ course.pk }}' class="button special fit">Purchase</a>
+                        <a href='/courses/pay/{{ course.pk }}' class="button special fit">{% trans "Purchase" %}</a>
                         {% endif %}
                     {% else %}
-                        <b><a href='/courses/enrolled_list/{{ course.pk }}/'>Enrolled students</a></b>
+                    <b><a href='/courses/enrolled_list/{{ course.pk }}/'>{% trans "Enrolled students" %}</a></b>
                         <br/><br/>
                     {% endif %}
                 </div>
                 <ul>
                     {% if not user_enrolled %}
-                        <h4><b>NOTE</b>: Before accessing course contents you should purchase the course.</h4>
+                    <h4><b>{% trans "NOTE" %}</b>: {% trans "Before accessing course contents you should purchase the course."%}</h4>
                         {% for entry in course_entries %}
                             <li>{{entry.name}}</li>
                         {% endfor %}
@@ -103,7 +104,7 @@
                         {% endfor %}
                     {% else %}
                         <div id="progress-wrapper">
-                            <label for="progress-bar">Progress:</label>
+                            <label for="progress-bar">{% trans "Progress" %}:</label>
                             <progress id="progress-bar" max="100" value="0"></progress>
                             <div id="progress-bar-message"></div>
                         </div>
@@ -117,9 +118,9 @@
                                         </div>
                                         <div class="right">
                                             {% if entry.completed %}
-                                                <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>Completed</span>
+                                            <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>{% trans "Completed" %}</span>
                                             {% else %}
-                                                <span style="color: red; ">In progress</span>
+                                            <span style="color: red; ">{% trans "In progress"%}</span>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -133,9 +134,9 @@
                                         </div>
                                         <div class="right">
                                             {% if entry.completed %}
-                                                <span style="color: darkgreen; "<i class="fas fa-check-circle"></i>Completed</span>
+                                            <span style="color: darkgreen; "<i class="fas fa-check-circle"></i>{% trans "Completed" %}</span>
                                             {% else %}
-                                                <span style="color: red; ">In progress</span>
+                                            <span style="color: red; ">{% trans "In progress"%}</span>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -149,9 +150,9 @@
                                         </div>
                                         <div class="right">
                                             {% if entry.completed %}
-                                                <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>Completed</span>
+                                            <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>{% trans "Completed" %}</span>
                                             {% else %}
-                                                <span style="color: red; ">In progress</span>
+                                            <span style="color: red; ">{% trans "In progress"%}</span>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -162,7 +163,7 @@
                 </ul>
                 <hr>
                 {% if user == course.owner %}
-                    <p><a href='/courses/add_entry/{{ course.pk }}' class="button special">Add course entry</a></p>
+                <p><a href='/courses/add_entry/{{ course.pk }}' class="button special">{% trans "Add course entry" %}</a></p>
                 {% endif %}
                 </div>
             {% endblock %}
@@ -241,7 +242,6 @@
 
         // Perform all the information retrieval
         if (is_enrolled && !is_owner) {
-            console.log('enrolled and not an owner');
             isRatingSet();
             updateProgress();
         }

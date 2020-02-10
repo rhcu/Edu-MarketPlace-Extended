@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-09 23:34+0600\n"
+"POT-Creation-Date: 2020-02-11 00:28+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,22 +18,436 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: courses/templates/add_courses.html:11
-msgid "Add Courses"
-msgstr "Создать курсы"
+#: auth0login/templates/contact_form.html:18
+msgid "Loading…"
+msgstr "Загрузка..."
+
+#: auth0login/templates/dashboard.html:14
+msgid "Welcome"
+msgstr "Добро пожаловать"
+
+#: auth0login/templates/dashboard.html:16
+msgid "Start your next education today by exploring our"
+msgstr "Начни свое образование сегодня с открытия наших"
+
+#: auth0login/templates/dashboard.html:16
+#, fuzzy
+#| msgid "Add course"
+msgid "list of courses"
+msgstr "Все курсы"
+
+#: auth0login/templates/faq.html:40 auth0login/templates/refund.html:40
+msgid "Close"
+msgstr "Закрыть"
+
+#: auth0login/templates/faq.html:41 auth0login/templates/refund.html:41
+msgid "If you cannot find an answer to your question, make sure to contact us."
+msgstr "Если у вас не получилось найти ответ на ваш вопрос, пожалуйста, свяжитесь с нами."
+
+#: auth0login/templates/faq.html:45
+msgid "General questions"
+msgstr "Общие вопросы"
+
+#: auth0login/templates/faq.html:50
+msgid "Is account registration required?"
+msgstr "Необходима ли регистрация?"
+
+#: auth0login/templates/faq.html:55
+msgid ""
+"Yes, you need to create an account to be able to see the list of courses. "
+"However, FAQ and contact form are available without registration. "
+"Registration can be done either using existing Google account or by filling "
+"the required information in Sign-up window."
+msgstr "Да, вам нужно создать учетную запись, чтобы увидеть список курсов. Тем не менее, FAQ и контактная форма доступны без регистрации. Регистрация может быть осуществлена ​​либо с использованием существующей учетной записи Google, либо путем заполнения необходимой информации в окне регистрации."
+
+#: auth0login/templates/faq.html:63
+msgid "Can I create my own course?"
+msgstr "Могу ли я создать собственный курс?"
+
+#: auth0login/templates/faq.html:68
+msgid ""
+"Yes! We will review your course to see if it satisfies our rules and "
+"conditions, and will notify you once your course is approved and added to "
+"the list of courses for students."
+msgstr "Да! Мы проверим ваш курс, чтобы выяснить, соответствует ли он нашим правилам и условиям, и уведомим вас, как только ваш курс будет одобрен и добавлен в список курсов для студентов."
+
+#: auth0login/templates/faq.html:76
+msgid "What is the currency used for all transactions?"
+msgstr "Какая денежная единица используется для переводов?"
+
+#: auth0login/templates/faq.html:81
+msgid "All prices for courses are in"
+msgstr "Все цены для курсов в"
+
+#: auth0login/templates/faq.html:81 courses/templates/user_courses.html:33
+msgid "KZT"
+msgstr "тенге"
+
+#: auth0login/templates/faq.html:81
+msgid "We plan to add other currencies later."
+msgstr "Мы планируем добавление других денежных единиц позднее."
+
+#: auth0login/templates/faq.html:89
+msgid "I want to enroll to the course. How can I do this?"
+msgstr "Я хочу записаться на курс. Как мне это сделать?"
+
+#: auth0login/templates/faq.html:103
+msgid "How can I add videos to the course?"
+msgstr "Как добавлять видео в курсы?"
+
+#: auth0login/templates/faq.html:108
+msgid "We have 2 options for this"
+msgstr "Есть 2 варианта того, как можно это сделать"
+
+#: auth0login/templates/faq.html:110
+msgid ""
+"You can chose Video course entry type from dropdown, and then paste the "
+"embed link from YouTube. This will create an entry with your video in the "
+"course."
+msgstr "Вы можете выбрать элемент курса Видео из выпадающего списка, а затем вставить ссылку для iframe с YouTube. Это создаст запись с вашим видео в курсе."
+
+#: auth0login/templates/faq.html:111
+msgid ""
+"You can insert embeddable iframe with a link from YouTube to the text editor "
+"in Lesson course entry."
+msgstr ""
+
+#: auth0login/templates/index.html:14
+msgid ""
+"Welcome to the first educational platform tailored to the needs of Kazakhstan"
+msgstr "Добро пожаловать на первую образовательную платформу в Казахстане"
+
+#: auth0login/templates/index.html:25
+#, fuzzy
+#| msgid "New course"
+msgid "Discover courses"
+msgstr "Открывай новые для себя темы"
+
+#: auth0login/templates/index.html:35
+#, fuzzy
+#| msgid "New course"
+msgid "Create courses"
+msgstr "Новый курс"
+
+#: auth0login/templates/index.html:43
+msgid "Talk to other students and to course creators to enhance your knowledge"
+msgstr "Улучшай свои знания, общаясь с другими студентами и создателями курсов"
+
+#: auth0login/templates/index.html:44
+msgid "Collaborate"
+msgstr "Сотрудничай"
+
+#: auth0login/templates/index.html:54
+msgid "Make a difference"
+msgstr "Привноси перемены"
+
+#: auth0login/templates/index.html:65
+msgid "Start learning today"
+msgstr "Начни обучение сегодня"
+
+#: auth0login/templates/index.html:66
+msgid "Discover the endless world of education with us"
+msgstr "Открой бесконечный мир знаний вместе с нами"
+
+#: auth0login/templates/index.html:69
+#, fuzzy
+#| msgid "Log out"
+msgid "Log In"
+msgstr "Войти"
+
+#: auth0login/templates/index.html:70
+msgid "Sign Up"
+msgstr "Зарегистрироваться"
+
+#: auth0login/templates/profile.html:45
+msgid "Profile Information"
+msgstr "Профиль"
+
+#: auth0login/templates/profile.html:50
+msgid "Update"
+msgstr "Обновить"
+
+#: auth0login/templates/refund.html:7 auth0login/templates/refund.html:31
+#: auth0login/templates/refund.html:45
+#, fuzzy
+#| msgid "Refund policies"
+msgid "Refund Policies"
+msgstr "Правила возмещения"
+
+#: auth0login/templates/refund.html:48
+msgid ""
+"You can unenroll from the course within 7 days from enrollment, and you will "
+"be refunded in the full amount in case you have not received a completion "
+"certificate in this timeline.  You may cancel your enrollment at any time "
+"after 7 days but won't get any refund in that case."
+msgstr "Вы можете отказаться от участия в курсе в течение 7 дней с момента регистрации, и вам будет возвращена полная сумма в случае, если вы не получили сертификат об окончании в этот срок. Вы можете отменить свою регистрацию в любое время по истечении 7 дней, но в этом случае возмещение не будет."
+
+#: auth0login/templates/refund.html:49
+msgid "You can unenroll from free courses at any time with no charge."
+msgstr "Вы можете отписаться от бесплатных курсов в любой момент времени без какого-либо штрафа."
+
+#: auth0login/templates/refund.html:51
+msgid ""
+"You are only allowed to unenroll from one specific course once. That means, "
+"if you will cancel your enrollment to the course claiming a refund, and will "
+"subsequently enroll in the same course, you won't be allowed to claim a "
+"refund for subsequent unenrollment."
+msgstr "Вы можете отписаться от одного конкретного курса только единожды. Это означает, что если вы отмените свою регистрацию на курс, требующий возврата средств, и впоследствии зарегистрируетесь на том же курсе, вам не будет разрешено требовать возврата средств после последующей отмены регистрации."
+
+#: auth0login/templates/refund.html:54
+msgid ""
+"Please, allow 30 days from the cancellation point for the refund to be "
+"processed. If you were eligible for a refund and didn't receive a money "
+"transfer after this period, please contact us."
+msgstr "Пожалуйста, подождите 30 дней с момента отмены для обработки возмещения. Если вы имели право на возмещение и не получили денежный перевод после этого периода, пожалуйста, свяжитесь с нами»."
+
+#: core/templates/footer.html:9
+msgid "Email"
+msgstr "Электронная почта"
+
+#: core/templates/navbar.html:25
+msgid "My Profile"
+msgstr "Мой профиль"
+
+#: core/templates/navbar.html:26
+msgid "Log out"
+msgstr "Выйти"
+
+#: core/templates/navbar.html:29
+msgid "Login"
+msgstr "Войти"
+
+#: core/templates/navbar.html:30
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: core/templates/navbar.html:32
+msgid "Menu"
+msgstr "Меню"
 
 #: core/templates/navbar.html:44
 msgid "Home"
 msgstr "Дом"
 
-#: core/templates/navbar.html:45
+#: core/templates/navbar.html:45 courses/templates/courses.html:11
 msgid "Courses"
 msgstr "Курсы"
 
-#: core/templates/navbar.html:17
+#: core/templates/navbar.html:46
 msgid "Contact us"
 msgstr "Свяжитесь с нами"
 
-#: core/templates/navbar.html:18
+#: core/templates/navbar.html:47
 msgid "Refund policies"
 msgstr "Правила возмещения"
+
+#: courses/templates/add_courses.html:11
+msgid "Add Courses"
+msgstr "Создание курсов"
+
+#: courses/templates/add_courses.html:21
+msgid "New course"
+msgstr "Новый курс"
+
+#: courses/templates/add_courses.html:26 courses/templates/courses.html:18
+msgid "Add course"
+msgstr "Создать курс"
+
+#: courses/templates/add_entry.html:11
+msgid "Add Course Entry"
+msgstr "Добавить элемент курса"
+
+#: courses/templates/add_entry.html:20
+msgid "Course entry"
+msgstr "Элементы курса"
+
+#: courses/templates/add_entry.html:24
+msgid "Save"
+msgstr "Сохранить"
+
+#: courses/templates/course_detail.html:19 courses/templates/save_quiz.html:101
+#, fuzzy
+#| msgid "Add course"
+msgid "All courses"
+msgstr "Все курсы"
+
+#: courses/templates/course_detail.html:58
+msgid "Topic"
+msgstr "Тема"
+
+#: courses/templates/course_detail.html:62
+msgid "Author"
+msgstr "Автор"
+
+#: courses/templates/course_detail.html:66
+msgid "Price"
+msgstr "Цена"
+
+#: courses/templates/course_detail.html:70
+msgid "Description"
+msgstr "Описание"
+
+#: courses/templates/course_detail.html:78
+msgid "You are enrolled"
+msgstr "Вы подписаны"
+
+#: courses/templates/course_detail.html:78
+msgid "Unenroll"
+msgstr "Отписаться"
+
+#: courses/templates/course_detail.html:80
+msgid "Purchase"
+msgstr "Приобрести"
+
+#: courses/templates/course_detail.html:83
+msgid "Enrolled students"
+msgstr "Список студентов"
+
+#: courses/templates/course_detail.html:89
+msgid "NOTE"
+msgstr "ВНИМАНИЕ"
+
+#: courses/templates/course_detail.html:89
+msgid "Before accessing course contents you should purchase the course."
+msgstr "Прежде, чем получить доступ к контенту, необходимо приобрести курс"
+
+#: courses/templates/course_detail.html:107
+#: courses/templates/enrolled_list.html:27
+msgid "Progress"
+msgstr "Прогресс"
+
+#: courses/templates/course_detail.html:121
+#: courses/templates/course_detail.html:137
+#: courses/templates/course_detail.html:153
+#: courses/templates/video_detail.html:34
+msgid "Completed"
+msgstr "Завершенно"
+
+#: courses/templates/course_detail.html:123
+#: courses/templates/course_detail.html:139
+#: courses/templates/course_detail.html:155
+#: courses/templates/lesson_detail.html:33
+#: courses/templates/video_detail.html:36
+msgid "In progress"
+msgstr "В прогрессе"
+
+#: courses/templates/course_detail.html:166
+#, fuzzy
+#| msgid "Add Course Entry"
+msgid "Add course entry"
+msgstr "Добавить элемент курса"
+
+#: courses/templates/course_pay.html:19
+msgid "Back to course"
+msgstr "Вернуться к курсу"
+
+#: courses/templates/course_pay.html:31
+msgid "Payment Details"
+msgstr "Платежные детали"
+
+#: courses/templates/course_pay.html:41
+msgid "CARD NUMBER"
+msgstr "Номер карты"
+
+#: courses/templates/course_pay.html:60
+msgid "EXPIRATION DATE"
+msgstr "Срок действия"
+
+#: courses/templates/course_pay.html:74
+msgid "CV CODE"
+msgstr "CV код"
+
+#: courses/templates/course_pay.html:97
+msgid "Buy"
+msgstr "Купить"
+
+#: courses/templates/courses.html:69
+msgid "Manage Your Course"
+msgstr "Управление курсом"
+
+#: courses/templates/courses.html:72
+msgid "Continue Learning"
+msgstr "Продолжить обучение"
+
+#: courses/templates/courses.html:74 courses/templates/user_courses.html:35
+msgid "Learn More"
+msgstr "Узнать больше"
+
+#: courses/templates/courses.html:88
+msgid "There are no courses right now!"
+msgstr "На данный момент курсов нет"
+
+#: courses/templates/enrolled_list.html:11
+#, fuzzy
+#| msgid "Enrolled students"
+msgid "Enrolled Students"
+msgstr "Список студентов"
+
+#: courses/templates/lesson_detail.html:13
+#: courses/templates/quiz_detail.html:124
+#: courses/templates/video_detail.html:23
+#, fuzzy
+#| msgid "Courses"
+msgid "Course"
+msgstr "Курсы"
+
+#: courses/templates/lesson_detail.html:28
+#: courses/templates/video_detail.html:31
+msgid "Delete"
+msgstr "Удалить"
+
+#: courses/templates/lesson_detail.html:44
+#: courses/templates/video_detail.html:48
+msgid "Mark as NOT completed"
+msgstr "Отменить незавершенным"
+
+#: courses/templates/lesson_detail.html:46
+#: courses/templates/video_detail.html:50
+#, fuzzy
+#| msgid "Completed"
+msgid "Mark as completed"
+msgstr "Отметить завершенным"
+
+#: courses/templates/quiz_detail.html:137
+msgid "Already submitted"
+msgstr "Уже был отправлен"
+
+#: courses/templates/quiz_detail.html:142
+#: courses/templates/video_detail.html:30
+msgid "Edit"
+msgstr "Редактировать"
+
+#: courses/templates/quiz_detail.html:150 courses/templates/save_lesson.html:28
+#: courses/templates/save_video.html:28
+msgid "Submit"
+msgstr "Отправить"
+
+#: courses/templates/save_lesson.html:14
+msgid "Save Lesson"
+msgstr "Сохранить урок"
+
+#: courses/templates/save_quiz.html:94
+#, fuzzy
+#| msgid "Save"
+msgid "Save Quiz"
+msgstr "Сохранить куиз"
+
+#: courses/templates/save_quiz.html:114
+msgid "Add"
+msgstr "Добавить"
+
+#: courses/templates/save_video.html:14
+msgid "Save Video"
+msgstr "Сохранить видео"
+
+#: courses/templates/user_courses.html:48
+#, fuzzy
+#| msgid "There are no courses right now!"
+msgid "This user has no courses published"
+msgstr "На данный момент курсов нет"
+
+#: courses/templates/video_detail.html:14
+#, fuzzy
+#| msgid "Payment Details"
+msgid "Video Details"
+msgstr "Платежные детали"

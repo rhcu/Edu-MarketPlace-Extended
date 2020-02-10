@@ -18,12 +18,12 @@
             {% block content %}
                 <div class="content">
                     <header class="align-left">
-                        <h2>New course</h2>
+                        <h2>{% trans "New course" %}</h2>
                     </header>
                     <form method="POST" class="course-form">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <button type="submit" class="btn btn-primary">Add course</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Add course" %}</button>
                     </form>
                 </div>
             {% endblock %}

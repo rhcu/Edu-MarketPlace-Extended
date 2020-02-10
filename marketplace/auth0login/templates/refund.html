@@ -1,9 +1,10 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>EduMarketplace Refund Policies</title>
+        <title>EduMarketplace {% trans "Refund Policies" %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
          <!-- CSS -->
@@ -27,7 +28,7 @@
 <section id="One" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>Refund Policies</h2>
+            <h2>{% trans "Refund Policies" %}</h2>
         </header>
     </div>
 </section>
@@ -36,19 +37,21 @@
          <div class="box">
              <div class="content">
                  <div class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    If you cannot find an answer to your question, make sure to contact us.
+                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{% trans "Close" %}</span></button>
+                    {% trans "If you cannot find an answer to your question, make sure to contact us." %}
                 </div>
                  <div class="panel-group" id="accordion">
                      <br/>
-                     <h2>Refund Policies</h2>
+                     <h2>{% trans "Refund Policies" %}</h2>
                      <br/>
 		    <p>
-You can unenroll from the course within <b>7 days</b> from enrollment, and you will be refunded in the full amount in case you have not received a completion certificate in this timeline.  You may cancel your enrollment at any time after 7 days but won't get any refund in that case.</br>
-You can unenroll from free courses at any time with no charge.
-You are only allowed to unenroll from one specific course once. That means, if you will cancel your enrollment to the course claiming a refund, and will subsequently enroll in the same course, you won't be allowed to claim a refund for subsequent unenrollment. 
+            {% trans "You can unenroll from the course within 7 days from enrollment, and you will be refunded in the full amount in case you have not received a completion certificate in this timeline.  You may cancel your enrollment at any time after 7 days but won't get any refund in that case." %}</br>
+            {% trans "You can unenroll from free courses at any time with no charge." %}
+            
+            {% trans "You are only allowed to unenroll from one specific course once. That means, if you will cancel your enrollment to the course claiming a refund, and will subsequently enroll in the same course, you won't be allowed to claim a refund for subsequent unenrollment." %}
+
 </b>
-Please, allow <b>30 days from the cancellation point for the refund to be processed</b>. If you were eligible for a refund and didn't receive a money transfer after this period, please contact us.
+{% trans "Please, allow 30 days from the cancellation point for the refund to be processed. If you were eligible for a refund and didn't receive a money transfer after this period, please contact us." %}
 		    </p>
                  </div>
              </div>
