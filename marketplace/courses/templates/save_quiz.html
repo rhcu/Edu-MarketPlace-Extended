@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -90,14 +91,14 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>Save Quiz</h2>
+            <h2>{% trans "Save Quiz" %}</h2>
         </header>
     </div>
 </section>
 <section id="two" class="wrapper style2">
         <h3>
             <a href="/courses">
-                <i class="fas fa-arrow-left"></i>&nbsp;All courses
+                <i class="fas fa-arrow-left"></i>&nbsp; {% trans "All courses" %}
             </a>
         </h3>
     {% csrf_token %}
@@ -110,7 +111,7 @@
                 <p id="quiz"></p>
                 <p>
                     <input type="text" id="question-name" placeholder="Add question">
-                    <button id="submit-question">Add</button>
+                        <button id="submit-question">{% trans "Add" %}</button>
                 </p>
             </div>
         </div>

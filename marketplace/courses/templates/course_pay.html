@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -15,7 +16,7 @@
     <div class="inner">
         <h3>
             <a href="/courses/course/{{ course.pk }}/">
-                <i class="fas fa-arrow-left"></i>&nbsp;Back to course
+                <i class="fas fa-arrow-left"></i>&nbsp; {% trans "Back to course" %}
             </a>
         </h3>
         <div class="container" >
@@ -27,7 +28,7 @@
 <div class="panel panel-default credit-card-box">
 <div class="panel-heading display-table" >
 <div class="row display-tr" >
-<h3 class="panel-title display-td" >Payment Details</h3>
+    <h3 class="panel-title display-td" >{% trans "Payment Details"%}</h3>
 <div class="display-td" >                            
 <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
 </div>
@@ -37,7 +38,7 @@
 <div class="row">
 <div class="col-xs-12   ">
 <div class="form-group">
-<label for="cardNumber">CARD NUMBER</label>
+    <label for="cardNumber">{% trans "CARD NUMBER" %}</label>
 <div class="input-group">
 <input 
 type="tel"
@@ -56,7 +57,7 @@ required autofocus
 <div class="row">
 <div class="col-xs-7 col-md-7">
 <div class="form-group">
-<label for="cardExpiry">EXPIRATION DATE</label>
+    <label for="cardExpiry">{% trans "EXPIRATION DATE"%}</label>
 <input 
 type="tel" 
 class="form-control" 
@@ -70,7 +71,7 @@ required
 </div>
 <div class="col-xs-6 col-md-6 pull-right">
 <div class="form-group">
-<label for="cardCVC">CV CODE</label>
+    <label for="cardCVC">{% trans "CV CODE" %}</label>
 <input 
 type="tel" 
 class="form-control"
@@ -93,7 +94,7 @@ required
     {% block content %}
             <form method="POST" class="course-form" id="pay-form" action="/courses/enroll/{{ course.pk }}/">
                 {% csrf_token %}
-                <button type="submit" class="button special fit">Buy</button>
+                <button type="submit" class="button special fit">{% trans "Buy"%}</button>
             </form>
     {% endblock %}
 </div>

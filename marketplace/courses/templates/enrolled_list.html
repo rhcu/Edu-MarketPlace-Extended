@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -7,7 +8,7 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>{{ course.title }} - Enrolled Students</h2>
+            <h2>{{ course.title }} - {% trans "Enrolled Students" %}</h2>
         </header>
     </div>
 </section>
@@ -23,7 +24,7 @@
                                      {{ enrolled_user.first_name }}{{ enrolled_user.last_name }}
                                  </a>
                              </h3>
-                             <label for="progress-bar">Progress: {{ progress}}%</label>
+                             <label for="progress-bar">{% trans "Progress" %}: {{ progress}}%</label>
                              <progress id="progress-bar" max="100" value="{{ progress }}"></progress>
                          </div>
                      </div>

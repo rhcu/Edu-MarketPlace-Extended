@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
     {% include "header.html" %}
@@ -10,9 +11,10 @@
 					<img src="{% static 'images/slide01.jpg'%}" alt=""/>
 					<div class="inner">
 						<header>
-							<p>Welcome, {{ userdata.name }}</p>
+                            <p>{% trans "Welcome" %}, {{ userdata.name }}</p>
                             <br/>
-                            <h3>Start your next education today by exploring our <b><a href="/courses">list of courses</a></b>.</h3>
+                            <h3>{% trans "Start your next education today by exploring our" %}
+                                <b><a href="/courses"> {% trans "list of courses" %}</a></b>.</h3>
 						</header>
 					</div>
 				</article>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
     {% include "header.html" %}
@@ -10,7 +11,7 @@
 					<img src="{% static 'images/slide01.jpg'%}" alt=""/>
 					<div class="inner">
 						<header>
-							<p>Welcome to the first educational platform tailored to the needs of Kazakhstan</p>
+                            <p>{% trans "Welcome to the first educational platform tailored to the needs of Kazakhstan" %}</p>
 							<h2>Edu Marketplace</h2>
 						</header>
 					</div>
@@ -19,9 +20,9 @@
 					<img src="{% static 'images/slide02.jpg'%}" alt=""/>
 					<div class="inner">
 						<header>
-							<p>Look through our rich courses catalog and gain the knowledge you need to maximize
-                            your success</p>
-							<h2>Discover courses</h2>
+                            <p>{% trans "Look through our rich courses catalog and gain the knowledge you need to maximize
+                            your success"%}</p>
+                            <h2>{% trans "Discover courses"%}</h2>
 						</header>
 					</div>
 				</article>
@@ -29,9 +30,9 @@
 					<img src="{% static 'images/slide03.jpeg'%}" alt=""/>
 					<div class="inner">
 						<header>
-							<p>If you have knowledge to share, utilize our platform to deliver it to the maximum
-                            amount of people</p>
-							<h2>Create courses</h2>
+                            <p>{% trans "If you have knowledge to share, utilize our platform to deliver it to the maximum
+                            amount of people" %}</p>
+                            <h2>{% trans "Create courses" %}</h2>
 						</header>
 					</div>
 				</article>
@@ -39,8 +40,8 @@
 					<img src="{% static 'images/slide04.jpeg'%}" alt=""/>
 					<div class="inner">
 						<header>
-							<p>Talk to other students and to course creators to enhance your knowledge</p>
-							<h2>Collaborate</h2>
+                            <p>{% trans "Talk to other students and to course creators to enhance your knowledge" %}</p>
+                            <h2>{% trans "Collaborate" %}</h2>
 						</header>
 					</div>
 				</article>
@@ -48,9 +49,9 @@
 					<img src="{% static 'images/slide05.jpg'%}" alt=""/>
 					<div class="inner">
 						<header>
-							<p>Knowledge is power. Information is liberating. Education is the premise of progress,
-                                in every society, in every family</p>
-							<h2>Make a difference</h2>
+                            <p>{% trans "Knowledge is power. Information is liberating. Education is the premise of progress,
+                            in every society, in every family" %}</p>
+                            <h2> {% trans "Make a difference" %}</h2>
 						</header>
 					</div>
 				</article>
@@ -61,12 +62,12 @@
 					<div class="box">
 						<div class="content">
 							<header class="align-center">
-								<h2>Start learning today</h2>
-                                <h4>Discover the endless world of education with us!</h4>
+                                <h2>{% trans "Start learning today" %}</h2>
+                                <h4>{% trans "Discover the endless world of education with us" %}!</h4>
                                 <br/>
                                 <ul class="actions">
-									<li><a href="/users/login/auth0" class="button special">Log In</a></li>
-									<li><a href="/users/login/auth0" class="button alt">Sign Up</a></li>
+                                    <li><a href="/users/login/auth0" class="button special">{% trans "Log In" %}</a></li>
+                                    <li><a href="/users/login/auth0" class="button alt">{% trans "Sign Up" %}</a></li>
 								</ul>
 							</header>
                         </div>

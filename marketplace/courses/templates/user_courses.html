@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -29,9 +30,9 @@
                                 <header class=".align-left"><h2>{{ course.title }}</h2></header>
                                 <h3>{{ course.topic }} </h3>
                                 <p class="article-content">{{ course.description|linebreaksbr }}</p>
-                                <h4>{{ course.price }} KZT</h4>
+                                <h4>{{ course.price }} {% trans "KZT" %}</h4>
                                 <footer class="align-center">
-                                    <a href="/courses/course/{{course.pk}}" class="button alt">Learn More</a>
+                                    <a href="/courses/course/{{course.pk}}" class="button alt"> {% trans "Learn More" %}</a>
                                 </footer>
                             </div>
                         </div>
@@ -44,7 +45,7 @@
     <section id="two" class="wrapper style3">
         <div class="inner">
             <header class="align-center">
-                <h2>This user has no courses published</h2>
+                <h2>{% trans "This user has no courses published" %}</h2>
             </header>
         </div>
     </section>
