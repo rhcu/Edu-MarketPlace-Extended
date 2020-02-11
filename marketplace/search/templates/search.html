@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 <html>
 {% include "header.html" %}
@@ -12,7 +13,7 @@
         <br><br>
         <form class="search" method="get">
             <input class="search-input" id="query" {% if request.GET.query %}value="{{ request.GET.query }}"{% endif %}
-                   name="query" type="text" placeholder="Your search...">
+                   name="query" type="text" placeholder="{% trans "Your search..." %}">
         </form>
     </div>
 </section>
@@ -30,7 +31,7 @@
                                 <h3>{{ course.topic }} </h3>
                                 <p class="article-content">{{ course.description|linebreaksbr }}</p>
                                 <footer class="align-center">
-                                    <a href="/courses/course/{{course.id}}" class="button alt">Learn More</a>
+                                    <a href="/courses/course/{{course.id}}" class="button alt"> {% trans "Learn More" %}</a>
                                 </footer>
                             </div>
                         </div>
@@ -43,7 +44,7 @@
     <section id="two" class="wrapper style3">
         <div class="inner">
             <header class="align-center">
-                <h3>No search results</h3>
+                <h3>{% trans "No search results" %}</h3>
             </header>
         </div>
     </section>
