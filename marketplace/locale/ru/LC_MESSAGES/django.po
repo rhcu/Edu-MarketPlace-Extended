@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:09+0600\n"
+"POT-Creation-Date: 2020-02-11 13:41+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -149,45 +149,63 @@ msgid ""
 "Welcome to the first educational platform tailored to the needs of Kazakhstan"
 msgstr "Добро пожаловать на первую образовательную платформу в Казахстане"
 
-#: auth0login/templates/index.html:25
+#: auth0login/templates/index.html:23
+msgid ""
+"Look through our rich courses catalog and gain the knowledge you need to "
+"maximize your success"
+msgstr "Станьте успешнее с помощью наших курсов"
+
+#: auth0login/templates/index.html:24
 #, fuzzy
 #| msgid "New course"
 msgid "Discover courses"
 msgstr "Открывай новые для себя темы"
 
-#: auth0login/templates/index.html:35
+#: auth0login/templates/index.html:32
+msgid ""
+"If you have knowledge to share, utilize our platform to deliver it to the "
+"maximum amount of people"
+msgstr "Делитесь своими знаниями с людьми на нашей платформе"
+
+#: auth0login/templates/index.html:33
 #, fuzzy
 #| msgid "New course"
 msgid "Create courses"
 msgstr "Новый курс"
 
-#: auth0login/templates/index.html:43
+#: auth0login/templates/index.html:41
 msgid "Talk to other students and to course creators to enhance your knowledge"
 msgstr "Улучшай свои знания, общаясь с другими студентами и создателями курсов"
 
-#: auth0login/templates/index.html:44
+#: auth0login/templates/index.html:42
 msgid "Collaborate"
 msgstr "Сотрудничай"
 
-#: auth0login/templates/index.html:54
+#: auth0login/templates/index.html:50
+msgid ""
+"Knowledge is power. Information is liberating. Education is the premise of "
+"progress, in every society, in every family"
+msgstr "Знания - сила. Наука - прогресс."
+
+#: auth0login/templates/index.html:51
 msgid "Make a difference"
 msgstr "Привноси перемены"
 
-#: auth0login/templates/index.html:65
+#: auth0login/templates/index.html:62
 msgid "Start learning today"
 msgstr "Начни обучение сегодня"
 
-#: auth0login/templates/index.html:66
+#: auth0login/templates/index.html:63
 msgid "Discover the endless world of education with us"
 msgstr "Открой бесконечный мир знаний вместе с нами"
 
-#: auth0login/templates/index.html:69
+#: auth0login/templates/index.html:66
 #, fuzzy
 #| msgid "Log out"
 msgid "Log In"
 msgstr "Войти"
 
-#: auth0login/templates/index.html:70
+#: auth0login/templates/index.html:67
 msgid "Sign Up"
 msgstr "Зарегистрироваться"
 
