@@ -1,0 +1,467 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-21 12:05+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: auth0login/templates/contact_form.html:10
+msgid ""
+"Hi! Thanks for using Edu Marketplace! If you want to contact us with any "
+"feedback or concern, fill out the form below"
+msgstr ""
+
+#: auth0login/templates/contact_form.html:17
+msgid "Loading…"
+msgstr ""
+
+#: auth0login/templates/dashboard.html:14
+msgid "Welcome"
+msgstr ""
+
+#: auth0login/templates/dashboard.html:16
+msgid "Start your next education today by exploring our"
+msgstr ""
+
+#: auth0login/templates/dashboard.html:17
+msgid "list of courses"
+msgstr ""
+
+#: auth0login/templates/faq.html:40 auth0login/templates/refund.html:40
+msgid "Close"
+msgstr ""
+
+#: auth0login/templates/faq.html:41 auth0login/templates/refund.html:41
+msgid "If you cannot find an answer to your question, make sure to contact us."
+msgstr ""
+
+#: auth0login/templates/faq.html:45
+msgid "General questions"
+msgstr ""
+
+#: auth0login/templates/faq.html:50
+msgid "Is account registration required?"
+msgstr ""
+
+#: auth0login/templates/faq.html:55
+msgid ""
+"Yes, you need to create an account to be able to see the list of courses. "
+"However, FAQ and contact form are available without registration. "
+"Registration can be done either using existing Google account or by filling "
+"the required information in Sign-up window."
+msgstr ""
+
+#: auth0login/templates/faq.html:63
+msgid "Can I create my own course?"
+msgstr ""
+
+#: auth0login/templates/faq.html:68
+msgid ""
+"Yes! We will review your course to see if it satisfies our rules and "
+"conditions, and will notify you once your course is approved and added to "
+"the list of courses for students."
+msgstr ""
+
+#: auth0login/templates/faq.html:76
+msgid "What is the currency used for all transactions?"
+msgstr ""
+
+#: auth0login/templates/faq.html:81
+msgid "All prices for courses are in"
+msgstr ""
+
+#: auth0login/templates/faq.html:81 courses/templates/user_courses.html:33
+msgid "KZT"
+msgstr ""
+
+#: auth0login/templates/faq.html:81
+msgid "We plan to add other currencies later."
+msgstr ""
+
+#: auth0login/templates/faq.html:89
+msgid "I want to enroll to the course. How can I do this?"
+msgstr ""
+
+#: auth0login/templates/faq.html:94
+msgid ""
+"Enrolling to a course is really simple. Each course has a description and "
+"price. Once you have selected a course, you can enroll to it and you will "
+"gain a full access to the purchased course materials including lessons and "
+"other course entries."
+msgstr ""
+
+#: auth0login/templates/faq.html:102
+msgid "How can I add videos to the course?"
+msgstr ""
+
+#: auth0login/templates/faq.html:107
+msgid "We have 2 options for this"
+msgstr ""
+
+#: auth0login/templates/faq.html:109
+msgid ""
+"You can chose Video course entry type from dropdown, and then paste the "
+"embed link from YouTube. This will create an entry with your video in the "
+"course."
+msgstr ""
+
+#: auth0login/templates/faq.html:110
+msgid ""
+"You can insert embeddable iframe with a link from YouTube to the text editor "
+"in Lesson course entry."
+msgstr ""
+
+#: auth0login/templates/index.html:14
+msgid ""
+"Welcome to the first educational platform tailored to the needs of Kazakhstan"
+msgstr ""
+
+#: auth0login/templates/index.html:23
+msgid ""
+"Look through our rich courses catalog and gain the knowledge you need to "
+"maximize your success"
+msgstr ""
+
+#: auth0login/templates/index.html:24
+msgid "Discover courses"
+msgstr ""
+
+#: auth0login/templates/index.html:32
+msgid ""
+"If you have knowledge to share, utilize our platform to deliver it to the "
+"maximum amount of people"
+msgstr ""
+
+#: auth0login/templates/index.html:33
+msgid "Create courses"
+msgstr ""
+
+#: auth0login/templates/index.html:41
+msgid "Talk to other students and to course creators to enhance your knowledge"
+msgstr ""
+
+#: auth0login/templates/index.html:42
+msgid "Collaborate"
+msgstr ""
+
+#: auth0login/templates/index.html:50
+msgid ""
+"Knowledge is power. Information is liberating. Education is the premise of "
+"progress, in every society, in every family"
+msgstr ""
+
+#: auth0login/templates/index.html:51
+msgid "Make a difference"
+msgstr ""
+
+#: auth0login/templates/index.html:62
+msgid "Start learning today"
+msgstr ""
+
+#: auth0login/templates/index.html:63
+msgid "Discover the endless world of education with us"
+msgstr ""
+
+#: auth0login/templates/index.html:66
+msgid "Log In"
+msgstr ""
+
+#: auth0login/templates/index.html:67
+msgid "Sign Up"
+msgstr ""
+
+#: auth0login/templates/profile.html:45
+msgid "Profile Information"
+msgstr ""
+
+#: auth0login/templates/profile.html:50
+msgid "Update"
+msgstr ""
+
+#: auth0login/templates/refund.html:31 auth0login/templates/refund.html:45
+#: core/templates/navbar.html:48
+msgid "Refund policies"
+msgstr ""
+
+#: auth0login/templates/refund.html:48
+msgid ""
+"You can unenroll from the course within 7 days from enrollment, and you will "
+"be refunded in the full amount in case you have not received a completion "
+"certificate in this timeline.  You may cancel your enrollment at any time "
+"after 7 days but won't get any refund in that case."
+msgstr ""
+
+#: auth0login/templates/refund.html:49
+msgid "You can unenroll from free courses at any time with no charge."
+msgstr ""
+
+#: auth0login/templates/refund.html:51
+msgid ""
+"You are only allowed to unenroll from one specific course once. That means, "
+"if you will cancel your enrollment to the course claiming a refund, and will "
+"subsequently enroll in the same course, you won't be allowed to claim a "
+"refund for subsequent unenrollment."
+msgstr ""
+
+#: auth0login/templates/refund.html:54
+msgid ""
+"Please, allow 30 days from the cancellation point for the refund to be "
+"processed. If you were eligible for a refund and didn't receive a money "
+"transfer after this period, please contact us."
+msgstr ""
+
+#: core/templates/footer.html:9
+msgid "Email"
+msgstr ""
+
+#: core/templates/navbar.html:25
+msgid "Search"
+msgstr ""
+
+#: core/templates/navbar.html:26
+msgid "My Profile"
+msgstr ""
+
+#: core/templates/navbar.html:27
+msgid "Log out"
+msgstr ""
+
+#: core/templates/navbar.html:30
+msgid "Login"
+msgstr ""
+
+#: core/templates/navbar.html:31
+msgid "Register"
+msgstr ""
+
+#: core/templates/navbar.html:33
+msgid "Menu"
+msgstr ""
+
+#: core/templates/navbar.html:45
+msgid "Home"
+msgstr ""
+
+#: core/templates/navbar.html:46 courses/templates/courses.html:11
+msgid "Courses"
+msgstr ""
+
+#: core/templates/navbar.html:47
+msgid "Contact us"
+msgstr ""
+
+#: courses/templates/add_courses.html:11
+msgid "Add Courses"
+msgstr ""
+
+#: courses/templates/add_courses.html:21
+msgid "New course"
+msgstr ""
+
+#: courses/templates/add_courses.html:26 courses/templates/courses.html:18
+msgid "Add course"
+msgstr ""
+
+#: courses/templates/add_entry.html:11
+msgid "Add Course Entry"
+msgstr ""
+
+#: courses/templates/add_entry.html:20
+msgid "Course entry"
+msgstr ""
+
+#: courses/templates/add_entry.html:24
+msgid "Save"
+msgstr ""
+
+#: courses/templates/course_detail.html:19 courses/templates/save_quiz.html:101
+msgid "All courses"
+msgstr ""
+
+#: courses/templates/course_detail.html:58
+msgid "Topic"
+msgstr ""
+
+#: courses/templates/course_detail.html:62
+msgid "Author"
+msgstr ""
+
+#: courses/templates/course_detail.html:66
+msgid "Price"
+msgstr ""
+
+#: courses/templates/course_detail.html:70
+msgid "Description"
+msgstr ""
+
+#: courses/templates/course_detail.html:78
+msgid "You are enrolled"
+msgstr ""
+
+#: courses/templates/course_detail.html:78
+msgid "Unenroll"
+msgstr ""
+
+#: courses/templates/course_detail.html:80
+msgid "Purchase"
+msgstr ""
+
+#: courses/templates/course_detail.html:83
+msgid "Enrolled students"
+msgstr ""
+
+#: courses/templates/course_detail.html:89
+msgid "NOTE"
+msgstr ""
+
+#: courses/templates/course_detail.html:89
+msgid "Before accessing course contents you should purchase the course."
+msgstr ""
+
+#: courses/templates/course_detail.html:107
+#: courses/templates/enrolled_list.html:27
+msgid "Progress"
+msgstr ""
+
+#: courses/templates/course_detail.html:121
+#: courses/templates/course_detail.html:137
+#: courses/templates/course_detail.html:153
+#: courses/templates/video_detail.html:34
+msgid "Completed"
+msgstr ""
+
+#: courses/templates/course_detail.html:123
+#: courses/templates/course_detail.html:139
+#: courses/templates/course_detail.html:155
+#: courses/templates/lesson_detail.html:33
+#: courses/templates/video_detail.html:36
+msgid "In progress"
+msgstr ""
+
+#: courses/templates/course_detail.html:166
+msgid "Add course entry"
+msgstr ""
+
+#: courses/templates/course_pay.html:19
+msgid "Back to course"
+msgstr ""
+
+#: courses/templates/course_pay.html:31
+msgid "Payment Details"
+msgstr ""
+
+#: courses/templates/course_pay.html:41
+msgid "CARD NUMBER"
+msgstr ""
+
+#: courses/templates/course_pay.html:60
+msgid "EXPIRATION DATE"
+msgstr ""
+
+#: courses/templates/course_pay.html:74
+msgid "CV CODE"
+msgstr ""
+
+#: courses/templates/course_pay.html:97
+msgid "Buy"
+msgstr ""
+
+#: courses/templates/courses.html:69
+msgid "Manage Your Course"
+msgstr ""
+
+#: courses/templates/courses.html:72
+msgid "Continue Learning"
+msgstr ""
+
+#: courses/templates/courses.html:74 courses/templates/user_courses.html:35
+#: search/templates/search.html:34
+msgid "Learn More"
+msgstr ""
+
+#: courses/templates/courses.html:88
+msgid "There are no courses right now!"
+msgstr ""
+
+#: courses/templates/enrolled_list.html:11
+msgid "Enrolled Students"
+msgstr ""
+
+#: courses/templates/lesson_detail.html:13
+#: courses/templates/quiz_detail.html:124
+#: courses/templates/video_detail.html:23
+msgid "Course"
+msgstr ""
+
+#: courses/templates/lesson_detail.html:28
+#: courses/templates/video_detail.html:31
+msgid "Delete"
+msgstr ""
+
+#: courses/templates/lesson_detail.html:44
+#: courses/templates/video_detail.html:48
+msgid "Mark as NOT completed"
+msgstr ""
+
+#: courses/templates/lesson_detail.html:46
+#: courses/templates/video_detail.html:50
+msgid "Mark as completed"
+msgstr ""
+
+#: courses/templates/quiz_detail.html:137
+msgid "Already submitted"
+msgstr ""
+
+#: courses/templates/quiz_detail.html:142
+#: courses/templates/video_detail.html:30
+msgid "Edit"
+msgstr ""
+
+#: courses/templates/quiz_detail.html:150 courses/templates/save_lesson.html:28
+#: courses/templates/save_video.html:28
+msgid "Submit"
+msgstr ""
+
+#: courses/templates/save_lesson.html:14
+msgid "Save Lesson"
+msgstr ""
+
+#: courses/templates/save_quiz.html:94
+msgid "Save Quiz"
+msgstr ""
+
+#: courses/templates/save_quiz.html:114
+msgid "Add"
+msgstr ""
+
+#: courses/templates/save_video.html:14
+msgid "Save Video"
+msgstr ""
+
+#: courses/templates/user_courses.html:48
+msgid "This user has no courses published"
+msgstr ""
+
+#: courses/templates/video_detail.html:14
+msgid "Video Details"
+msgstr ""
+
+#: search/templates/search.html:16
+msgid "Your search..."
+msgstr ""
+
+#: search/templates/search.html:47
+msgid "No search results"
+msgstr ""
