@@ -196,6 +196,9 @@
                         document.getElementById("progress-bar-message").innerHTML =
                             progress.completed + ' of ' + progress.total + ' course entries completed.';
                     }
+                    if(progress.completed == progress.total) {
+                       document.getElementById("progress-wrapper").innerHTML += '<h1><a href="/courses/certificate/{{ course.pk }}">Download certificate of completion</a></h1>';
+                    }
                 });
             });
         }
