@@ -1,0 +1,92 @@
+\documentclass[16pt,a4paper]{scrartcl}              %class
+\usepackage[landscape,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry} %for layout
+\usepackage{setspace} % for spacing between lines
+\usepackage{graphicx}         %for including images
+\usepackage{eso-pic}     %package for including background image
+\usepackage{color}
+\usepackage{wallpaper}
+\definecolor{a}{rgb}{0,0.08,0.45}
+
+\definecolor{red}{rgb}{0.5,0,0}
+%---------------------------------------------------------------
+
+%----------------------------------------------------------------
+%=============================
+
+ %=============================
+%=============================
+
+\def\signature#1#2{\parbox[b]{1in}{\smash{#1}\vskip12pt}
+\hfill \parbox[t]{2.8in}{\shortstack{\vrule width 2.8in height 0.4pt\\\small#2}}}
+\def\sigskip{\vskip0.4in plus 0.1in}
+        \def\beginskip{\vskip0.5875in plus 0.1in}
+%=============================
+ \begin{document}
+ 
+\TileWallPaper{1\paperwidth}{1\paperheight}{border.jpg}
+ \AddToShipoutPicture{\BackgroundPic}     % here background image is called
+%=============================
+ \DTLforeach{}{
+ %=============================
+ \noindent
+\begin{minipage}[l]{1.5in}
+\includegraphics[width=.92\linewidth]{logo.png}  %Here include left side image
+\end{minipage}
+ \hfill
+ %============================= 
+\begin{minipage}[c]{6.5in}
+{\centering
+{\onehalfspacing
+    {\LARGE\bfseries\color{a}EduMarketplace}\\
+    }}
+\end{minipage}
+ \hfill
+ %=============================
+\begin{minipage}[r]{1.0in}
+\includegraphics[width=1.2\linewidth]{\photo}  %here include right side image
+\end{minipage}
+\hfill
+
+%=============================
+\noindent
+\begin{minipage}[l]{1.5in}
+\end{minipage}
+ \hfill
+ %=============================
+\begin{minipage}[c]{6.5in}
+{\centering
+{\doublespacing
+{\LARGE\bfseries\color{a} Certificate}\\
+{\LARGE\bfseries\color{a} Of}\\
+{\LARGE\bfseries\color{a} Completion}\\
+    }}
+\end{minipage}
+ \hfill
+%=============================
+\begin{minipage}[r]{1.0in}
+\end{minipage}
+\hfill
+
+%=============================
+
+\vspace{4cm}
+\doublespacing
+\noindent{{\bfseries This is to certified that {{\underline{\name}}} student of {{\underline{\dep}}} course
+of EduMarketplace has successfully completed the course on NAME OF COURSE.
+\\Date: DATE
+\\ Certificate Identification Number: NUMBER
+}}
+
+\noindent
+%\beginskip
+{\singlespacing 
+
+\begin{minipage}[l]{}
+ \sigskip \signature{}{\bfseries\color{a} NAME HERE \\ \bfseries\color{a} Tutor }
+\end{minipage}
+}
+
+%=============================
+ \pagebreak
+ }
+\end{document}
