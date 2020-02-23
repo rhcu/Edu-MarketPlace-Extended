@@ -14,7 +14,6 @@
     {% get_available_languages as LANGUAGES %}
     {% get_current_language as LANGUAGE_CODE %}
     
-    <a class="nav-item nav-link" href="#">Your lang is: {{ LANGUAGE_CODE }} </a>
     {% get_language_info_list for LANGUAGES as languages%}
     {% for language in languages %}
         <a class="nav-item nav-link" href="#" onclick="changeLang('{{ language.code }}')">{{ language.name_local }} </a>
