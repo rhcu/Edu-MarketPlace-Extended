@@ -13,7 +13,10 @@ from django.db.models import Q
 from decimal import Decimal
 
 import json
+from datetime import date
+import subprocess
 import simplejson
+from .certificate import get_template
 from django.utils import translation
 
 
@@ -395,6 +398,34 @@ def add_entry(request, pk):
     else:
         return redirect('course_detail', pk=course.pk)
 
+
+def course_certificate(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    course_entries = CourseEntry.objects.filter(course=course)
+    user = None
+    course_progression = {}
+    if request.user.is_authenticated:
+        user = request.user
+    user_enrolled = is_user_enrolled(course, user)
+    if user_enrolled:
+        course_entries_count = CourseProgression.objects.filter(user=user, course=course).count()
+        course_entries_completed = CourseProgression.objects.filter(user=user, course=course, completed=True).count()
+        
+        if course_entries_completed < course_entries_count:
+            return redirect('course_detail', pk=course.pk)
+        certificate_id = str(course.pk) + "_" + str(user.pk)
+        certificate_content = get_template(user.first_name, course.title, date.today().strftime("%d/%m/%Y"), certificate_id.replace("_", ""), course.owner.first_name)
+        certificate_file = open(certificate_id + ".tex", "w")
+        certificate_file.write(certificate_content)
+        certificate_file.close()
+        subprocess.run(["./laton", certificate_id + ".tex"])
+        pdf_file = open(certificate_id + ".pdf", "rb")
+        import mimetypes
+        mime_type_guess = mimetypes.guess_type(certificate_id + ".pdf")
+        response = HttpResponse(pdf_file, content_type='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=' + certificate_id + '.pdf'
+        return response
+    return redirect('course_detail', pk=course.pk)
 
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
