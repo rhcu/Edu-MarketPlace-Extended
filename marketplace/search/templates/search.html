@@ -1,6 +1,4 @@
-{% load static %}
-{% load i18n %}
-{% load crispy_forms_tags %}
+{% load static i18n crispy_forms_tags %}
 <html>
 {% include "header.html" %}
 <body>
@@ -8,20 +6,24 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>Search courses</h2>
+            <h2>{% trans "Search courses" %}</h2>
         </header>
-        <br><br>
-        <form class="search" method="get">
-            <input class="search-input" id="query" {% if request.GET.query %}value="{{ request.GET.query }}"{% endif %}
-                   name="query" type="text" placeholder="{% trans "Your search..." %}">
-        </form>
+        <div class="content">
+            <form method="GET" action="{{ request.path }}">
+                {% csrf_token %}
+                <table>
+                    {{ form.as_table }}
+                </table>
+                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
+            </form>
+        </div>
     </div>
 </section>
-{% if courses %}
+{% if object_list %}
     <section id="two" class="wrapper style2">
         <div class="inner">
             <div class="grid-style">
-                {% for course in courses %}
+                {% for course in object_list %}
                     <div>
                         <div class="box">
                             <div class="content">
@@ -31,7 +33,7 @@
                                 <h3>{{ course.topic }} </h3>
                                 <p class="article-content">{{ course.description|linebreaksbr }}</p>
                                 <footer class="align-center">
-                                    <a href="/courses/course/{{course.id}}" class="button alt"> {% trans "Learn More" %}</a>
+                                    <a href="/courses/course/{{ course.id }}" class="button alt"> {% trans "Learn More" %}</a>
                                 </footer>
                             </div>
                         </div>
