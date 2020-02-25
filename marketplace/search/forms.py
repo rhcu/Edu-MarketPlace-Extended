@@ -1,20 +1,21 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 
 class CourseSearchForm(forms.Form):
     query = forms.CharField(
-        label="Custom query",
+        label=_("Custom query"),
         required=False,
     )
     title = forms.CharField(
-        label="Title",
+        label=_("Title"),
         required=False,
     )
     description = forms.CharField(
-        label="Description",
+        label=_("Description"),
         required=False,
     )
     topic = forms.CharField(
-        label="Topic",
+        label=_("Topic"),
         required=False,
     )
