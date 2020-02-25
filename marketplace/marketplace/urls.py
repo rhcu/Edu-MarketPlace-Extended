@@ -18,11 +18,10 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from search import views as search_views
-from django.conf.urls.i18n import i18n_patterns
-
 import auth0login
+
 urlpatterns = [
-    path('search/', search_views.search, name='search'),
+    path('search/', search_views.search),
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path('users/', include('auth0login.urls')),

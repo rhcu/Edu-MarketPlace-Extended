@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-21 12:05+0600\n"
+"POT-Creation-Date: 2020-02-25 11:46+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,9 @@ msgstr ""
 msgid ""
 "Hi! Thanks for using Edu Marketplace! If you want to contact us with any "
 "feedback or concern, fill out the form below"
-msgstr "Сәлем! Edu Marketplace-ті қолдаңғаныңызға рахмет! Өзіңізді мазалаған сұрақтар бойынша бізбен байланысу үшін төмендегі форманы толтырыңыз"
+msgstr ""
+"Сәлем! Edu Marketplace-ті қолдаңғаныңызға рахмет! Өзіңізді мазалаған "
+"сұрақтар бойынша бізбен байланысу үшін төмендегі форманы толтырыңыз"
 
 #: auth0login/templates/contact_form.html:17
 msgid "Loading…"
@@ -45,7 +47,8 @@ msgstr "Жабық"
 
 #: auth0login/templates/faq.html:41 auth0login/templates/refund.html:41
 msgid "If you cannot find an answer to your question, make sure to contact us."
-msgstr "Сұрағыңызға жауап табылмаған жағдайда, бізбен байланысуыңызды өтінеміз."
+msgstr ""
+"Сұрағыңызға жауап табылмаған жағдайда, бізбен байланысуыңызды өтінеміз."
 
 #: auth0login/templates/faq.html:45
 msgid "General questions"
@@ -61,8 +64,11 @@ msgid ""
 "However, FAQ and contact form are available without registration. "
 "Registration can be done either using existing Google account or by filling "
 "the required information in Sign-up window."
-msgstr "Иә, курстар тізімін көру мүмкіндігіне ие болу үшін аккаунттық тіркелуден өтуіңіз қажет. Алайда, Сұрақ-Жауап және байланыс формасына тіркелімсіз қол жеткізе аласыз. Тіркелу қолданымдағы Google аккаунтын қолдану немесе Тіркелу терезесіндегі талап етілген ақпаратты толтыру арқылы жүзеге асырыла алады."
-
+msgstr ""
+"Иә, курстар тізімін көру мүмкіндігіне ие болу үшін аккаунттық тіркелуден "
+"өтуіңіз қажет. Алайда, Сұрақ-Жауап және байланыс формасына тіркелімсіз қол "
+"жеткізе аласыз. Тіркелу қолданымдағы Google аккаунтын қолдану немесе Тіркелу "
+"терезесіндегі талап етілген ақпаратты толтыру арқылы жүзеге асырыла алады."
 
 #: auth0login/templates/faq.html:63
 msgid "Can I create my own course?"
@@ -73,7 +79,10 @@ msgid ""
 "Yes! We will review your course to see if it satisfies our rules and "
 "conditions, and will notify you once your course is approved and added to "
 "the list of courses for students."
-msgstr "Иә! Біз сіздің курсыңызды ережелер мен талаптарымызға лайықтылығын білу үшін қарап шығамыз, және сіздің курс мақұлданып студенттерге арналған курстар тізіміне қосылғаннан кейін сізге хабарлаймыз."
+msgstr ""
+"Иә! Біз сіздің курсыңызды ережелер мен талаптарымызға лайықтылығын білу үшін "
+"қарап шығамыз, және сіздің курс мақұлданып студенттерге арналған курстар "
+"тізіміне қосылғаннан кейін сізге хабарлаймыз."
 
 #: auth0login/templates/faq.html:76
 msgid "What is the currency used for all transactions?"
@@ -101,7 +110,11 @@ msgid ""
 "price. Once you have selected a course, you can enroll to it and you will "
 "gain a full access to the purchased course materials including lessons and "
 "other course entries."
-msgstr "Курсқа жазылу шынында оңай. Әр курстың сипаттамасы және бағасы көрсетілген. Сіз курсты таңдағаннан кейін оған жазылуға болады. Содан соң сіз сатып алынған курстың материалдарына, соның ішінде сабақтар мен басқа да жазбаларға толық қол жеткізе аласыз."
+msgstr ""
+"Курсқа жазылу шынында оңай. Әр курстың сипаттамасы және бағасы көрсетілген. "
+"Сіз курсты таңдағаннан кейін оған жазылуға болады. Содан соң сіз сатып "
+"алынған курстың материалдарына, соның ішінде сабақтар мен басқа да "
+"жазбаларға толық қол жеткізе аласыз."
 
 #: auth0login/templates/faq.html:102
 msgid "How can I add videos to the course?"
@@ -116,24 +129,33 @@ msgid ""
 "You can chose Video course entry type from dropdown, and then paste the "
 "embed link from YouTube. This will create an entry with your video in the "
 "course."
-msgstr "Ашылатын мәзірден Бейне курсқа кіру түрін таңдап, содан кейін YouTube-тен ендірілген сілтемені қоюға болады. Бұл арқылы курста сіздің бейнеңізбен жазба құрылады."
+msgstr ""
+"Ашылатын мәзірден Бейне курсқа кіру түрін таңдап, содан кейін YouTube-тен "
+"ендірілген сілтемені қоюға болады. Бұл арқылы курста сіздің бейнеңізбен "
+"жазба құрылады."
 
 #: auth0login/templates/faq.html:110
 msgid ""
 "You can insert embeddable iframe with a link from YouTube to the text editor "
 "in Lesson course entry."
-msgstr "Сабақ жазбасындағы мәтіндік редакторға YouTube сілтемесі кірістірілген iframe-ді ендіруге болады."
+msgstr ""
+"Сабақ жазбасындағы мәтіндік редакторға YouTube сілтемесі кірістірілген "
+"iframe-ді ендіруге болады."
 
 #: auth0login/templates/index.html:14
 msgid ""
 "Welcome to the first educational platform tailored to the needs of Kazakhstan"
-msgstr "Қазақстанның қажеттіліктерін ескере отырып жасалған алғашқы білім алаңына қош келдіңіздер"
+msgstr ""
+"Қазақстанның қажеттіліктерін ескере отырып жасалған алғашқы білім алаңына "
+"қош келдіңіздер"
 
 #: auth0login/templates/index.html:23
 msgid ""
 "Look through our rich courses catalog and gain the knowledge you need to "
 "maximize your success"
-msgstr "Біздің курстардың бай тіздемесін қарап шығыңыз және табысқа жету үшін қажет білімге ие болыңыз"
+msgstr ""
+"Біздің курстардың бай тіздемесін қарап шығыңыз және табысқа жету үшін қажет "
+"білімге ие болыңыз"
 
 #: auth0login/templates/index.html:24
 msgid "Discover courses"
@@ -143,7 +165,9 @@ msgstr "Курстар туралы ақапарат"
 msgid ""
 "If you have knowledge to share, utilize our platform to deliver it to the "
 "maximum amount of people"
-msgstr "Егер бөлісерлік біліміңіз болса, біздің платформаны оны барынша көп адамдарға жеткізу үшін пайдаланыңыз"
+msgstr ""
+"Егер бөлісерлік біліміңіз болса, біздің платформаны оны барынша көп "
+"адамдарға жеткізу үшін пайдаланыңыз"
 
 #: auth0login/templates/index.html:33
 msgid "Create courses"
@@ -151,7 +175,8 @@ msgstr "Курстарды құру"
 
 #: auth0login/templates/index.html:41
 msgid "Talk to other students and to course creators to enhance your knowledge"
-msgstr "Біліміңді толықтыру үшін басқа студенттермен және курс құрушылармен тілдесу"
+msgstr ""
+"Біліміңді толықтыру үшін басқа студенттермен және курс құрушылармен тілдесу"
 
 #: auth0login/templates/index.html:42
 msgid "Collaborate"
@@ -161,7 +186,9 @@ msgstr "Серіктесу"
 msgid ""
 "Knowledge is power. Information is liberating. Education is the premise of "
 "progress, in every society, in every family"
-msgstr "Білім - күш. Ақпарат азат. Білім - әр қоғамда, әрбір отбасында үдерістің алғышарты"
+msgstr ""
+"Білім - күш. Ақпарат азат. Білім - әр қоғамда, әрбір отбасында үдерістің "
+"алғышарты"
 
 #: auth0login/templates/index.html:51
 msgid "Make a difference"
@@ -192,7 +219,7 @@ msgid "Update"
 msgstr "Жаңарту"
 
 #: auth0login/templates/refund.html:31 auth0login/templates/refund.html:45
-#: core/templates/navbar.html:48
+#: core/templates/navbar.html:47
 msgid "Refund policies"
 msgstr "Төлемді қайтару саясаты"
 
@@ -202,7 +229,11 @@ msgid ""
 "be refunded in the full amount in case you have not received a completion "
 "certificate in this timeline.  You may cancel your enrollment at any time "
 "after 7 days but won't get any refund in that case."
-msgstr "Сіз тіркелгеннен бастап 7 күннің ішінде курстан шыға аласыз, және осы мерзім ішінде курстың аяқталғаны туралы сертификат алмаған болсаңыз, толық көлемде төлем қайтарылады. Сіз 7 күн өткеннен кейін кез-келген уақытта оқудан бас тарта аласыз, бірақ бұл жағдайда төлем қайтарылмайды."
+msgstr ""
+"Сіз тіркелгеннен бастап 7 күннің ішінде курстан шыға аласыз, және осы мерзім "
+"ішінде курстың аяқталғаны туралы сертификат алмаған болсаңыз, толық көлемде "
+"төлем қайтарылады. Сіз 7 күн өткеннен кейін кез-келген уақытта оқудан бас "
+"тарта аласыз, бірақ бұл жағдайда төлем қайтарылмайды."
 
 #: auth0login/templates/refund.html:49
 msgid "You can unenroll from free courses at any time with no charge."
@@ -214,52 +245,60 @@ msgid ""
 "if you will cancel your enrollment to the course claiming a refund, and will "
 "subsequently enroll in the same course, you won't be allowed to claim a "
 "refund for subsequent unenrollment."
-msgstr "Сізге бір курстан бір рет қана бас тартуға рұқсат етіледі. Бұл дегеніміз, егер сіз төлемді қайтаруды саясаты бекітілген курсқа жазылудан бас тартсаңыз және кейіннен сол курсты қайта оқитын болсаңыз, сізге одан кейінгі курстан бас тартуға төлем қайтарылмайды."
+msgstr ""
+"Сізге бір курстан бір рет қана бас тартуға рұқсат етіледі. Бұл дегеніміз, "
+"егер сіз төлемді қайтаруды саясаты бекітілген курсқа жазылудан бас тартсаңыз "
+"және кейіннен сол курсты қайта оқитын болсаңыз, сізге одан кейінгі курстан "
+"бас тартуға төлем қайтарылмайды."
 
 #: auth0login/templates/refund.html:54
 msgid ""
 "Please, allow 30 days from the cancellation point for the refund to be "
 "processed. If you were eligible for a refund and didn't receive a money "
 "transfer after this period, please contact us."
-msgstr "Төлемді қайтару процессіне тіркелім күшін жойған сәттен бастап 30 күн жұмсалатындығын ескеруіңізді өтінеміз. Егер сіз төлемді қайтаруға лайықты деп табылсаңыз және белгіленген мерзім ішінде ақша аударымы жасалынбаса, бізбен байланысуыңызды сұранамыз."
+msgstr ""
+"Төлемді қайтару процессіне тіркелім күшін жойған сәттен бастап 30 күн "
+"жұмсалатындығын ескеруіңізді өтінеміз. Егер сіз төлемді қайтаруға лайықты "
+"деп табылсаңыз және белгіленген мерзім ішінде ақша аударымы жасалынбаса, "
+"бізбен байланысуыңызды сұранамыз."
 
 #: core/templates/footer.html:9
 msgid "Email"
 msgstr "Электрондық пошта"
 
-#: core/templates/navbar.html:25
+#: core/templates/navbar.html:24 search/templates/search.html:17
 msgid "Search"
 msgstr "Іздеу"
 
-#: core/templates/navbar.html:26
+#: core/templates/navbar.html:25
 msgid "My Profile"
 msgstr "Менің Парақшам"
 
-#: core/templates/navbar.html:27
+#: core/templates/navbar.html:26
 msgid "Log out"
 msgstr "Жүйеден шығу"
 
-#: core/templates/navbar.html:30
+#: core/templates/navbar.html:29
 msgid "Login"
 msgstr "Жүйеге кіру"
 
-#: core/templates/navbar.html:31
+#: core/templates/navbar.html:30
 msgid "Register"
 msgstr "Тіркелу"
 
-#: core/templates/navbar.html:33
+#: core/templates/navbar.html:32
 msgid "Menu"
 msgstr "Мәзір"
 
-#: core/templates/navbar.html:45
+#: core/templates/navbar.html:44
 msgid "Home"
 msgstr "Басты бет"
 
-#: core/templates/navbar.html:46 courses/templates/courses.html:11
+#: core/templates/navbar.html:45 courses/templates/courses.html:11
 msgid "Courses"
 msgstr "Курстар"
 
-#: core/templates/navbar.html:47
+#: core/templates/navbar.html:46
 msgid "Contact us"
 msgstr "Бізбен байланысыңыз"
 
@@ -291,7 +330,7 @@ msgstr "Сақтау"
 msgid "All courses"
 msgstr "Барлық курстар"
 
-#: courses/templates/course_detail.html:58
+#: courses/templates/course_detail.html:58 search/forms.py:19
 msgid "Topic"
 msgstr "Тақырып"
 
@@ -303,7 +342,7 @@ msgstr "Автор"
 msgid "Price"
 msgstr "Бағасы"
 
-#: courses/templates/course_detail.html:70
+#: courses/templates/course_detail.html:70 search/forms.py:15
 msgid "Description"
 msgstr "Сипаттама"
 
@@ -372,7 +411,9 @@ msgid "EXPIRATION DATE"
 msgstr "Қолданылу мерзімі"
 
 #: courses/templates/course_pay.html:74
-msgid "CVV CODE"
+#, fuzzy
+#| msgid "CVV CODE"
+msgid "CV CODE"
 msgstr "CVV коды"
 
 #: courses/templates/course_pay.html:97
@@ -388,7 +429,7 @@ msgid "Continue Learning"
 msgstr "Оқылымды жалғастыру"
 
 #: courses/templates/courses.html:74 courses/templates/user_courses.html:35
-#: search/templates/search.html:34
+#: search/templates/search.html:36
 msgid "Learn More"
 msgstr "Толығырақ"
 
@@ -459,11 +500,21 @@ msgstr "Бұл пайдаланушыда жарияланған курстар 
 msgid "Video Details"
 msgstr "Бейне туралы толық ақпарат"
 
-#: search/templates/search.html:16
-msgid "Your search..."
-msgstr "Сіздің ізделіміңіз..."
+#: search/forms.py:7
+msgid "Custom query"
+msgstr "Жалпы ізденіс"
 
-#: search/templates/search.html:47
+#: search/forms.py:11
+msgid "Title"
+msgstr "Тақырыбы"
+
+#: search/templates/search.html:9
+msgid "Search courses"
+msgstr "Курстарды іздеу"
+
+#: search/templates/search.html:49
 msgid "No search results"
 msgstr "Іздеу нәтижесі табылмады"
 
+#~ msgid "Your search..."
+#~ msgstr "Сіздің ізделіміңіз..."

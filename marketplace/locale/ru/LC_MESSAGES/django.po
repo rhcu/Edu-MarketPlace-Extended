@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-11 13:41+0600\n"
+"POT-Creation-Date: 2020-02-25 11:46+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,7 +218,7 @@ msgid "Update"
 msgstr "Обновить"
 
 #: auth0login/templates/refund.html:31 auth0login/templates/refund.html:45
-#: core/templates/navbar.html:48
+#: core/templates/navbar.html:47
 msgid "Refund policies"
 msgstr "Правила возмещения"
 
@@ -267,39 +267,39 @@ msgstr ""
 msgid "Email"
 msgstr "Электронная почта"
 
-#: core/templates/navbar.html:25
+#: core/templates/navbar.html:24 search/templates/search.html:17
 msgid "Search"
 msgstr "Поиск"
 
-#: core/templates/navbar.html:26
+#: core/templates/navbar.html:25
 msgid "My Profile"
 msgstr "Мой профиль"
 
-#: core/templates/navbar.html:27
+#: core/templates/navbar.html:26
 msgid "Log out"
 msgstr "Выйти"
 
-#: core/templates/navbar.html:30
+#: core/templates/navbar.html:29
 msgid "Login"
 msgstr "Войти"
 
-#: core/templates/navbar.html:31
+#: core/templates/navbar.html:30
 msgid "Register"
 msgstr "Зарегистрироваться"
 
-#: core/templates/navbar.html:33
+#: core/templates/navbar.html:32
 msgid "Menu"
 msgstr "Меню"
 
-#: core/templates/navbar.html:45
+#: core/templates/navbar.html:44
 msgid "Home"
 msgstr "Главная страница"
 
-#: core/templates/navbar.html:46 courses/templates/courses.html:11
+#: core/templates/navbar.html:45 courses/templates/courses.html:11
 msgid "Courses"
 msgstr "Курсы"
 
-#: core/templates/navbar.html:47
+#: core/templates/navbar.html:46
 msgid "Contact us"
 msgstr "Свяжитесь с нами"
 
@@ -333,7 +333,7 @@ msgstr "Сохранить"
 msgid "All courses"
 msgstr "Все курсы"
 
-#: courses/templates/course_detail.html:58
+#: courses/templates/course_detail.html:58 search/forms.py:19
 msgid "Topic"
 msgstr "Тема"
 
@@ -345,7 +345,7 @@ msgstr "Автор"
 msgid "Price"
 msgstr "Цена"
 
-#: courses/templates/course_detail.html:70
+#: courses/templates/course_detail.html:70 search/forms.py:15
 msgid "Description"
 msgstr "Описание"
 
@@ -432,7 +432,7 @@ msgid "Continue Learning"
 msgstr "Продолжить обучение"
 
 #: courses/templates/courses.html:74 courses/templates/user_courses.html:35
-#: search/templates/search.html:34
+#: search/templates/search.html:36
 msgid "Learn More"
 msgstr "Узнать больше"
 
@@ -515,13 +515,24 @@ msgstr "На данный момент курсов нет"
 msgid "Video Details"
 msgstr "Платежные детали"
 
-#: search/templates/search.html:16
-msgid "Your search..."
-msgstr "Что вы ищете?"
+#: search/forms.py:7
+msgid "Custom query"
+msgstr "Общий поиск"
 
-#: search/templates/search.html:47
+#: search/forms.py:11
+msgid "Title"
+msgstr "Название курса"
+
+#: search/templates/search.html:9
+msgid "Search courses"
+msgstr "Поиск курсов"
+
+#: search/templates/search.html:49
 msgid "No search results"
 msgstr "Нет результатов поиска"
+
+#~ msgid "Your search..."
+#~ msgstr "Что вы ищете?"
 
 #, fuzzy
 #~| msgid "Refund policies"
