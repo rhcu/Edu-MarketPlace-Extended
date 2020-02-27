@@ -60,9 +60,9 @@ def index(request):
     userdata = {}
     user = request.user
     if user.is_authenticated:
-        course_objects = Course.objects.filter(Q(visible=True) | Q(owner=user))
+        course_objects = Course.objects.all()
     else:
-        course_objects = Course.objects.filter(Q(visible=True))
+        course_objects = Course.objects.all()
     courses = []
     if user.is_authenticated:
         user = request.user
