@@ -12,9 +12,19 @@
         </div>
     </section>
     <section id="two" class="wrapper style2">
-        <div class="inner">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeOJbgXsa7PcG6re5KNIn0jc2igKUrTOBji0z-59zLmhxne4w/viewform?embedded=true"
-                width="640" height="864" frameborder="0" marginheight="0" marginwidth="0">{% trans "Loading…" %}</iframe>
+       <div class="inner">
+           {% get_current_language as LANGUAGE_CODE %}
+           {% if LANGUAGE_CODE == "ru"%}
+           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScXONEr9uhbKwCjC-7SpJZe0r-kDgB6OxpQmB9wRTbjlU7wRA/viewform?embedded=true"
+               width="640" height="864" frameborder="0" marginheight="0" marginwidth="0">{% trans "Loading…" %}</iframe>
+           {% elif LANGUAGE_CODE == "kk"%}
+           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfFp82hBYg6i4HU0kgXSFZkybb3XyD4XfZusubVJDZTHoID3w/viewform?embedded=true"
+               width="640" height="864" frameborder="0" marginheight="0" marginwidth="0">{% trans "Loading…" %}</iframe>
+           {% else %}
+           <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeOJbgXsa7PcG6re5KNIn0jc2igKUrTOBji0z-59zLmhxne4w/viewform?embedded=true"
+               width="640" height="864" frameborder="0" marginheight="0" marginwidth="0">{% trans "Loading…" %}</iframe>
+           {% endif %}
+           
         </div>
     </section>
     {% include "footer.html" %}
