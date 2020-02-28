@@ -45,8 +45,12 @@
                             <span class='r r5' data-rating='5' data-value='5'></span>
                             <span class='r current' id="total-rating"></span>
                         </span>
-                        <input type="hidden" id="rating" value="0" />
-                        <input type="hidden" name="rating" id="rating_val" value="0" />
+                        <div class="values">
+                            <div>
+                                <label><input type="hidden" id="rating" value="0" /></label>
+                                <label><input type="hidden" name="rating" id="rating_val" value="0" /></label>
+                            </div>
+                        </div>
                         <br/><br/>
                     {% else %}
                         <div id="rating-not-enrolled"></div>
@@ -196,7 +200,7 @@
                         document.getElementById("progress-bar-message").innerHTML =
                             progress.completed + ' of ' + progress.total + ' course entries completed.';
                     }
-                    if(progress.completed == progress.total) {
+                    if(progress.completed === progress.total) {
                        document.getElementById("progress-wrapper").innerHTML += '<h1><a href="/courses/certificate/{{ course.pk }}">Download certificate of completion</a></h1>';
                     }
                 });
@@ -215,7 +219,6 @@
                     }
                 });
             });
-
         }
 
         function updateRating() {
@@ -267,9 +270,9 @@
             }
         ).click(function() {
             // Set a hidden-field value on click
-            var value = $(this).data('value');
-            var rating = $(this).data('rating');
+            let value = $(this).data('value');
             $("#rating_val").val(value);
+            let rating = $(this).data('rating');
             $("#rating").val(rating);
 
             highlight_star(value);
@@ -279,6 +282,7 @@
             let url = "/courses/set_rating/{{ course.pk }}/" + rating + "/";
             fetch(url);
         });
+
         const highlight_star = function(rating) {
             $('.rating_stars span.s').each(function() {
                 let low = $(this).data('low');
