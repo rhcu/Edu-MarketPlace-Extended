@@ -105,6 +105,9 @@
                             {% if entry.entry_type == 'quiz' %}
                                 <li><a href="/courses/quiz/{{ entry.pk }}">{{entry.name}}</a></li>
                             {% endif %}
+                            {% if entry.entry_type == 'assignment' %}
+                                <li><a href="/courses/assignment/{{ entry.pk }}">{{entry.name}}</a></li>
+                            {% endif %}
                         {% endfor %}
                     {% else %}
                         <div id="progress-wrapper">
@@ -151,6 +154,22 @@
                                     <div>
                                         <div class="left">
                                             <a href="/courses/quiz/{{ entry.course_entry.pk }}">{{ entry.course_entry.name }}</a>
+                                        </div>
+                                        <div class="right">
+                                            {% if entry.completed %}
+                                            <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>{% trans "Completed" %}</span>
+                                            {% else %}
+                                            <span style="color: red; ">{% trans "In progress"%}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endif %}
+                            {% if entry.course_entry.entry_type == 'assignment' %}
+                                <li>
+                                    <div>
+                                        <div class="left">
+                                            <a href="/courses/assignment/{{ entry.course_entry.pk }}">{{ entry.course_entry.name }}</a>
                                         </div>
                                         <div class="right">
                                             {% if entry.completed %}

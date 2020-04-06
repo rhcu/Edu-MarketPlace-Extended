@@ -1,0 +1,92 @@
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+<html>
+{% include "header.html" %}
+<body>
+{% include "navbar.html" %}
+<section id="one" class="wrapper style3">
+    <div class="inner">
+        <header class="align-left">
+            <h2>
+                <a href="/courses/course/{{assignment.course_entry.course.pk}}">
+                    <i class="fas fa-arrow-left"></i> {% trans "Course" %}: {{ assignment.course_entry.course.title }}
+                </a>
+            </h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <h3 class="display-4">
+                    {{ assignment.course_entry.name }}
+                </h3>
+                <h4>
+                    <b>{% trans "Description" %}</b>: {{ assignment.description }}.
+                </h4>
+                {% if user == assignment.course_entry.course.owner %}
+                    <a href='/courses/save_assignment/{{assignment.course_entry.pk}}'><i class="fas fa-edit"></i> {%  trans "Edit" %}</a>
+                    <a href='/courses/delete_assignment_entry/{{assignment.course_entry.pk}}'><i class="fas fa-trash-alt"></i> {% trans "Delete" %}</a>
+                    <hr>
+                    <h4><b>{%  trans "Submitted assignments" %}</b>:</h4>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Student" %}</th>
+                                    <th>{% trans "Download" %}</th>
+                                    <th>{% trans "Delete" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for assignment in assignments %}
+                                    {% if assignment.file %}
+                                        <tr>
+                                            <td>
+                                                <a class="mr-2" href="{% url 'user_detail' username=assignment.user.username %}">
+                                                    {{ assignment.user.first_name }}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ assignment.file.url }}" class="btn btn-primary btn-sm" target="_blank">
+                                                    {% trans "Download submission" %}
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <form method="post" action="{% url 'delete_assignment' assignment.pk %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger btn-sm">{% trans "Delete" %}</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    {% if is_completed %}
+                        <span style="color: darkgreen; "><i class="fas fa-check-circle"></i>{% trans "Completed" %}</span>
+                        <h4>{% trans "You have submitted this assignment" %}.</h4>
+                    {% else %}
+                        <span style="color: red; ">{% trans "Not completed" %}</span>
+                        <h4>{% trans "Please submit your work below. Supported file extensions" %}: <i>.pdf, .doc, .docx, .xlsx, .xls.</i></h4>
+                        {% block content %}
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.as_table }}
+                                <button type="submit" class="btn btn-primary">{% trans "Submit Assignment" %}</button>
+                            </form>
+                        {% endblock %}
+                    {% endif %}
+                {% endif %}
+                <hr>
+            </div>
+        </div>
+    </div>
+</section>
+{% include "footer.html" %}
+</body>
+</html>
