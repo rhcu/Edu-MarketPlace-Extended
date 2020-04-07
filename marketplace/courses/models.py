@@ -1,6 +1,10 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
 from decimal import Decimal
+from django.contrib.auth.models import User
+from .validators import validate_file_extension
+import os
 
 
 class Course(models.Model):
@@ -22,12 +26,12 @@ ENTRIES_CHOICES = (
     ('lesson', 'Lesson'),
     ('video', 'Video'),
     ('quiz', 'Quiz'),
+    ('assignment', 'Assignment'),
 )
 
 
 class CourseEntry(models.Model):
-    # Meta data about course entry, full data stored within course
-    # entry types
+    # Meta data about course entry, full data stored in specific course entry types
     name = models.CharField(max_length=500)
     entry_type = models.CharField(max_length=100, choices=ENTRIES_CHOICES, default='lesson')
     course = models.ForeignKey(Course, on_delete=models.CASCADE,)
@@ -107,3 +111,16 @@ class CourseProgression(models.Model):
     def __str__(self):
         return "CourseProgression: user=" + self.user.username + " course='" + self.course.title + \
                "', course_entity='" + self.course_entry.name + ", completed=%r" % self.completed
+
+
+class Assignment(models.Model):
+    # Assignment type of course entry
+    course_entry = models.ForeignKey(CourseEntry, on_delete=models.CASCADE, )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    is_course_owner = models.BooleanField(default=False)
+    description = models.TextField()
+    file = models.FileField(upload_to='assignments/', blank=True, validators=[validate_file_extension])
+
+    def delete(self, *args, **kwargs):
+        self.file.delete()  # To make sure that files are deleted from storage
+        super().delete(*args, **kwargs)

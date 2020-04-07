@@ -1,15 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from .forms import CourseForm, CourseEntryForm, LessonSaveForm, VideoSaveForm
+from .forms import CourseForm, CourseEntryForm, LessonSaveForm, VideoSaveForm, AssignmentSaveForm, AssignmentSubmitForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer, CourseProgression, UserAnswer, UserQuizPassed
+from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer, CourseProgression, UserAnswer, UserQuizPassed, Assignment
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
-from django.db.models import Q
 from decimal import Decimal
 
 import json
@@ -51,6 +50,11 @@ def get_video(course_entry_pk):
 def get_quiz(course_entry_pk):
     course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
     return Quiz.objects.filter(course_entry=course_entry)[0]
+
+
+def get_assignment(course_entry_pk):
+    course_entry = get_object_or_404(CourseEntry, pk=course_entry_pk)
+    return Assignment.objects.filter(course_entry=course_entry)[0]
 
 
 def index(request):
@@ -297,7 +301,7 @@ def get_user_answer(request, answer_pk):
 
 @login_required
 def quiz_detail(request, pk):
-    # pk - primary key for course entry and NOT LESSON
+    # pk - primary key for course entry and NOT QUIZ
     if request.user.is_authenticated:
         user = request.user
         quiz = get_quiz(pk)
@@ -333,7 +337,6 @@ def get_quiz_content(request, quiz_pk):
                 arr_questions.append(dict_question)
             return JsonResponse({'questions': arr_questions})
     return redirect('course_detail', pk=course.pk)
-
 
 
 @login_required
@@ -377,7 +380,7 @@ def add_entry(request, pk):
                 if course_entry.entry_type == 'lesson':
                     lesson = Lesson()
                     lesson.course_entry = course_entry
-                    lesson.content = 'Here will be the content of your course!'
+                    lesson.content = 'Here goes the content of your lesson!'
                     lesson.save()
                     return redirect('save_lesson', pk=lesson.pk)
                 elif course_entry.entry_type == 'video':
@@ -390,6 +393,14 @@ def add_entry(request, pk):
                     quiz.course_entry = course_entry
                     quiz.save()
                     return redirect('save_quiz', pk=quiz.pk)
+                elif course_entry.entry_type == 'assignment':
+                    assignment = Assignment()
+                    assignment.course_entry = course_entry
+                    assignment.user = user
+                    assignment.is_course_owner = True
+                    assignment.description = 'Describe assignment requirements here.'
+                    assignment.save()
+                    return redirect('save_assignment', pk=course_entry.pk)
                 else:
                     raise Exception('Course entry is not found')
         else:
@@ -426,6 +437,7 @@ def course_certificate(request, pk):
         response['Content-Disposition'] = 'attachment; filename=' + certificate_id + '.pdf'
         return response
     return redirect('course_detail', pk=course.pk)
+
 
 def course_detail(request, pk):
     course = get_object_or_404(Course, pk=pk)
@@ -657,3 +669,109 @@ def set_course_rating(request, course_pk, rating):
         course.rating = course_rating
         course.save()
     return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def save_assignment(request, pk):
+    # pk - primary key for course entry
+    request_user = None
+    if request.user.is_authenticated:
+        request_user = request.user
+    assignment = get_assignment(pk)
+    course_entry = assignment.course_entry
+    course = course_entry.course
+    if request_user == course.owner:
+        form = AssignmentSaveForm()
+        form.fields['description'].initial = assignment.description
+        if request.method == "POST":
+            form = AssignmentSaveForm(request.POST)
+            if form.is_valid():
+                cleaned_data = form.cleaned_data
+                assignments = Assignment.objects.filter(course_entry=course_entry).all()
+                for assignment in assignments:
+                    assignment.description = cleaned_data.get('description', '')
+                    assignment.save()
+                return redirect('assignment_detail', pk=course_entry.pk)
+        return render(request, 'save_assignment.html',
+                      {'assignment': assignment, 'user': request_user, 'form': form})
+    return redirect('course_detail', pk=course.pk)
+
+
+@login_required
+def delete_assignment_entry(request, pk):
+    # pk - primary key for course entry
+    request_user = None
+    if request.user.is_authenticated:
+        request_user = request.user
+    assignment = get_assignment(pk)
+    course_entry = assignment.course_entry
+    if request_user == course_entry.course.owner:
+        CourseProgression.objects.filter(course_entry=course_entry).all().delete()
+        assignments = Assignment.objects.filter(course_entry=course_entry).all()
+        for assignment in assignments:
+            assignment.delete()
+        CourseEntry.objects.filter(pk=course_entry.pk).all().delete()
+    return redirect('course_detail', pk=course_entry.course.pk)
+
+
+# Deletes specific assignment
+@login_required
+def delete_assignment(request, pk):
+    # pk - primary key for a specific assignment
+    if request.user.is_authenticated:
+        request_user = request.user
+        if request.method == 'POST':
+            assignment = Assignment.objects.get(pk=pk)
+            course_entry = assignment.course_entry
+            course = course_entry.course
+            if request_user == course.owner:
+                assignment.delete()
+        return redirect('assignment_detail', pk=course_entry.pk)
+
+
+@login_required
+def assignment_detail(request, pk):
+    # pk - primary key for course entry and NOT assignment
+    if request.user.is_authenticated:
+        request_user = request.user
+        assignment = get_assignment(pk)
+        course_entry = assignment.course_entry
+        course = course_entry.course
+        if request_user != course.owner and is_user_enrolled(course, request_user):
+            is_completed = is_course_entry_completed(request_user, course, course_entry)
+            if is_completed:
+                return render(request, 'assignment_detail.html',
+                              {'assignment': assignment, 'user': request_user, 'is_completed': is_completed,
+                               'form': None})
+            else:
+                if request.method == 'POST':
+                    # Create a new Assignment instance but do not save it yet
+                    student_assignment = Assignment()
+                    student_assignment.course_entry = course_entry
+                    student_assignment.description = assignment.description
+                    student_assignment.user = request_user
+                    # Base an Assignment data from form on the Assignment instance created above
+                    assignment_from_form = AssignmentSubmitForm(
+                        request.POST, request.FILES, instance=student_assignment)
+                    if assignment_from_form.is_valid():
+                        # Save new Assignment instance
+                        assignment_from_form.save()
+                        # Auto-mark this course entry as completed for the current user
+                        assignment_to_mark_progress = CourseProgression.objects.filter(
+                            user=request_user, course=course, course_entry=course_entry).all()[0]
+                        assignment_to_mark_progress.completed = True
+                        assignment_to_mark_progress.save()
+                        return render(
+                            request, 'assignment_detail.html',
+                            {'assignment': assignment, 'user': request_user, 'is_completed': True, 'form': None})
+                else:
+                    form = AssignmentSubmitForm()
+                    return render(request, 'assignment_detail.html',
+                                  {'assignment': assignment, 'user': request_user, 'is_completed': is_completed,
+                                   'form': form})
+        elif request_user == course.owner:
+            assignments = Assignment.objects.filter(course_entry=course_entry).all()
+            return render(request, 'assignment_detail.html',
+                          {'assignment': assignment, 'assignments': assignments, 'user': request_user})
+    course_entry = CourseEntry.objects.filter(pk=pk).all()[0]
+    return redirect('course_detail', pk=course_entry.course.pk)

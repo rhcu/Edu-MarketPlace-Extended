@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-25 11:46+0600\n"
+"POT-Creation-Date: 2020-04-07 00:19+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,9 @@ msgstr ""
 "Сәлем! Edu Marketplace-ті қолдаңғаныңызға рахмет! Өзіңізді мазалаған "
 "сұрақтар бойынша бізбен байланысу үшін төмендегі форманы толтырыңыз"
 
-#: auth0login/templates/contact_form.html:17
+#: auth0login/templates/contact_form.html:19
+#: auth0login/templates/contact_form.html:22
+#: auth0login/templates/contact_form.html:25
 msgid "Loading…"
 msgstr "Жүктелуде"
 
@@ -326,71 +328,127 @@ msgstr "Курс жазылымы"
 msgid "Save"
 msgstr "Сақтау"
 
+#: courses/templates/assignment_detail.html:13
+#: courses/templates/lesson_detail.html:13
+#: courses/templates/quiz_detail.html:124
+#: courses/templates/video_detail.html:23
+msgid "Course"
+msgstr "Курс"
+
+#: courses/templates/assignment_detail.html:27
+#: courses/templates/course_detail.html:74 search/forms.py:15
+msgid "Description"
+msgstr "Сипаттама"
+
+#: courses/templates/assignment_detail.html:30
+#: courses/templates/quiz_detail.html:142
+#: courses/templates/video_detail.html:30
+msgid "Edit"
+msgstr "Өзгерту"
+
+#: courses/templates/assignment_detail.html:31
+#: courses/templates/assignment_detail.html:40
+#: courses/templates/assignment_detail.html:60
+#: courses/templates/lesson_detail.html:28
+#: courses/templates/video_detail.html:31
+msgid "Delete"
+msgstr "Жою"
+
+#: courses/templates/assignment_detail.html:33
+msgid "Submitted assignments"
+msgstr "Берілген тапсырмалар"
+
+#: courses/templates/assignment_detail.html:38
+msgid "Student"
+msgstr "Студент"
+
+#: courses/templates/assignment_detail.html:39
+msgid "Download"
+msgstr "Жүктеу"
+
+#: courses/templates/assignment_detail.html:54
+msgid "Download submission"
+msgstr "Бағындыруны жүктеу"
+
+#: courses/templates/assignment_detail.html:71
+#: courses/templates/course_detail.html:128
+#: courses/templates/course_detail.html:144
+#: courses/templates/course_detail.html:160
+#: courses/templates/course_detail.html:176
+#: courses/templates/video_detail.html:34
+msgid "Completed"
+msgstr "Орындалды"
+
+#: courses/templates/assignment_detail.html:72
+msgid "You have submitted this assignment"
+msgstr "Сіз бұл тапсырманы жібердіңіз"
+
+msgid "Not completed"
+msgstr "Орындалмады"
+
+#: courses/templates/assignment_detail.html:75
+msgid "Please submit your work below. Supported file extensions"
+msgstr "Төмендегі жұмысыңызды жіберіңіз. Қолдау көрсетілетін файл кеңейтімдері"
+
+#: courses/templates/assignment_detail.html:80
+msgid "Submit Assignment"
+msgstr "Тапсырманы жіберу"
+
 #: courses/templates/course_detail.html:19 courses/templates/save_quiz.html:101
 msgid "All courses"
 msgstr "Барлық курстар"
 
-#: courses/templates/course_detail.html:58 search/forms.py:19
+#: courses/templates/course_detail.html:62 search/forms.py:19
 msgid "Topic"
 msgstr "Тақырып"
 
-#: courses/templates/course_detail.html:62
+#: courses/templates/course_detail.html:66
 msgid "Author"
 msgstr "Автор"
 
-#: courses/templates/course_detail.html:66
+#: courses/templates/course_detail.html:70
 msgid "Price"
 msgstr "Бағасы"
 
-#: courses/templates/course_detail.html:70 search/forms.py:15
-msgid "Description"
-msgstr "Сипаттама"
-
-#: courses/templates/course_detail.html:78
+#: courses/templates/course_detail.html:82
 msgid "You are enrolled"
 msgstr "Сіз тіркелдіңіз"
 
-#: courses/templates/course_detail.html:78
+#: courses/templates/course_detail.html:82
 msgid "Unenroll"
 msgstr "Тіркелімнің күшін жою"
 
-#: courses/templates/course_detail.html:80
+#: courses/templates/course_detail.html:84
 msgid "Purchase"
 msgstr "Сатып алу"
 
-#: courses/templates/course_detail.html:83
+#: courses/templates/course_detail.html:87
 msgid "Enrolled students"
 msgstr "Тіркелген студенттер"
 
-#: courses/templates/course_detail.html:89
+#: courses/templates/course_detail.html:93
 msgid "NOTE"
 msgstr "Ескертпе"
 
-#: courses/templates/course_detail.html:89
+#: courses/templates/course_detail.html:93
 msgid "Before accessing course contents you should purchase the course."
 msgstr "Курс мазмұнын көрмес бұрын кусрты сатып алуыңыз қажет"
 
-#: courses/templates/course_detail.html:107
+#: courses/templates/course_detail.html:114
 #: courses/templates/enrolled_list.html:27
 msgid "Progress"
 msgstr "Ілгерілеу деңгейі"
 
-#: courses/templates/course_detail.html:121
-#: courses/templates/course_detail.html:137
-#: courses/templates/course_detail.html:153
-#: courses/templates/video_detail.html:34
-msgid "Completed"
-msgstr "Аяқталды"
-
-#: courses/templates/course_detail.html:123
-#: courses/templates/course_detail.html:139
-#: courses/templates/course_detail.html:155
+#: courses/templates/course_detail.html:130
+#: courses/templates/course_detail.html:146
+#: courses/templates/course_detail.html:162
+#: courses/templates/course_detail.html:178
 #: courses/templates/lesson_detail.html:33
 #: courses/templates/video_detail.html:36
 msgid "In progress"
 msgstr "Ілгерілеуде"
 
-#: courses/templates/course_detail.html:166
+#: courses/templates/course_detail.html:189
 msgid "Add course entry"
 msgstr "Курс кіріспесін қосу"
 
@@ -420,37 +478,26 @@ msgstr "CVV коды"
 msgid "Buy"
 msgstr "Сатып алу"
 
-#: courses/templates/courses.html:69
+#: courses/templates/courses.html:73
 msgid "Manage Your Course"
 msgstr "Курсты реттеу"
 
-#: courses/templates/courses.html:72
+#: courses/templates/courses.html:76
 msgid "Continue Learning"
 msgstr "Оқылымды жалғастыру"
 
-#: courses/templates/courses.html:74 courses/templates/user_courses.html:35
+#: courses/templates/courses.html:78 courses/templates/user_courses.html:35
 #: search/templates/search.html:36
 msgid "Learn More"
 msgstr "Толығырақ"
 
-#: courses/templates/courses.html:88
+#: courses/templates/courses.html:92
 msgid "There are no courses right now!"
 msgstr "Қазір қол жетімді кусртар жоқ!"
 
 #: courses/templates/enrolled_list.html:11
 msgid "Enrolled Students"
 msgstr "Тіркелген студенттер"
-
-#: courses/templates/lesson_detail.html:13
-#: courses/templates/quiz_detail.html:124
-#: courses/templates/video_detail.html:23
-msgid "Course"
-msgstr "Курс"
-
-#: courses/templates/lesson_detail.html:28
-#: courses/templates/video_detail.html:31
-msgid "Delete"
-msgstr "Жою"
 
 #: courses/templates/lesson_detail.html:44
 #: courses/templates/video_detail.html:48
@@ -466,15 +513,15 @@ msgstr "Аяқталды белгісін қою"
 msgid "Already submitted"
 msgstr "Тапсырылды"
 
-#: courses/templates/quiz_detail.html:142
-#: courses/templates/video_detail.html:30
-msgid "Edit"
-msgstr "Өзгерту"
-
 #: courses/templates/quiz_detail.html:150 courses/templates/save_lesson.html:28
 #: courses/templates/save_video.html:28
 msgid "Submit"
 msgstr "Тапсыру"
+
+#: courses/templates/save_assignment.html:14
+#: courses/templates/save_assignment.html:28
+msgid "Create Assignment"
+msgstr "Тапсырма құру"
 
 #: courses/templates/save_lesson.html:14
 msgid "Save Lesson"
@@ -516,5 +563,5 @@ msgstr "Курстарды іздеу"
 msgid "No search results"
 msgstr "Іздеу нәтижесі табылмады"
 
-#~ msgid "Your search..."
-#~ msgstr "Сіздің ізделіміңіз..."
+msgid "Your search..."
+msgstr "Сіздің ізделіміңіз..."

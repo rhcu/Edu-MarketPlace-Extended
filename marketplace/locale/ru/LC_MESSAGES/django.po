@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-25 11:46+0600\n"
+"POT-Creation-Date: 2020-04-07 00:19+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,9 @@ msgstr ""
 "Здравствуйте! Спасибо за использование Edu Marketplace! Если вы хотите "
 "связаться с нами, чтобы оставить отзыв, заполните следующую форму"
 
-#: auth0login/templates/contact_form.html:17
+#: auth0login/templates/contact_form.html:19
+#: auth0login/templates/contact_form.html:22
+#: auth0login/templates/contact_form.html:25
 msgid "Loading…"
 msgstr "Загрузка..."
 
@@ -327,73 +329,132 @@ msgstr "Элементы курса"
 msgid "Save"
 msgstr "Сохранить"
 
+#: courses/templates/assignment_detail.html:13
+#: courses/templates/lesson_detail.html:13
+#: courses/templates/quiz_detail.html:124
+#: courses/templates/video_detail.html:23
+msgid "Course"
+msgstr "Курс"
+
+#: courses/templates/assignment_detail.html:27
+#: courses/templates/course_detail.html:74 search/forms.py:15
+msgid "Description"
+msgstr "Описание"
+
+#: courses/templates/assignment_detail.html:30
+#: courses/templates/quiz_detail.html:142
+#: courses/templates/video_detail.html:30
+msgid "Edit"
+msgstr "Редактировать"
+
+#: courses/templates/assignment_detail.html:31
+#: courses/templates/assignment_detail.html:40
+#: courses/templates/assignment_detail.html:60
+#: courses/templates/lesson_detail.html:28
+#: courses/templates/video_detail.html:31
+msgid "Delete"
+msgstr "Удалить"
+
+#: courses/templates/assignment_detail.html:33
+msgid "Submitted assignments"
+msgstr "Принятые задания"
+
+#: courses/templates/assignment_detail.html:38
+msgid "Student"
+msgstr "Студент"
+
+#: courses/templates/assignment_detail.html:39
+msgid "Download"
+msgstr "Скачать"
+
+#: courses/templates/assignment_detail.html:54
+msgid "Download submission"
+msgstr "Скачать работу"
+
+#: courses/templates/assignment_detail.html:71
+#: courses/templates/course_detail.html:128
+#: courses/templates/course_detail.html:144
+#: courses/templates/course_detail.html:160
+#: courses/templates/course_detail.html:176
+#: courses/templates/video_detail.html:34
+msgid "Completed"
+msgstr "Завершено"
+
+#: courses/templates/assignment_detail.html:72
+msgid "You have submitted this assignment"
+msgstr "Вы выполнили данное задание"
+
+#: courses/templates/assignment_detail.html:74
+#, fuzzy
+#| msgid "Completed"
+msgid "Not completed"
+msgstr "Не завершено"
+
+#: courses/templates/assignment_detail.html:75
+msgid "Please submit your work below. Supported file extensions"
+msgstr "Пожалуйста, отправьте вашу работу ниже. Поддерживаемые расширения файлов"
+
+#: courses/templates/assignment_detail.html:80
+msgid "Submit Assignment"
+msgstr "Отправить Задание"
+
 #: courses/templates/course_detail.html:19 courses/templates/save_quiz.html:101
 #, fuzzy
 #| msgid "Add course"
 msgid "All courses"
 msgstr "Все курсы"
 
-#: courses/templates/course_detail.html:58 search/forms.py:19
+#: courses/templates/course_detail.html:62 search/forms.py:19
 msgid "Topic"
 msgstr "Тема"
 
-#: courses/templates/course_detail.html:62
+#: courses/templates/course_detail.html:66
 msgid "Author"
 msgstr "Автор"
 
-#: courses/templates/course_detail.html:66
+#: courses/templates/course_detail.html:70
 msgid "Price"
 msgstr "Цена"
 
-#: courses/templates/course_detail.html:70 search/forms.py:15
-msgid "Description"
-msgstr "Описание"
-
-#: courses/templates/course_detail.html:78
+#: courses/templates/course_detail.html:82
 msgid "You are enrolled"
 msgstr "Вы подписаны"
 
-#: courses/templates/course_detail.html:78
+#: courses/templates/course_detail.html:82
 msgid "Unenroll"
 msgstr "Отписаться"
 
-#: courses/templates/course_detail.html:80
+#: courses/templates/course_detail.html:84
 msgid "Purchase"
 msgstr "Приобрести"
 
-#: courses/templates/course_detail.html:83
+#: courses/templates/course_detail.html:87
 msgid "Enrolled students"
 msgstr "Список студентов"
 
-#: courses/templates/course_detail.html:89
+#: courses/templates/course_detail.html:93
 msgid "NOTE"
 msgstr "ВНИМАНИЕ"
 
-#: courses/templates/course_detail.html:89
+#: courses/templates/course_detail.html:93
 msgid "Before accessing course contents you should purchase the course."
 msgstr "Прежде, чем получить доступ к контенту, необходимо приобрести курс"
 
-#: courses/templates/course_detail.html:107
+#: courses/templates/course_detail.html:114
 #: courses/templates/enrolled_list.html:27
 msgid "Progress"
 msgstr "Прогресс"
 
-#: courses/templates/course_detail.html:121
-#: courses/templates/course_detail.html:137
-#: courses/templates/course_detail.html:153
-#: courses/templates/video_detail.html:34
-msgid "Completed"
-msgstr "Завершенно"
-
-#: courses/templates/course_detail.html:123
-#: courses/templates/course_detail.html:139
-#: courses/templates/course_detail.html:155
+#: courses/templates/course_detail.html:130
+#: courses/templates/course_detail.html:146
+#: courses/templates/course_detail.html:162
+#: courses/templates/course_detail.html:178
 #: courses/templates/lesson_detail.html:33
 #: courses/templates/video_detail.html:36
 msgid "In progress"
 msgstr "В прогрессе"
 
-#: courses/templates/course_detail.html:166
+#: courses/templates/course_detail.html:189
 #, fuzzy
 #| msgid "Add Course Entry"
 msgid "Add course entry"
@@ -423,20 +484,20 @@ msgstr "CV код"
 msgid "Buy"
 msgstr "Купить"
 
-#: courses/templates/courses.html:69
+#: courses/templates/courses.html:73
 msgid "Manage Your Course"
 msgstr "Управление курсом"
 
-#: courses/templates/courses.html:72
+#: courses/templates/courses.html:76
 msgid "Continue Learning"
 msgstr "Продолжить обучение"
 
-#: courses/templates/courses.html:74 courses/templates/user_courses.html:35
+#: courses/templates/courses.html:78 courses/templates/user_courses.html:35
 #: search/templates/search.html:36
 msgid "Learn More"
 msgstr "Узнать больше"
 
-#: courses/templates/courses.html:88
+#: courses/templates/courses.html:92
 msgid "There are no courses right now!"
 msgstr "На данный момент курсов нет"
 
@@ -445,19 +506,6 @@ msgstr "На данный момент курсов нет"
 #| msgid "Enrolled students"
 msgid "Enrolled Students"
 msgstr "Список студентов"
-
-#: courses/templates/lesson_detail.html:13
-#: courses/templates/quiz_detail.html:124
-#: courses/templates/video_detail.html:23
-#, fuzzy
-#| msgid "Courses"
-msgid "Course"
-msgstr "Курсы"
-
-#: courses/templates/lesson_detail.html:28
-#: courses/templates/video_detail.html:31
-msgid "Delete"
-msgstr "Удалить"
 
 #: courses/templates/lesson_detail.html:44
 #: courses/templates/video_detail.html:48
@@ -475,15 +523,15 @@ msgstr "Отметить завершенным"
 msgid "Already submitted"
 msgstr "Уже был отправлен"
 
-#: courses/templates/quiz_detail.html:142
-#: courses/templates/video_detail.html:30
-msgid "Edit"
-msgstr "Редактировать"
-
 #: courses/templates/quiz_detail.html:150 courses/templates/save_lesson.html:28
 #: courses/templates/save_video.html:28
 msgid "Submit"
 msgstr "Отправить"
+
+#: courses/templates/save_assignment.html:14
+#: courses/templates/save_assignment.html:28
+msgid "Create Assignment"
+msgstr "Cоздать задание"
 
 #: courses/templates/save_lesson.html:14
 msgid "Save Lesson"
@@ -531,10 +579,8 @@ msgstr "Поиск курсов"
 msgid "No search results"
 msgstr "Нет результатов поиска"
 
-#~ msgid "Your search..."
-#~ msgstr "Что вы ищете?"
+msgid "Your search..."
+msgstr "Что вы ищете?"
 
-#, fuzzy
-#~| msgid "Refund policies"
-#~ msgid "Refund Policies"
-#~ msgstr "Правила возмещения"
+msgid "Refund Policies"
+msgstr "Правила возмещения"

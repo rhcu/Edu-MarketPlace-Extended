@@ -34,6 +34,9 @@ urlpatterns = [
     path('get_course_rating/<int:course_pk>', views.get_course_rating, name='get_course_rating'),
     path('get_user_rating/<int:course_pk>', views.get_user_rating, name='get_user_rating'),
     re_path(r'^set_rating/(?P<course_pk>[0-9]+)/(?P<rating>[0-9]+)/$', views.set_course_rating,
-            name='set_course_rating')
+            name='set_course_rating'),
+    path('save_assignment/<int:pk>/', views.save_assignment, name='save_assignment'),
+    path('delete_assignment_entry/<int:pk>', views.delete_assignment_entry, name='delete_assignment_entry'),
+    path('assignment/<int:pk>/', views.assignment_detail, name='assignment_detail'),
+    path('delete_assignment/<int:pk>', views.delete_assignment, name='delete_assignment'),
 ]
-
