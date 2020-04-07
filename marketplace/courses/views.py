@@ -634,13 +634,16 @@ def get_user_rating(request, course_pk):
         return HttpResponse(json.dumps(response_data), content_type='application/json')
     return redirect('course_detail', pk=course.pk)
 
-
-@login_required
-def set_course_rating(request, course_pk, rating):
+def adjust_rating(rating):
     rating = int(rating)
     if rating // 10 > 0:
         rating /= 10
         rating = Decimal(rating)
+    return rating
+
+@login_required
+def set_course_rating(request, course_pk, rating):
+    rating = adjust_rating(rating)
     curr_user = None
     if request.user.is_authenticated:
         curr_user = request.user
