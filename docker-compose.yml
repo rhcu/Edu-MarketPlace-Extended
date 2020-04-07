@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  web:
+    environment:
+      - SOCIAL_AUTH_AUTH0_DOMAIN
+      - SOCIAL_AUTH_AUTH0_KEY
+      - SOCIAL_AUTH_AUTH0_SECRET
+      - DB_NAME
+      - DB_USER
+      - DB_PASSWORD
+      - DB_HOST
+      - DJANGO_SECRET_KEY
+    build: .
+    command: python marketplace/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
