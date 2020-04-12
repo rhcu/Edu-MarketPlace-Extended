@@ -40,8 +40,13 @@ func validateMessage(data []byte) (message, error) {
 	return msg, nil
 }
 
+func enableCors(w *http.ResponseWriter) {
+	(*w).Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 // handleWebsocket connection.
 func handleWebsocket(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
 	if r.Method != "GET" {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
