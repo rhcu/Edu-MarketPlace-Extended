@@ -51,6 +51,9 @@
                                 <label><input type="hidden" name="rating" id="rating_val" value="0" /></label>
                             </div>
                         </div>
+                        <a href='/courses/chat/{{ course.pk }}'>
+                            Chat <i class="fa fa-comments"></i>
+                        </a>
                         <br/><br/>
                     {% else %}
                         <div id="rating-not-enrolled"></div>
@@ -74,6 +77,7 @@
                                 <td><b>{% trans "Description" %}</b></td>
                                 <td>{{ course.description }}</td>
                             </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div>

@@ -12,7 +12,7 @@ class Course(models.Model):
     topic = models.CharField(max_length=200)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     date_created = models.DateTimeField('date published')
-    price = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
+    price = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.00'))
     visible = models.BooleanField(default=False)
     rating = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
 
