@@ -455,6 +455,22 @@ def course_detail(request, pk):
 
 
 @login_required
+def course_chat(request, pk):
+    course = get_object_or_404(Course, pk=pk)
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+    user_enrolled = is_user_enrolled(course, user)
+    if user_enrolled:
+        return render(request, 'course_chat.html',{
+            'course': course,
+            'user': user,
+        })
+    else:   
+        return redirect('course_detail', pk=course.pk)
+
+
+@login_required
 def course_pay(request, pk):
     course = get_object_or_404(Course, pk=pk)
     user = request.user

@@ -8,4 +8,7 @@ WORKDIR /app
 
 RUN pip install -r requirements.txt
 
+EXPOSE 8080
+EXPOSE 8000
+
 CMD ["python marketplace/manage.py runserver]
