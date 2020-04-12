@@ -31,7 +31,11 @@
                         </div>
                         <button class="btn btn-primary" type="submit">Send</button>
                     </form>
-                    <div id="chat-text">
+                    <div class="table-wrapper">
+                        <table>
+                            <tbody id="chat-text">
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             {% endblock %}
@@ -44,7 +48,7 @@ var box = new ReconnectingWebSocket("wss://edu-marketplace-chat.herokuapp.com/ws
 box.onmessage = function(message) {
   var data = JSON.parse(message.data);
   console.log(data)
-  $("#chat-text").append("<div class='panel panel-default'><div class='panel-heading'>" + $('<span/>').text(data.handle).html() + "</div><div class='panel-body'>" + $('<span/>').text(data.text).html() + "</div></div>");
+  $("#chat-text").append("<tr><td><b>" + data.handle + "</b></td><td>" + data.text + "</td></tr>");
   $("#chat-text").stop().animate({
     scrollTop: $('#chat-text')[0].scrollHeight
   }, 800);
