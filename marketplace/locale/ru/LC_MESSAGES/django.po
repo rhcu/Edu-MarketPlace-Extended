@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-07 00:19+0600\n"
+"POT-Creation-Date: 2020-04-13 00:57+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,7 +269,7 @@ msgstr ""
 msgid "Email"
 msgstr "Электронная почта"
 
-#: core/templates/navbar.html:24 search/templates/search.html:17
+#: core/templates/navbar.html:24
 msgid "Search"
 msgstr "Поиск"
 
@@ -392,7 +392,8 @@ msgstr "Не завершено"
 
 #: courses/templates/assignment_detail.html:75
 msgid "Please submit your work below. Supported file extensions"
-msgstr "Пожалуйста, отправьте вашу работу ниже. Поддерживаемые расширения файлов"
+msgstr ""
+"Пожалуйста, отправьте вашу работу ниже. Поддерживаемые расширения файлов"
 
 #: courses/templates/assignment_detail.html:80
 msgid "Submit Assignment"
@@ -493,7 +494,7 @@ msgid "Continue Learning"
 msgstr "Продолжить обучение"
 
 #: courses/templates/courses.html:78 courses/templates/user_courses.html:35
-#: search/templates/search.html:36
+#: search/templates/search.html:32
 msgid "Learn More"
 msgstr "Узнать больше"
 
@@ -571,16 +572,13 @@ msgstr "Общий поиск"
 msgid "Title"
 msgstr "Название курса"
 
-#: search/templates/search.html:9
-msgid "Search courses"
-msgstr "Поиск курсов"
-
-#: search/templates/search.html:49
-msgid "No search results"
-msgstr "Нет результатов поиска"
-
+#: search/templates/search.html:14
 msgid "Your search..."
 msgstr "Что вы ищете?"
 
-msgid "Refund Policies"
-msgstr "Правила возмещения"
+#: search/templates/search.html:45
+msgid "No search results"
+msgstr "Нет результатов поиска"
+
+msgid "Search courses"
+msgstr "Поиск курсов"
