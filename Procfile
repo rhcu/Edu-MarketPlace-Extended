@@ -1,1 +1,1 @@
-web: gunicorn --chdir marketplace/ marketplace.wsgi
+web: ./run.sh
