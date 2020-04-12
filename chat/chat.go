@@ -47,6 +47,8 @@ func handleWebsocket(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
+
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		m := "Unable to upgrade to websockets"
