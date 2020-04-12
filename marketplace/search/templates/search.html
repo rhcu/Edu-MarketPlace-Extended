@@ -6,17 +6,13 @@
 <section id="one" class="wrapper style3">
     <div class="inner">
         <header class="align-center">
-            <h2>{% trans "Search courses" %}</h2>
+            <h2>Search courses</h2>
         </header>
-        <div class="content">
-            <form method="GET" action="{{ request.path }}">
-                {% csrf_token %}
-                <table>
-                    {{ form.as_table }}
-                </table>
-                <button type="submit" class="btn btn-primary">{% trans "Search" %}</button>
-            </form>
-        </div>
+        <br><br>
+        <form class="search" method="get">
+            <input class="search-input" id="query" {% if request.GET.query %}value="{{ request.GET.query }}"{% endif %}
+                   name="query" type="text" placeholder="{% trans "Your search..." %}">
+        </form>
     </div>
 </section>
 {% if object_list %}

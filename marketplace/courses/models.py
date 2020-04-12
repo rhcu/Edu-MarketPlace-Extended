@@ -1,10 +1,8 @@
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
 from decimal import Decimal
 from django.contrib.auth.models import User
 from .validators import validate_file_extension
-import os
 
 
 class Course(models.Model):
@@ -17,6 +15,16 @@ class Course(models.Model):
     price = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
     visible = models.BooleanField(default=False)
     rating = models.DecimalField(max_digits=9, decimal_places=2, default=Decimal('0.0000'))
+
+    # The only owner information we're going to need in our document
+    # is the owner name.
+    @property
+    def owner_indexing(self):
+        """Owner for indexing.
+        Used in Elasticsearch indexing.
+        """
+        if self.owner is not None:
+            return self.owner.first_name + " " + self.owner.last_name
 
     def __str__(self):
         return self.title + ", pk=" + str(self.pk) + ", rating=" + str(self.rating)
