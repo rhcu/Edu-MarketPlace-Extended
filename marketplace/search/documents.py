@@ -1,12 +1,12 @@
 from courses.models import Course
+from django.contrib.auth.models import User
 from django_elasticsearch_dsl import Document, Index, fields
 from django_elasticsearch_dsl.registries import registry
-from elasticsearch_dsl import analyzer
-
+from elasticsearch_dsl import analyzer, token_filter
 
 # Elasticsearch text analyzer = tokenizer + character filters + token filters
-my_analyzer = analyzer(
-    'my_analyzer',
+courses_analyzer = analyzer(
+    'courses_analyzer',
     tokenizer="standard",
     filter=[
         "lowercase",
@@ -16,8 +16,24 @@ my_analyzer = analyzer(
     char_filter=["html_strip"]
 )
 
+users_analyzer = analyzer(
+    'users_analyzer',
+    tokenizer='whitespace',
+    filter=[
+        'lowercase',
+        token_filter('ascii_fold', 'asciifolding')
+    ]
+)
+
+
 courses = Index('course')
 courses.settings(
+    number_of_shards=1,
+    number_of_replicas=1
+)
+
+users = Index('user')
+users.settings(
     number_of_shards=1,
     number_of_replicas=1
 )
@@ -30,7 +46,7 @@ class CourseDocument(Document):
     id = fields.IntegerField(attr='id')
 
     title = fields.TextField(
-        analyzer=my_analyzer,
+        analyzer=courses_analyzer,
         fields={
             'raw': fields.TextField(analyzer='keyword'),
             'suggest': fields.CompletionField(multi=True),
@@ -38,7 +54,7 @@ class CourseDocument(Document):
     )
 
     description = fields.TextField(
-        analyzer=my_analyzer,
+        analyzer=courses_analyzer,
         fields={
             'raw': fields.TextField(analyzer='keyword'),
             'suggest': fields.CompletionField(multi=True),
@@ -46,7 +62,7 @@ class CourseDocument(Document):
     )
 
     topic = fields.TextField(
-        analyzer=my_analyzer,
+        analyzer=courses_analyzer,
         fields={
             'raw': fields.TextField(analyzer='keyword'),
             'suggest': fields.CompletionField(multi=True),
@@ -55,7 +71,7 @@ class CourseDocument(Document):
 
     owner = fields.TextField(
         attr='owner_indexing',
-        analyzer=my_analyzer,
+        analyzer=courses_analyzer,
         fields={
             'raw': fields.TextField(analyzer='keyword'),
             'suggest': fields.CompletionField(multi=True),
@@ -72,6 +88,47 @@ class CourseDocument(Document):
 
     class Django(object):
         """Inner nested class Django."""
+        model = Course  # The model associated with this Document
 
-        model = Course  # The model associate with this Document
 
+@registry.register_document
+@users.doc_type
+class UserDocument(Document):
+    """User ElasticSearch document."""
+    id = fields.IntegerField(attr='id')
+
+    username = fields.TextField(
+        analyzer=users_analyzer,
+        fields={
+            'raw': fields.TextField(analyzer='keyword'),
+            'suggest': fields.CompletionField(multi=True),
+        }
+    )
+
+    first_name = fields.TextField(
+        analyzer=users_analyzer,
+        fields={
+            'raw': fields.TextField(analyzer='keyword'),
+            'suggest': fields.CompletionField(multi=True),
+        }
+    )
+
+    last_name = fields.TextField(
+        analyzer=users_analyzer,
+        fields={
+            'raw': fields.TextField(analyzer='keyword'),
+            'suggest': fields.CompletionField(multi=True),
+        }
+    )
+
+    email = fields.TextField(
+        analyzer=users_analyzer,
+        fields={
+            'raw': fields.TextField(analyzer='keyword'),
+            'suggest': fields.CompletionField(multi=True),
+        }
+    )
+
+    class Django(object):
+        """Inner nested class Django."""
+        model = User  # The model associated with this Document
