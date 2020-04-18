@@ -4,6 +4,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('save_chat_message/', views.save_chat_message, name='save_chat_message'),
+    path('get_chat_message/<str:pk>/', views.get_chat_message, name='get_chat_message'),
     path('add_courses', views.add_courses, name='add_courses'),
     path('course/<int:pk>/', views.course_detail, name='course_detail'),
     path('chat/<int:pk>/', views.course_chat, name='course_chat'),
