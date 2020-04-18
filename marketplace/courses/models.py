@@ -124,3 +124,11 @@ class Assignment(models.Model):
     def delete(self, *args, **kwargs):
         self.file.delete()  # To make sure that files are deleted from storage
         super().delete(*args, **kwargs)
+
+
+class ChatMessage(models.Model):
+    # Let's keep messaging simple by not making references to other models
+    handle = models.CharField(max_length=200)
+    chatId = models.CharField(max_length=200)
+    text = models.TextField()
+
