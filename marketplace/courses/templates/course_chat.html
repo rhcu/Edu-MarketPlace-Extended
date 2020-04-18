@@ -23,6 +23,7 @@
             {% block content %}
                 <div class="content">
                     <form id="input-form" class="form-inline">
+                        {% csrf_token %}
                         <div class="form-group">
                           <input id="input-handle" type="hidden" class="form-control" value="{{ user.first_name }}"  />
                         </div>
@@ -62,12 +63,55 @@ box.onclose = function(){
     this.box = new WebSocket(box.url);
 };
 
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
 $("#input-form").on("submit", function(event) {
   event.preventDefault();
   var handle = $("#input-handle")[0].value;
   var text   = $("#input-text")[0].value;
-  box.send(JSON.stringify({ handle: handle, text: text, chatId: chatId}));
+  var data   = {handle: handle, text: text, chatId: chatId};
+  box.send(JSON.stringify(data));
   $("#input-text")[0].value = "";
+
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+  $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+      }
+  });
+
+  $.ajax({
+      type: "POST",
+      url: "/courses/save_chat_message/",
+      data: data,
+      async: false,
+      success: function(data){
+          console.log(data);
+      },
+      error: function(data){
+          console.log(data);
+      }
+  });
+});
+
+$.ajax({
+    type: "GET",
+    url: "/courses/get_chat_message/{{ course.pk }}",
+    success: function(data){
+        console.log(data);
+        for(let i = 0; i < data.length; i++){
+          let message = data[i].fields;
+          $("#chat-text").append("<tr><td><b>" + message.handle + "</b></td><td>" + message.text + "</td></tr>");
+        }
+    },
+    error: function(data){
+        console.log(data);
+    }
 });
 
 </script>

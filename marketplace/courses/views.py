@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
-from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question, Answer, CourseProgression, UserAnswer, UserQuizPassed, Assignment
 from django.http import JsonResponse, HttpResponse
 from django.core import serializers
 from decimal import Decimal
@@ -15,8 +14,11 @@ import json
 from datetime import date
 import subprocess
 import simplejson
-from .certificate import get_template
 from django.utils import translation
+
+from .certificate import get_template
+from .models import Course, CourseEntry, Lesson, Video, CourseEnroll, Quiz, Question
+from .models import Answer, CourseProgression, UserAnswer, UserQuizPassed, Assignment, ChatMessage
 
 
 def is_course_owner(course, user):
@@ -468,6 +470,23 @@ def course_chat(request, pk):
         })
     else:   
         return redirect('course_detail', pk=course.pk)
+
+@login_required
+def save_chat_message(request):
+    if request.method == 'POST':
+        # Save data to the ChatMessage table
+        enroll = ChatMessage()
+        enroll.handle = request.POST.get('handle')
+        enroll.text = request.POST.get('text')
+        enroll.chatId = request.POST.get('chatId')
+        enroll.save()
+    return HttpResponse("Saved!")
+
+@login_required
+def get_chat_message(request, pk):
+    messages = ChatMessage.objects.filter(chatId=pk)
+    obj = serializers.serialize('json', messages)
+    return HttpResponse(obj, content_type="text/json-comment-filtered")
 
 
 @login_required
