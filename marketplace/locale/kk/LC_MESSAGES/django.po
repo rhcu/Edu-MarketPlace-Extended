@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-13 00:57+0600\n"
+"POT-Creation-Date: 2020-04-19 02:37+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: auth0login/templates/contact_form.html:10
+#: auth0login/templates/contact_form.html:11
 msgid ""
 "Hi! Thanks for using Edu Marketplace! If you want to contact us with any "
 "feedback or concern, fill out the form below"
@@ -25,21 +25,21 @@ msgstr ""
 "Сәлем! Edu Marketplace-ті қолдаңғаныңызға рахмет! Өзіңізді мазалаған "
 "сұрақтар бойынша бізбен байланысу үшін төмендегі форманы толтырыңыз"
 
-#: auth0login/templates/contact_form.html:19
-#: auth0login/templates/contact_form.html:22
-#: auth0login/templates/contact_form.html:25
+#: auth0login/templates/contact_form.html:20
+#: auth0login/templates/contact_form.html:23
+#: auth0login/templates/contact_form.html:26
 msgid "Loading…"
 msgstr "Жүктелуде"
 
-#: auth0login/templates/dashboard.html:14
+#: auth0login/templates/dashboard.html:15
 msgid "Welcome"
 msgstr "Қош келдіңіз"
 
-#: auth0login/templates/dashboard.html:16
+#: auth0login/templates/dashboard.html:17
 msgid "Start your next education today by exploring our"
 msgstr "Келесі оқылымды бүгін бастау үшін керек"
 
-#: auth0login/templates/dashboard.html:17
+#: auth0login/templates/dashboard.html:18
 msgid "list of courses"
 msgstr "курстар тізімі"
 
@@ -144,14 +144,14 @@ msgstr ""
 "Сабақ жазбасындағы мәтіндік редакторға YouTube сілтемесі кірістірілген "
 "iframe-ді ендіруге болады."
 
-#: auth0login/templates/index.html:14
+#: auth0login/templates/index.html:15
 msgid ""
 "Welcome to the first educational platform tailored to the needs of Kazakhstan"
 msgstr ""
 "Қазақстанның қажеттіліктерін ескере отырып жасалған алғашқы білім алаңына "
 "қош келдіңіздер"
 
-#: auth0login/templates/index.html:23
+#: auth0login/templates/index.html:24
 msgid ""
 "Look through our rich courses catalog and gain the knowledge you need to "
 "maximize your success"
@@ -159,11 +159,11 @@ msgstr ""
 "Біздің курстардың бай тіздемесін қарап шығыңыз және табысқа жету үшін қажет "
 "білімге ие болыңыз"
 
-#: auth0login/templates/index.html:24
+#: auth0login/templates/index.html:25
 msgid "Discover courses"
 msgstr "Курстар туралы ақапарат"
 
-#: auth0login/templates/index.html:32
+#: auth0login/templates/index.html:33
 msgid ""
 "If you have knowledge to share, utilize our platform to deliver it to the "
 "maximum amount of people"
@@ -171,20 +171,20 @@ msgstr ""
 "Егер бөлісерлік біліміңіз болса, біздің платформаны оны барынша көп "
 "адамдарға жеткізу үшін пайдаланыңыз"
 
-#: auth0login/templates/index.html:33
+#: auth0login/templates/index.html:34
 msgid "Create courses"
 msgstr "Курстарды құру"
 
-#: auth0login/templates/index.html:41
+#: auth0login/templates/index.html:42
 msgid "Talk to other students and to course creators to enhance your knowledge"
 msgstr ""
 "Біліміңді толықтыру үшін басқа студенттермен және курс құрушылармен тілдесу"
 
-#: auth0login/templates/index.html:42
+#: auth0login/templates/index.html:43
 msgid "Collaborate"
 msgstr "Серіктесу"
 
-#: auth0login/templates/index.html:50
+#: auth0login/templates/index.html:51
 msgid ""
 "Knowledge is power. Information is liberating. Education is the premise of "
 "progress, in every society, in every family"
@@ -192,23 +192,23 @@ msgstr ""
 "Білім - күш. Ақпарат азат. Білім - әр қоғамда, әрбір отбасында үдерістің "
 "алғышарты"
 
-#: auth0login/templates/index.html:51
+#: auth0login/templates/index.html:52
 msgid "Make a difference"
 msgstr "Өзгеріс еңгізу"
 
-#: auth0login/templates/index.html:62
+#: auth0login/templates/index.html:63
 msgid "Start learning today"
 msgstr "Бүгінгі оқылымды бастау"
 
-#: auth0login/templates/index.html:63
+#: auth0login/templates/index.html:64
 msgid "Discover the endless world of education with us"
 msgstr "Білім шексіздігін зерттеуде бізбен бірге болыңыз"
 
-#: auth0login/templates/index.html:66
+#: auth0login/templates/index.html:67
 msgid "Log In"
 msgstr "Жүйеге кіру"
 
-#: auth0login/templates/index.html:67
+#: auth0login/templates/index.html:68
 msgid "Sign Up"
 msgstr "Тіркелу"
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Email"
 msgstr "Электрондық пошта"
 
-#: core/templates/navbar.html:24
+#: core/templates/navbar.html:24 search/templates/search.html:18
 msgid "Search"
 msgstr "Іздеу"
 
@@ -336,7 +336,7 @@ msgid "Course"
 msgstr "Курс"
 
 #: courses/templates/assignment_detail.html:27
-#: courses/templates/course_detail.html:74 search/forms.py:15
+#: courses/templates/course_detail.html:77
 msgid "Description"
 msgstr "Сипаттама"
 
@@ -371,10 +371,10 @@ msgid "Download submission"
 msgstr "Бағындыруны жүктеу"
 
 #: courses/templates/assignment_detail.html:71
-#: courses/templates/course_detail.html:128
-#: courses/templates/course_detail.html:144
-#: courses/templates/course_detail.html:160
-#: courses/templates/course_detail.html:176
+#: courses/templates/course_detail.html:132
+#: courses/templates/course_detail.html:148
+#: courses/templates/course_detail.html:164
+#: courses/templates/course_detail.html:180
 #: courses/templates/video_detail.html:34
 msgid "Completed"
 msgstr "Орындалды"
@@ -399,57 +399,57 @@ msgstr "Тапсырманы жіберу"
 msgid "All courses"
 msgstr "Барлық курстар"
 
-#: courses/templates/course_detail.html:62 search/forms.py:19
+#: courses/templates/course_detail.html:65
 msgid "Topic"
 msgstr "Тақырып"
 
-#: courses/templates/course_detail.html:66
+#: courses/templates/course_detail.html:69
 msgid "Author"
 msgstr "Автор"
 
-#: courses/templates/course_detail.html:70
+#: courses/templates/course_detail.html:73
 msgid "Price"
 msgstr "Бағасы"
 
-#: courses/templates/course_detail.html:82
+#: courses/templates/course_detail.html:86
 msgid "You are enrolled"
 msgstr "Сіз тіркелдіңіз"
 
-#: courses/templates/course_detail.html:82
+#: courses/templates/course_detail.html:86
 msgid "Unenroll"
 msgstr "Тіркелімнің күшін жою"
 
-#: courses/templates/course_detail.html:84
+#: courses/templates/course_detail.html:88
 msgid "Purchase"
 msgstr "Сатып алу"
 
-#: courses/templates/course_detail.html:87
+#: courses/templates/course_detail.html:91
 msgid "Enrolled students"
 msgstr "Тіркелген студенттер"
 
-#: courses/templates/course_detail.html:93
+#: courses/templates/course_detail.html:97
 msgid "NOTE"
 msgstr "Ескертпе"
 
-#: courses/templates/course_detail.html:93
+#: courses/templates/course_detail.html:97
 msgid "Before accessing course contents you should purchase the course."
 msgstr "Курс мазмұнын көрмес бұрын кусрты сатып алуыңыз қажет"
 
-#: courses/templates/course_detail.html:114
+#: courses/templates/course_detail.html:118
 #: courses/templates/enrolled_list.html:27
 msgid "Progress"
 msgstr "Ілгерілеу деңгейі"
 
-#: courses/templates/course_detail.html:130
-#: courses/templates/course_detail.html:146
-#: courses/templates/course_detail.html:162
-#: courses/templates/course_detail.html:178
+#: courses/templates/course_detail.html:134
+#: courses/templates/course_detail.html:150
+#: courses/templates/course_detail.html:166
+#: courses/templates/course_detail.html:182
 #: courses/templates/lesson_detail.html:33
 #: courses/templates/video_detail.html:36
 msgid "In progress"
 msgstr "Ілгерілеуде"
 
-#: courses/templates/course_detail.html:189
+#: courses/templates/course_detail.html:193
 msgid "Add course entry"
 msgstr "Курс кіріспесін қосу"
 
@@ -488,7 +488,7 @@ msgid "Continue Learning"
 msgstr "Оқылымды жалғастыру"
 
 #: courses/templates/courses.html:78 courses/templates/user_courses.html:35
-#: search/templates/search.html:32
+#: search/templates/search.html:37
 msgid "Learn More"
 msgstr "Толығырақ"
 
@@ -548,21 +548,30 @@ msgstr "Бұл пайдаланушыда жарияланған курстар 
 msgid "Video Details"
 msgstr "Бейне туралы толық ақпарат"
 
-#: search/forms.py:7
-msgid "Custom query"
-msgstr "Жалпы ізденіс"
+#: search/forms.py:10
+#, fuzzy
+#| msgid "Your search..."
+msgid "Your search query"
+msgstr "Не іздейміз?"
 
-#: search/forms.py:11
-msgid "Title"
-msgstr "Тақырыбы"
+#: search/forms.py:15
+#, fuzzy
+#| msgid "Search"
+msgid "Search by"
+msgstr "Не бойынша іздеу?"
 
-#: search/templates/search.html:14
-msgid "Your search..."
-msgstr "Сіздің ізделіміңіз..."
+#: search/templates/search.html:9
+#, fuzzy
+#| msgid "Search courses"
+msgid "Search courses or users"
+msgstr "Курстарды немесе пайдаланушыларды іздеу"
 
-#: search/templates/search.html:45
+#: search/templates/search.html:57
+#, fuzzy
+#| msgid "My Profile"
+msgid "See Profile"
+msgstr "Профильді қарау"
+
+#: search/templates/search.html:70
 msgid "No search results"
 msgstr "Іздеу нәтижесі табылмады"
-
-msgid "Search courses"
-msgstr "Курстарды іздеу"
