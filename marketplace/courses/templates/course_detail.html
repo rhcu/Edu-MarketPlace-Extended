@@ -55,7 +55,13 @@
                             Chat <i class="fa fa-comments"></i>
                         </a>
                         <br/><br/>
-                    {% else %}
+                    {% elif user == course.owner %}
+                        <div id="rating-not-enrolled"></div>
+                        <a href='/courses/chat/{{ course.pk }}'>
+                            Chat with students <i class="fa fa-comments"></i>
+                        </a>
+                        <br/><br/>
+                    {%  else %}
                         <div id="rating-not-enrolled"></div>
                     {% endif %}
                 <div class="table-wrapper">
