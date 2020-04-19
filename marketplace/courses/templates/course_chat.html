@@ -15,8 +15,8 @@
 <section id="two" class="wrapper style2">
     <div class="inner">
         <h3>
-            <a href="/course/{{ course.topic }}">
-                <i class="fas fa-arrow-left"></i>&nbsp;
+            <a href="/courses/course/{{course.pk}}">
+                <i class="fas fa-arrow-left"></i>&nbsp;{% trans "Course" %}: {{ course.title }}
             </a>
         </h3>
         <div class="box">

@@ -462,8 +462,9 @@ def course_chat(request, pk):
     user = None
     if request.user.is_authenticated:
         user = request.user
+    is_owner = is_course_owner(course, user)
     user_enrolled = is_user_enrolled(course, user)
-    if user_enrolled:
+    if user_enrolled or is_owner:
         return render(request, 'course_chat.html',{
             'course': course,
             'user': user,
