@@ -42,7 +42,7 @@
                     autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 {% endblock %}
                 <hr>
-                {% if user != lesson.course_entry.course.owner %}
+                {% if user != video.course_entry.course.owner %}
                     <a href="/courses/mark_video/{{video.pk}}" class="button special fit small">
                         {% if is_completed %}
                             {% trans "Mark as NOT completed" %}
