@@ -248,19 +248,19 @@ def user_passed_quiz(request, quiz_pk):
     if request.user.is_authenticated:
         user = request.user
     quiz = get_object_or_404(Quiz, pk=quiz_pk)
-    course = quiz.course_entry.course
+    course_entry = quiz.course_entry
+    course = course_entry.course
     if is_user_enrolled(course, user):
         if request.method == 'POST':
             quiz_passed = UserQuizPassed()
             quiz_passed.user = user
             quiz_passed.quiz = quiz
             quiz_passed.save()
-            course_progress = CourseProgression()
-            course_progress.course_entry = quiz.course_entry
-            course_progress.user = user
-            course_progress.course = course
-            course_progress.completed = True
-            course_progress.save()
+            # Update quiz progression
+            quiz_progress = CourseProgression.objects.filter(
+                user=user, course=course, course_entry=course_entry).all()[0]
+            quiz_progress.completed = True
+            quiz_progress.save()
             obj = serializers.serialize('json', [quiz_passed])
             return HttpResponse(obj, content_type="text/json-comment-filtered")
     return redirect('course_detail', pk=course.pk)
