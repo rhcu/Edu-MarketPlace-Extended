@@ -10,8 +10,12 @@
 {% include "navbar.html" %}
 <section id="one" class="wrapper style3">
     <div class="inner">
-        <header class="align-center">
-            <h2>{% trans "Video Details" %}</h2>
+        <header class="align-left">
+            <h2>
+                <a href="/courses/course/{{video.course_entry.course.pk}}">
+                    <i class="fas fa-arrow-left"></i> {% trans "Course" %}: {{ video.course_entry.course.title }}
+                </a>
+            </h2>
         </header>
     </div>
 </section>
@@ -19,10 +23,6 @@
     <div class="inner">
         <div class="box">
             <div class="content">
-                <a href="/courses/course/{{video.course_entry.course.pk}}">
-                    <i class="fas fa-arrow-left"></i> {% trans "Course" %}: {{ video.course_entry.course.title }}
-                </a>
-                </h4>
                 <h1 class="display-4">
                     {{ video.course_entry.name }}
                 </h1>

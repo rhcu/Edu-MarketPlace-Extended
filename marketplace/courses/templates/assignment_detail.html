@@ -77,7 +77,7 @@
                             <form method="POST" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ form.as_table }}
-                                <button type="submit" class="btn btn-primary">{% trans "Submit Assignment" %}</button>
+                                <button id="submitBtn" type="submit" class="btn btn-primary" disabled>{% trans "Submit Assignment" %}</button>
                             </form>
                         {% endblock %}
                     {% endif %}
@@ -88,5 +88,12 @@
     </div>
 </section>
 {% include "footer.html" %}
+<script>
+    $(document).ready(function(){
+        $('input:file').on("change", function() {
+            $('#submitBtn').prop('disabled', !$(this).val());
+        });
+    });
+</script>
 </body>
 </html>

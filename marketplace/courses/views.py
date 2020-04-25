@@ -545,7 +545,8 @@ def enrolled_list(request, pk):
                 if getattr(entry, 'completed'):
                     completed += 1
             if total > 0:
-                user_to_progress[enrolled_user] = completed/total * 100
+                progress = completed/total * 100
+                user_to_progress[enrolled_user] = int(round(progress))
             else:
                 user_to_progress[enrolled_user] = 0
         return render(request, 'enrolled_list.html',
